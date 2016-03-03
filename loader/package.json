@@ -1,0 +1,32 @@
+{
+  "name": "SunseedLoader",
+  "version": "0.0.1",
+  "description": "Sunseed MongoDB loader",
+  "main": "loader.js",
+  "author": {
+    "name": "Klemen Kenda",
+    "email": "klemen.kenda@ijs.si"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klemenkenda/sunseed"
+  },
+  "scripts": {
+    "start": "set NODE_ENV=development&& node loader.js",
+    "test": "set NODE_ENV=test&& mocha",
+    "production":  "set NODE_ENV=production&& node loader.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "express": "^4.13.3",
+    "ncp": "^2.0.0",
+    "node-schedule": "^0.5.1",
+    "nedb":  "^1.8.0",
+    "sync-request":  "^3.0.0",
+    "request":  "^2.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "supertest": "^1.1.0"
+  }
+}
