@@ -80,11 +80,9 @@ function push2QMiner(data) {
         { "name": "v2", "phenomenon": "Voltage", "UoM": "V" },
         { "name": "v3", "phenomenon": "Voltage", "UoM": "V" },
 
-        /*
-         * { "name": "vv1", "phenomenon": "VVoltage", "UoM": "VV" },
-         * { "name": "vv2", "phenomenon": "VVoltage", "UoM": "VV" },
-         * { "name": "vv3", "phenomenon": "VVoltage", "UoM": "VV" },         
-         */ 
+        { "name": "vv1", "phenomenon": "voltage violation alarm", "uom": "" },
+        { "name": "vv2", "phenomenon": "voltage violation alarm", "uom": "" },
+        { "name": "vv3", "phenomenon": "voltage violation alarm", "uom": "" }                  
 
     ]
     var json = [];
