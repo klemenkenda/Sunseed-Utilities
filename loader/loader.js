@@ -159,7 +159,7 @@ while (lastTS < (Date.now() / 1000)) {
         lastTS = parseInt(lastTS) + parseInt(db.interval);
         console.log("++ REQUEST: " + zeroTS + "-" + lastTS);
         
-        var res = request("GET", "http://193.2.205.65:5000/ami_retrieve?start=" + zeroTS + "&end=" + lastTS + "&num=-1");
+        var res = request("GET", "http://193.2.205.65:55555/ami_retrieve?start=" + zeroTS + "&end=" + lastTS + "&num=-1");
         data = JSON.parse(res.getBody())["query_result"];
         // console.log(data);
         for (var i = data.length - 1; i > 0; i--) {

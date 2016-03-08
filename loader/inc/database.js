@@ -3,8 +3,8 @@ var fs = require("fs");
 function Database() {
     this.dbName = "data.db";
     this.db;
-    this.zeroTS = 1455408000;
-    this.lastTS = 1455408000;
+    this.zeroTS = 1426032900;
+    this.lastTS = 1426032900;
     this.interval = 900;
 }
 
