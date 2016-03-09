@@ -2,6 +2,8 @@ var schedule = require('node-schedule');
 var Database = require('./inc/database.js');
 var request = require("sync-request");
 var request2 = require("request");
+var jsonfile = require("jsonfile");
+var jsonQuery = require("json-query");
 
 var env = process.env.NODE_ENV || 'development';
 
@@ -15,24 +17,28 @@ if (scriptArgs == "append") {
     db.init();
 }
 
+// read the nodes metadata
+var nodes = jsonfile.readFileSync("nodes.json");
+
 /* sync object */
 function SyncHttpManager() {
     this.requests = 0;
     this.responses = 0;
 
-    function reqMade() {
+    this.reqMade = function () {
         this.requests++;
     }
 
-    function resReceived() {
+    this.resReceived = function() {
         this.responses++;
+        console.log("Request received: " + this.responses + "/" + this.requests);
     }
 
-    function isInSync() {
+    this.isInSync = function() {
         return this.requests == this.responses;
     }
 
-    function stats() {
+    this.stats = function() {
         console.log("Requests/responses: " + this.requests + "/" + this.responses);
     }
 }
@@ -51,38 +57,39 @@ function ISODateString(timestamp) {
          + pad(d.getUTCSeconds()) + 'Z'
 }
 
-function push2QMiner(data) {
+function push2QMiner(data, shm) {
+
     var sensors = [
         { "name": "f1", "phenomenon": "Frequency", "UoM": "Hz" },
 
         { "name": "i1", "phenomenon": "Current", "UoM": "A" },
-        { "name": "i2", "phenomenon": "Current", "UoM": "A" },
-        { "name": "i3", "phenomenon": "Current", "UoM": "A" },
-        { "name": "i4", "phenomenon": "Current", "UoM": "A" },
+        //{ "name": "i2", "phenomenon": "Current", "UoM": "A" },
+        //{ "name": "i3", "phenomenon": "Current", "UoM": "A" },
+        //{ "name": "i4", "phenomenon": "Current", "UoM": "A" },
 
         { "name": "pc1", "phenomenon": "Consumed real power", "UoM": "kW" },
         { "name": "pc2", "phenomenon": "Consumed real power", "UoM": "kW" },
         { "name": "pc3", "phenomenon": "Consumed real power", "UoM": "kW" },
 
         { "name": "pg1", "phenomenon": "Generated real power", "UoM": "kW" },
-        { "name": "pg2", "phenomenon": "Generated real power", "UoM": "kW" },
-        { "name": "pg3", "phenomenon": "Generated real power", "UoM": "kW" },
+        //{ "name": "pg2", "phenomenon": "Generated real power", "UoM": "kW" },
+        //{ "name": "pg3", "phenomenon": "Generated real power", "UoM": "kW" },
 
         { "name": "qc1", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
-        { "name": "qc2", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
-        { "name": "qc3", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
+        //{ "name": "qc2", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
+        //{ "name": "qc3", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
 
-        { "name": "qg1", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
-        { "name": "qg2", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
-        { "name": "qg3", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
+        { "name": "qg1", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
+        //{ "name": "qg2", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
+        //{ "name": "qg3", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
 
         { "name": "v1", "phenomenon": "Voltage", "UoM": "V" },
-        { "name": "v2", "phenomenon": "Voltage", "UoM": "V" },
-        { "name": "v3", "phenomenon": "Voltage", "UoM": "V" },
+        //{ "name": "v2", "phenomenon": "Voltage", "UoM": "V" },
+        //{ "name": "v3", "phenomenon": "Voltage", "UoM": "V" },
 
-        { "name": "vv1", "phenomenon": "voltage violation alarm", "uom": "" },
-        { "name": "vv2", "phenomenon": "voltage violation alarm", "uom": "" },
-        { "name": "vv3", "phenomenon": "voltage violation alarm", "uom": "" }                  
+        //{ "name": "vv1", "phenomenon": "voltage violation alarm", "uom": "" },
+        //{ "name": "vv2", "phenomenon": "voltage violation alarm", "uom": "" },
+        //{ "name": "vv3", "phenomenon": "voltage violation alarm", "uom": "" }                  
 
     ]
     var json = [];
@@ -90,8 +97,18 @@ function push2QMiner(data) {
     // node level
     var nodeId = data["node_id"];
     var nodeName = nodeId;
-    var lat = 43;
-    var lng = 42;
+    
+    // match nodename   
+    result = jsonQuery("[id=" + nodeId + "]", { data: nodes });
+    
+    var lat = 0;
+    var lng = 0;
+
+    if (result.value != null) {
+        // bug in nodes file (from Y-X GK!)
+        var lat = result.value.lng;
+        var lng = result.value.lat;
+    };
 
     // sensor level
     var measurements = [];
@@ -107,7 +124,7 @@ function push2QMiner(data) {
         var typePhenomenon = sensor["phenomenon"];
         var typeUoM = sensor["UoM"];
 
-        var sensorName = nodeName + "-" + typeName;
+        var sensorName = nodeName + "-" + typeName + "-" + fieldName;
 
         measurements.push({
             "sensorid": sensorName,
@@ -133,12 +150,12 @@ function push2QMiner(data) {
         }
     }];
 
-    // var res = request("GET", "http://localhost:9201/data/add-measurement?data=" + JSON.stringify(node));
-    // http.request("http://localhost:9201/data/add-measurement?data=" + JSON.stringify(node));
+    // var res = request("GET", "http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node));
+    // http.request("http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node));
     shm.reqMade();
-    request2("http://localhost:9201/data/add-measurement?data=" + JSON.stringify(node), function (error, response, body) {
-        resReceived();        
-        console.error(error.stack);
+    request2("http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node), function (error, response, body) {
+        shm.resReceived();        
+        if (error) console.error(error.stack);
     });
     
         
@@ -153,32 +170,39 @@ var lastTS = db.lastTS;
 
 
 // scheduler for 
-while (lastTS < (Date.now() / 1000)) {    
-
-    try {
-        lastTS = parseInt(lastTS) + parseInt(db.interval);
-        console.log("++ REQUEST: " + zeroTS + "-" + lastTS);
-        
-        var res = request("GET", "http://193.2.205.65:55555/ami_retrieve?start=" + zeroTS + "&end=" + lastTS + "&num=-1");
-        data = JSON.parse(res.getBody())["query_result"];
-        // console.log(data);
-        for (var i = data.length - 1; i > 0; i--) {
-            // push data synchronously to QMiner instance
-            push2QMiner(data[i]);
+// while (lastTS < (Date.now() / 1000)) {    
+var j = schedule.scheduleJob('*/1 * * * * *', function () {
+    
+    if (shm.isInSync()) {
+        try {
+            lastTS = parseInt(lastTS) + parseInt(db.interval);
+            console.log("++ REQUEST: " + zeroTS + "-" + lastTS);
+            
+            var res = request("GET", "http://193.2.205.65:55555/ami_retrieve?start=" + zeroTS + "&end=" + lastTS + "&num=-1");
+            data = JSON.parse(res.getBody())["query_result"];
+            // console.log(data);
+            for (var i = data.length - 1; i > 0; i--) {
+                // push data synchronously to QMiner instance            
+                push2QMiner(data[i], shm);
+            }
+            
+            if (data.length > 0) {
+                zeroTS = lastTS;
+            }
+            
+            db.update(zeroTS, lastTS);
+        } catch (err) {
+            // make lastTS back
+            lastTS = parseInt(lastTS) - parseInt(db.interval);
+            console.error(err.stack);
         }
-        
-        if (data.length > 0) {
-            zeroTS = lastTS;
-        }
-        
-        db.update(zeroTS, lastTS);
-    } catch (err) {
-        // make lastTS back
-        lastTS = parseInt(lastTS) - parseInt(db.interval);
-        console.error(err.stack);
+    } else {
+        console.log("Waiting for requests stack to finish.");
     }
 
-}
+});
+
+// }
 
 // after that - trigger reading every 15 minutes
 

@@ -5,7 +5,7 @@ function Database() {
     this.db;
     this.zeroTS = 1426032900;
     this.lastTS = 1426032900;
-    this.interval = 900;
+    this.interval = 2700;
 }
 
 Database.prototype.exists = function () {
