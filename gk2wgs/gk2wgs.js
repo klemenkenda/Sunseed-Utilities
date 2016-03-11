@@ -14,7 +14,7 @@ fs.readFile("GIS.csv", function (err, buffer) {
 function gk2wgs(str) {
     //console.log(str);
     //bufferString = bufferString.replace(".", ",");
-    var geopedia = "http://customers.geopedia.si/services/d48towgs84.php?code=vei0sw3sxhz2lx29wc22m07a32b3b7&precision=5";
+    var geopedia = "http://customers.geopedia.si/services/d48towgs84.php?code=v&precision=5";
     // x=411515.30&y=132761.61
     
     var json = [];
