@@ -63,33 +63,33 @@ function push2QMiner(data, shm) {
         { "name": "f1", "phenomenon": "Frequency", "UoM": "Hz" },
 
         { "name": "i1", "phenomenon": "Current", "UoM": "A" },
-        //{ "name": "i2", "phenomenon": "Current", "UoM": "A" },
-        //{ "name": "i3", "phenomenon": "Current", "UoM": "A" },
-        //{ "name": "i4", "phenomenon": "Current", "UoM": "A" },
+        { "name": "i2", "phenomenon": "Current", "UoM": "A" },
+        { "name": "i3", "phenomenon": "Current", "UoM": "A" },
+        { "name": "i4", "phenomenon": "Current", "UoM": "A" },
 
         { "name": "pc1", "phenomenon": "Consumed real power", "UoM": "kW" },
         { "name": "pc2", "phenomenon": "Consumed real power", "UoM": "kW" },
         { "name": "pc3", "phenomenon": "Consumed real power", "UoM": "kW" },
 
         { "name": "pg1", "phenomenon": "Generated real power", "UoM": "kW" },
-        //{ "name": "pg2", "phenomenon": "Generated real power", "UoM": "kW" },
-        //{ "name": "pg3", "phenomenon": "Generated real power", "UoM": "kW" },
+        { "name": "pg2", "phenomenon": "Generated real power", "UoM": "kW" },
+        { "name": "pg3", "phenomenon": "Generated real power", "UoM": "kW" },
 
         { "name": "qc1", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
-        //{ "name": "qc2", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
-        //{ "name": "qc3", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
+        { "name": "qc2", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
+        { "name": "qc3", "phenomenon": "Consumed reactive power", "UoM": "kVAR" },
 
         { "name": "qg1", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
-        //{ "name": "qg2", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
-        //{ "name": "qg3", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
+        { "name": "qg2", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
+        { "name": "qg3", "phenomenon": "Generated reactive power", "UoM": "kVAR" },
 
         { "name": "v1", "phenomenon": "Voltage", "UoM": "V" },
-        //{ "name": "v2", "phenomenon": "Voltage", "UoM": "V" },
-        //{ "name": "v3", "phenomenon": "Voltage", "UoM": "V" },
+        { "name": "v2", "phenomenon": "Voltage", "UoM": "V" },
+        { "name": "v3", "phenomenon": "Voltage", "UoM": "V" },
 
-        //{ "name": "vv1", "phenomenon": "voltage violation alarm", "uom": "" },
-        //{ "name": "vv2", "phenomenon": "voltage violation alarm", "uom": "" },
-        //{ "name": "vv3", "phenomenon": "voltage violation alarm", "uom": "" }                  
+        // { "name": "vv1", "phenomenon": "voltage violation alarm", "uom": "" },
+        // { "name": "vv2", "phenomenon": "voltage violation alarm", "uom": "" },
+        // { "name": "vv3", "phenomenon": "voltage violation alarm", "uom": "" }                  
 
     ]
     var json = [];

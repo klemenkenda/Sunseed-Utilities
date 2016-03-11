@@ -1,0 +1,35 @@
+{
+  "name": "SunseedGK2WGS",
+  "version": "0.0.1",
+  "description": "Sunseed Gauss-Krueger 2 WGS84 converter",
+  "main": "gk2wgs.js",
+  "author": {
+    "name": "Klemen Kenda",
+    "email": "klemen.kenda@ijs.si"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klemenkenda/sunseed"
+  },
+  "scripts": {
+    "start": "set NODE_ENV=development&& node gk2wgs.js",
+    "test": "set NODE_ENV=test&& mocha",
+    "production": "set NODE_ENV=production&& node gk2wgs.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "express": "^4.13.3",
+    "jsonfile": "^2.2.3",
+    "ncp": "^2.0.0",
+    "nedb": "^1.8.0",
+    "node-schedule": "^0.5.1",
+    "request": "^2.6.0",
+    "striptags": "^2.1.1",
+    "sync-request": "^3.0.0",
+    "jsonfile":  "^2.2.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "supertest": "^1.1.0"
+  }
+}
