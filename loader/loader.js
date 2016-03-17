@@ -164,6 +164,42 @@ function push2QMiner(data, shm) {
 };
 
 
+function mergeSameNodes(data) {
+    var merged = [];
+    var pointer = {};
+    
+    var id;
+    
+    for (var i = data.length - 1; i > 0; i--) {
+        var hash = data[i]["node_id"] + "-" + data[i]["stamp"];
+        if (hash in pointer) {
+            id = pointer[hash];   
+            // update record with non zero properties            
+            console.log("Merging: " + hash);
+            
+            for (var key in data[i]) {
+                // console.log(key);
+                if (data[i][key] != 0) {
+                    merged[id][key] = data[i][key];
+                } else {
+                    // console.log("no need");
+                }
+            }
+            
+            // display
+            // console.log(merged[id]);
+            
+        } else {
+            id = merged.length;
+            pointer[hash] = id;
+            // put in whole record
+            merged[id] = data[i];
+        }
+    }
+    
+    return merged;
+}
+
 // parse until all the data is in
 var zeroTS = db.zeroTS;
 var lastTS = db.lastTS;
@@ -180,10 +216,13 @@ var j = schedule.scheduleJob('*/1 * * * * *', function () {
             
             var res = request("GET", "http://193.2.205.65:55555/ami_retrieve?start=" + zeroTS + "&end=" + lastTS + "&num=-1");
             data = JSON.parse(res.getBody())["query_result"];
-            // console.log(data);
-            for (var i = data.length - 1; i > 0; i--) {
+            
+            // overcome bug in MongoDB loader from E6
+            var merged = mergeSameNodes(data);
+            
+            for (var i = 0; i < merged.length; i++) {
                 // push data synchronously to QMiner instance            
-                push2QMiner(data[i], shm);
+                push2QMiner(merged[i], shm);
             }
             
             if (data.length > 0) {
