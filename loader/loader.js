@@ -8,7 +8,7 @@ var jsonQuery = require("json-query");
 var env = process.env.NODE_ENV || 'development';
 
 // initialize database
-var db = new Database;
+var db = new Database();
 var scriptArgs = (process.argv[2] == null) ? "append" : process.argv[2];
 
 if (scriptArgs == "append") {
