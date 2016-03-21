@@ -19,8 +19,8 @@ function push2QMiner(data, header) {
     var nodeId = "staticFeatures";
     var nodeName = nodeId;
         
-    var lat = 14.509;
-    var lng = 46.052;       
+    var lng = 14.509;
+    var lat = 46.052;       
     
     // sensor level
     var measurements = [];
