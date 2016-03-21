@@ -1,0 +1,22 @@
+{
+  "name": "StaticFeaturesLoader",
+  "version": "0.0.0",
+  "description": "StaticFeaturesLoader",
+  "main": "loader.js",
+  "author": {
+    "name": "Klemen Kenda",
+    "email": "klemen.kenda@ijs.si"
+  },
+  "scripts": {
+    "start": "set NODE_ENV=development&& node loader.js",
+    "test": "set NODE_ENV=test&& mocha",
+    "production":  "set NODE_ENV=production&& node loader.js"
+  },
+  "dependencies": {
+    "sync-request":  "^3.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "supertest": "^1.1.0"
+  }
+}
