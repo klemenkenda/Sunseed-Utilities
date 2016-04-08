@@ -56,7 +56,7 @@ while ($line = mysql_fetch_array($result)) {
 	
 	$result_m = mysql_query($SQL);
 	$numrows = mysql_num_rows($result_m);
-	$numrecs = 5000; // max 50 measurements per packet
+	$numrecs = 50; // max 50 measurements per packet
 	
 	$i = 0;
 	while ($m = mysql_fetch_array($result_m)) {		
