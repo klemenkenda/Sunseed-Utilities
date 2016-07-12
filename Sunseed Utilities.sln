@@ -11,6 +11,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "StaticFeaturesGenerator", "
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "StaticFeaturesLoader", "StaticFeaturesLoader\StaticFeaturesLoader.njsproj", "{39D64A0A-8D95-49BA-B045-1F545203A146}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Loader2", "Loader2\Loader2.njsproj", "{476AFCBB-6AA4-48A8-A69B-402061CBF13B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{39D64A0A-8D95-49BA-B045-1F545203A146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D64A0A-8D95-49BA-B045-1F545203A146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D64A0A-8D95-49BA-B045-1F545203A146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{476AFCBB-6AA4-48A8-A69B-402061CBF13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476AFCBB-6AA4-48A8-A69B-402061CBF13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476AFCBB-6AA4-48A8-A69B-402061CBF13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476AFCBB-6AA4-48A8-A69B-402061CBF13B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
