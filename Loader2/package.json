@@ -1,0 +1,15 @@
+{
+  "name": "Loader2",
+  "version": "0.0.0",
+  "description": "Loader2",
+  "main": "loader2.js",
+    "scripts": {
+    "start": "set NODE_ENV=development&& node loader2.js",
+    "test": "set NODE_ENV=test&& mocha",
+    "production":  "set NODE_ENV=production&& node loader2.js"
+  },
+  "author": {
+    "name": "Klemen Kenda",
+    "email": "klemen.kenda@ijs.si"
+  }
+}
