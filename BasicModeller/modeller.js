@@ -144,6 +144,7 @@ function insertPrediction(name, method, time, value) {
         if (err) console.log(err);
         connection.query(sql, function (err, rows) {
             if (err) console.log(err);
+            console.log("MySQL OK!");
             connection.release();
         });
     });
