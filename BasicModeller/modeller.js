@@ -19,6 +19,11 @@ var pool = mysql.createPool({
     database: 'sunseed'
 });
 
+pool.getConnection(function (err, connection) {
+    // connected! (unless `err` is set)
+    if (err) console.log(err.message);
+});
+
 
 function twoDigits(d) {
     if (0 <= d && d < 10) return "0" + d.toString();
@@ -136,6 +141,7 @@ function insertPrediction(name, method, time, value) {
     
     console.log(sql);
     pool.getConnection(function (err, connection) {
+        if (err) console.log(err);
         connection.query(sql, function (err, rows) {
             if (err) console.log(err);
             connection.release();
@@ -167,7 +173,8 @@ function calculateMA(virtualOffset, sensor, N) {
 
 var sensors = [
     "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",
-    "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
+    /*
+     * "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
     "129728 MGM Kromberk 85024272-Consumed real power-pc",
     "TP Meblo - Pikolud_30442750-Consumed real power-pc",
     "TP Meblo kotlarna TR2_30488597-Consumed real power-pc",
@@ -186,6 +193,7 @@ var sensors = [
     "TP Meblo Jogi_30488652-Consumed real power-pc",
     "174556 SE Alupla Meblo 35747740-Consumed real power-pc",
     "137187 Meblo JOGI 51237780-Consumed real power-pc"
+    */
 ]
 
 for (var i in sensors) {
