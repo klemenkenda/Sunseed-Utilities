@@ -1,0 +1,24 @@
+{
+    "name": "BasicModeller",
+    "version": "0.0.1",
+    "description": "BasicModeller",
+    "main": "modeller.js",
+    "author": {
+        "name": "Klemen Kenda",
+        "email": "klemen.kenda@ijs.si"
+    },
+    "scripts": {
+        "start": "set NODE_ENV=development&& node modeller.js",
+        "test": "set NODE_ENV=test&& mocha"
+    },
+    "dependencies": {        
+        "mysql": "^2.10.2",
+        "node-schedule": "^0.5.1",
+        "request": "^2.6.0",        
+        "sync-request": "^3.0.0"
+    },
+    "devDependencies": {
+        "mocha": "^2.2.4",
+        "supertest": "^1.1.0"
+    }
+}
