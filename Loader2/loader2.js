@@ -199,9 +199,12 @@ var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL3Rlc3QtYW
 
 var n = 0;
 
-for (var i = 5; i < nodes.length; i++) {
+for (var i = 0; i < nodes.length; i++) {
     if (nodes[i].street == street) {
         n++;
+        // skipping already loaded
+        if (n < 5) continue;
+
         // query the node
         var nodeName = nodes[i].node_id;
         var requestStr = 'https://admin.sunseed-fp7.eu/api/smartmeterMeasurementsFromTo?access_token=' + token + '&time_from=' + startTS + '&time_to=' + endTS + '&node_id=' + escape(nodeName);
