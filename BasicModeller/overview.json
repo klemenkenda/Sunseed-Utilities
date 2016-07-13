@@ -1,0 +1,378 @@
+[   
+    {
+        "title": "Row 1",
+        "columns": [
+            {
+                "title": "Column 1",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Avtocenter ABC",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 2",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "PC Sirra Meblo",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 3",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "MGM Kromberk",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "129728 MGM Kromberk 85024272-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "129728 MGM Kromberk 85024272-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+
+	{
+        "title": "Row 2",
+        "columns": [
+            {
+                "title": "Column 1",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Pikolud (2750)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo - Pikolud_30442750-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo - Pikolud_30442750-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 2",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Kotlarna TR2 (8597)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488597-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488597-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 3",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Kotlarna TR2 (8610)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488610-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488610-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+
+	{
+        "title": "Row 3",
+        "columns": [
+            {
+                "title": "Column 1",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Jogi (8589)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo Jogi_30488589-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo Jogi_30488589-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 2",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Kotlarna TR2 (8614)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488614-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488614-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 3",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Jogi (8641)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo Jogi_30488641-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo Jogi_30488641-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+
+	{
+        "title": "Row 4",
+        "columns": [
+            {
+                "title": "Column 1",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Kotlarna TR2 (8617)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488617-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488617-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 2",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "SE Marchiol Meblo",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "175632 SE Marchiol Meblo 50279962-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "175632 SE Marchiol Meblo 50279962-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 3",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "SE Nova Gorica (0099)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "174185 SE Nova Gorica 99690099-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "174185 SE Nova Gorica 99690099-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+
+	{
+        "title": "Row 5",
+        "columns": [
+            {
+                "title": "Column 1",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Kotlarna TR1 (8600)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo kotlarna TR1_30488600-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo kotlarna TR1_30488600-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 2",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "Meblo Kotlarna TR2 (8611)",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488611-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "TP Meblo kotlarna TR2_30488611-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Column 3",
+                "class": "col-md-4",
+                "charts": [
+                    {
+                        "title": "SE Kovent Meblo",
+                        "endDate": "now",
+                        "timeSpan": "4",
+                        "series": [
+                            {
+                                "sensorId": "175579 SE Kovent Meblo 35747726-Consumed real power-pc",
+                                "aggregate": "raw",
+                                "window": "raw"
+                            },
+                            {
+                                "sensorId": "175579 SE Kovent Meblo 35747726-Consumed real power-pc",
+                                "aggregate": "prediction",
+                                "window": "raw"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+
+
+]
