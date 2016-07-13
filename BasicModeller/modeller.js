@@ -3,7 +3,16 @@ var mysql = require('mysql');
 var syncRequest = require('sync-request');
 var request = require('request');
 
+/*
 var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    passwrod: '',
+    database: 'sunseed'
+});
+*/
+
+var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     passwrod: '',
@@ -126,10 +135,12 @@ function insertPrediction(name, method, time, value) {
     sql += " ON DUPLICATE KEY UPDATE pr_value = " + value;
     
     console.log(sql);
-    
-    connection.query(sql, function (err, rows) {
-        if (err) console.log(err);
-    });    
+    pool.getConnection(function (err, connection) {
+        connection.query(sql, function (err, rows) {
+            if (err) console.log(err);
+            connection.release();
+        });
+    });
 }
 
 function calculateMA(virtualOffset, sensor, N) {
