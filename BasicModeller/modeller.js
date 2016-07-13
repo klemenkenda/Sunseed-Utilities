@@ -100,7 +100,7 @@ function makePrediction(predictSensor) {
     console.log("MA PREDICTIONS");
     // find index of 11. 4. 2016
     var start = new Date(2016, 3, 30, 0, 0, 0);
-    var offset = (start.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
+    var offset = Math.round ((start.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600);
     var last = sensor[sensor.length - 1];
     var lastTime = new Date;
     lastTime.setTime(last.Timestamp.getTime() + 24 * 3600 * 1000);
@@ -113,6 +113,7 @@ function makePrediction(predictSensor) {
     
     while (currentTimestamp < lastTime) {
         currentTimestamp.addHours(1);
+        // why Math.round - possible problem with missing values (!)
         var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
         var prediction = calculateMA(virtualOffset, sensor, 5);
         console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
