@@ -154,7 +154,26 @@ function calculateMA(virtualOffset, sensor, N) {
 }
 
 var sensors = [
-   "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc"
+    "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",
+    "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
+    "129728 MGM Kromberk 85024272-Consumed real power-pc",
+    "TP Meblo - Pikolud_30442750-Consumed real power-pc",
+    "TP Meblo kotlarna TR2_30488597-Consumed real power-pc",
+    "TP Meblo kotlarna TR2_30488610-Consumed real power-pc",
+    "TP Meblo Jogi_30488589-Consumed real power-pc",
+    "TP Meblo kotlarna TR2_30488614-Consumed real power-pc",
+    "TP Meblo Jogi_30488641-Consumed real power-pc",
+    "TP Meblo kotlarna TR2_30488617-Consumed real power-pc",
+    "175632 SE Marchiol Meblo 50279962-Consumed real power-pc",
+    "174185 SE Nova Gorica 99690099-Consumed real power-pc",
+    "TP Meblo kotlarna TR1_30488600-Consumed real power-pc",
+    "TP Meblo kotlarna TR2_30488611-Consumed real power-pc",
+    "175579 SE Kovent Meblo 35747726-Consumed real power-pc",
+    "TP Meblo kotlarna TR2_30488604-Consumed real power-pc",
+    "TP Meblo_16137120-Consumed real power-pc",
+    "TP Meblo Jogi_30488652-Consumed real power-pc",
+    "174556 SE Alupla Meblo 35747740-Consumed real power-pc",
+    "137187 Meblo JOGI 51237780-Consumed real power-pc"
 ]
 
 for (var i in sensors) {
