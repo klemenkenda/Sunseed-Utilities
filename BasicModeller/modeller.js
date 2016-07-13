@@ -142,10 +142,11 @@ function insertPrediction(name, method, time, value) {
     console.log(sql);
     pool.getConnection(function (err, connection) {
         if (err) console.log(err);
+        shm.reqMade();
         connection.query(sql, function (err, rows) {
             if (err) console.log(err);
-            console.log("MySQL OK!");
             connection.release();
+            shm.resReceived();
         });
     });
 }
@@ -172,6 +173,33 @@ function calculateMA(virtualOffset, sensor, N) {
     return prediction;
 }
 
+/* sync object */
+function SyncHttpManager() {
+    this.requests = 0;
+    this.responses = 0;
+    
+    this.reqMade = function () {
+        this.requests++;
+        console.log("Request made.");
+    }
+    
+    this.resReceived = function () {
+        this.responses++;
+        console.log("Request received: " + this.responses + "/" + this.requests);
+    }
+    
+    this.isInSync = function () {
+        return this.requests == this.responses;
+    }
+    
+    this.stats = function () {
+        console.log("Requests/responses: " + this.requests + "/" + this.responses);
+    }
+}
+
+var shm = new SyncHttpManager();
+
+
 var sensors = [
     "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",    
     "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
@@ -195,7 +223,25 @@ var sensors = [
     "137187 Meblo JOGI 51237780-Consumed real power-pc"   
 ]
 
-for (var i in sensors) {
-    console.log(sensors[i]);
-    makePrediction(sensors[i]);
-}
+var i = 0;
+var N = sensors.length;
+
+var j = schedule.scheduleJob('*/5 * * * * *', function () {
+    
+    if (shm.isInSync()) {
+        try {
+            if (i < N) {
+                console.log(sensors[i]);
+                makePrediction(sensors[i]);
+                i++;
+            } else {
+                console.log("Safe to terminate!");
+            }
+        } catch (err) {
+            if (err) console.log(err.message);
+        }
+    } else {
+        console.log("Waiting for requests stack to finish.");
+    }
+
+});
