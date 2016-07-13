@@ -199,7 +199,7 @@ var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL3Rlc3QtYW
 
 var n = 0;
 
-for (var i = 4; i < nodes.length; i++) {
+for (var i = 5; i < nodes.length; i++) {
     if (nodes[i].street == street) {
         n++;
         // query the node
