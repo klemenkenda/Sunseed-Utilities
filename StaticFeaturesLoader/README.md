@@ -1,5 +1,5 @@
 # StaticFeaturesLoader
-Loads static features from file ```staticFeatures.csv``` to the instance of Seensy. 
+Loads static features from file ```staticFeatures.csv``` to the instance of Seensy. This file can be generated with StaticFeaturesGenerator package.
 
 ## Run
 Run with ```npm start```.
