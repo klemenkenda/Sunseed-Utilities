@@ -1,4 +1,4 @@
-﻿var request = require("sync-request");
+var request = require("sync-request");
 var jsonfile = require("jsonfile");
 var jsonQuery = require("json-query");
 var request2 = require("request");
@@ -167,7 +167,7 @@ function push2QMiner(dataArray, shm) {
                     }
             }];
 
-            var res = request("GET", "http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node));
+            var res = request("GET", "http://localhost:9201/data/add-measurement?data=" + JSON.stringify(node));
             // http.request("http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node));
             /*
             shm.reqMade();
@@ -194,8 +194,20 @@ function push2QMiner(dataArray, shm) {
 // match nodename   
 var street = "KROMBERK-INDUSTRIJSKA CESTA";
 var startTS = "2016-04-11T00:00:00Z";
-var endTS = "2016-07-31T23:59:59Z";
-var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL3Rlc3QtYWRtaW4uc3Vuc2VlZC1mcDcuZXU6ODAiLCJzdWIiOjIwLCJwcm8iOiJsb2NhbCIsIm9yaSI6ImFwaSIsImV4cCI6MTQ2ODM4MjYyNiwiaWF0IjoxNDY4Mzc5MDI2LCJqdGkiOiIwZjhiZTcxNC1iN2ZkLTQxYzktYWQ1MC1hZTNjZDIzMDBlOTAifQ.VexN06LseppE3mx65bbyAwpZMxfyb_6_8YW4N2HVoP6sAQez9Bh1bGcOG7Wz8IG9kLTb8oeEPQCuDJn2xCg00g";
+var endTS = "2016-11-03T23:59:59Z";
+var token = "5e63ca1e-4a27-457f-8bb6-486705df41ff";
+
+var credentials = require('./credentials.js');
+
+// create UNIX timestamp from ISO String
+var startDate = new Date();
+var endDate = new Date();
+startDate = Date.parse(startTS);
+endDate = Date.parse(endTS);
+
+var startUTS = Math.round(startDate / 1000);
+var endUTS = Math.round(endDate / 1000);
+
 
 var n = 0;
 
@@ -203,11 +215,11 @@ for (var i = 0; i < nodes.length; i++) {
     if (nodes[i].street == street) {
         n++;
         // skipping already loaded
-        if (n < 5) continue;
+        // if (n < 5) continue;
 
         // query the node
         var nodeName = nodes[i].node_id;
-        var requestStr = 'https://admin.sunseed-fp7.eu/api/smartmeterMeasurementsFromTo?access_token=' + token + '&time_from=' + startTS + '&time_to=' + endTS + '&node_id=' + escape(nodeName);
+        var requestStr = 'https://api.sunseed-fp7.eu/smartmeter/measurements/interval?from=' + startUTS + '&to=' + endUTS + '&node_id=' + escape(nodeName);
         console.log("Request for: " + nodeName);
         
         var ok = false;
@@ -216,51 +228,50 @@ for (var i = 0; i < nodes.length; i++) {
 
         while ((ok == false) && (retry < 10)) {
             try {
-                var res = request('GET', requestStr, {
+                var res = request('POST', requestStr, {
                     'headers': {
-                        'Content-Type': 'application/json'
+                        'Authorization': 'Bearer ' + token
                     }
                 });
 
                 // error message ?
-                dataArray = JSON.parse(res.body);
-                if ((dataArray != []) && ("message" in dataArray) && (dataArray.message == "Unauthorized")) {
-                    console.log("GETTING NEW TOKEN!!!")
+                dataArray = JSON.parse(res.body);                
+                
+                if ((dataArray != []) && ("error" in dataArray) && ((dataArray.error == "unauthorized") || (dataArray.error == "invalid_token"))) {
+                    console.log("GETTING NEW TOKEN!!!");
                     // wrong token - get new one
-                    var tokenRequestStr = "https://api.sunseed-fp7.eu/auth/obtain_accesstoken";
+                    var tokenRequestStr = "https://api.sunseed-fp7.eu/uaa/oauth/token?grant_type=client_credentials";
                     var tokenRes = request('POST', tokenRequestStr, {
-                        'headers': {
-                            'Content-Type': 'application/json'
+                        'auth': {
+                            'user': credentials.username,
+                            'pass': credentials.password,
+                            'sendImmediately': false
                         },
-                        'json': {
-                            "provider": "local",
-                            "providerId": "1",
-                            "username": "ijs",
-                            "secret": "ijs11052016",
-                            "secret2": "1"
+                        'headers': {
+                            'Authorization': 'Basic ' + credentials.base64all                            
                         }
                     });
-
-                    tokenObj = JSON.parse(tokenRes.body);
-                    token = tokenObj.token;
-                    console.log(token);
+                    
+                    tokenObj = JSON.parse(tokenRes.body);                    
+                    token = tokenObj.access_token;
+                    console.log("NEW TOKEN: " + token);
                     // create request string
-                    requestStr = 'https://admin.sunseed-fp7.eu/api/smartmeterMeasurementsFromTo?access_token=' + token + '&time_from=' + startTS + '&time_to=' + endTS + '&node_id=' + escape(nodeName);
+                    requestStr = 'https://api.sunseed-fp7.eu/smartmeter/measurements/interval?from=' + startUTS + '&to=' + endUTS + '&node_id=' + escape(nodeName);
                     retry++;
                 } else {                    
                     console.log("ok:" + retry);
                     ok = true;
-                    dataArray = JSON.parse(res.body);
+                    dataArray = JSON.parse(res.body);                    
                 }
             } catch (err) {
                 console.log("ERROR:" + err.message + ": " + retry);
                 retry++;
             }
         }
-        
+        console.log(i);
         push2QMiner(dataArray, shm);
 
     }
 }
 
-console.log(n);
+console.log(n); 
