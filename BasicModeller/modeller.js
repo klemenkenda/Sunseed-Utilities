@@ -25,17 +25,19 @@ Date.prototype.addHours = function (h) {
 // initial load
 // http://atena.ijs.si/api/get-measurements?p=000137187-Consumed%20real%20power-pc1:2015-02-11:2016-03-20
 
-function makePrediction(predictSensor) {    
+function makePrediction(fromDataDate, startPredictionDate, predictSensor) {    
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     
     var dayAfterTomorrow = new Date();
     dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
     
+    var from = fromDataDate.toMysqlDateFormat();
+    
     console.log(tomorrow.toMysqlDateFormat());
     
     console.log("Reading sensor data until " + tomorrow.toMysqlDateFormat());
-    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=' + escape(predictSensor) + ':2016-08-01:' + tomorrow.toMysqlDateFormat());
+    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=' + escape(predictSensor) + ':' + from + ':' + tomorrow.toMysqlDateFormat());
     var sensorData = JSON.parse(res.getBody());
     
     console.log("Reading holiday");
@@ -57,10 +59,10 @@ function makePrediction(predictSensor) {
         var nextTs = new Date(lastTs);
         nextTs.addHours(1);
         
-        console.log("next: " + nextTs.toMysqlFormat() + "; this: " + ts.toMysqlFormat());
+        // console.log("next: " + nextTs.toMysqlFormat() + "; this: " + ts.toMysqlFormat());
         
         if (nextTs.toMysqlFormat() == ts.toMysqlFormat()) {
-            console.log("OK");
+            // console.log("OK");
             lastTs = nextTs;
             lastValue = sensorData[i].Val;
             value = lastValue;
@@ -92,7 +94,8 @@ function makePrediction(predictSensor) {
     
     console.log("MA PREDICTIONS");
     // find index of 11. 4. 2016
-    var start = new Date(2016, 9, 30, 0, 0, 0);
+    // var start = new Date(2016, 9, 30, 0, 0, 0);
+    var start = startPredictionDate;
     var offset = Math.round ((start.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600);
     var last = sensor[sensor.length - 1];
     var lastTime = new Date;
@@ -102,18 +105,20 @@ function makePrediction(predictSensor) {
     console.log(offset);
     console.log(sensor.length);
     
-    currentTimestamp.setTime(sensor[offset].Timestamp.getTime());
-    
-    while (currentTimestamp < lastTime) {
-        currentTimestamp.addHours(1);
-        // why Math.round - possible problem with missing values (!)
-        var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
-        var prediction = calculateMA(virtualOffset, sensor, 5);
-        console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
-        pi.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
+    if (offset <= sensor.length) {
+        currentTimestamp.setTime(sensor[offset].Timestamp.getTime());
+
+        while (currentTimestamp < lastTime) {
+            currentTimestamp.addHours(1);
+            // why Math.round - possible problem with missing values (!)
+            var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
+            var prediction = calculateMA(virtualOffset, sensor, 5);
+            console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
+            pi.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
+        }
+
+        pi.flushPredictions();
     }
-    
-    pi.flushPredictions();
 }
 
 
@@ -164,27 +169,41 @@ var sensors = [
     "TP Meblo Jogi_30488652-Consumed real power-pc",
     "174556 SE Alupla Meblo 35747740-Consumed real power-pc",
     "137187 Meblo JOGI 51237780-Consumed real power-pc"   
-]
+];
 
-var i = 0;
-var N = sensors.length;
+function startPrediction() {
+    var i = 0;
+    var N = sensors.length;
 
-var j = schedule.scheduleJob('*/5 * * * * *', function () {
-    
-    if (shm.isInSync()) {
-        try {
-            if (i < N) {
-                console.log(sensors[i]);
-                makePrediction(sensors[i]);
-                i++;
-            } else {
-                console.log("Safe to terminate!");
+    var fromDataDate = new Date();
+    fromDataDate.addHours(-60 * 24);
+    var startPredictionDate = new Date();
+    startPredictionDate.addHours(-2 * 24);
+
+    var j = schedule.scheduleJob('*/5 * * * * *', function () {
+
+        if (shm.isInSync()) {
+            try {
+                if (i < N) {
+                    console.log(fromDataDate, startPredictionDate, sensors[i]);
+                    makePrediction(fromDataDate, startPredictionDate, sensors[i]);
+                    i++;
+                } else {
+                    console.log("Safe to terminate prediction cycle!");
+                    j.cancel();
+                }
+            } catch (err) {
+                if (err) console.log(err);
             }
-        } catch (err) {
-            if (err) console.log(err.message);
+        } else {
+            console.log("Waiting for requests stack to finish.");
         }
-    } else {
-        console.log("Waiting for requests stack to finish.");
-    }
+    });
+};
 
+
+console.log("Waiting for the first prediction job to start ...");
+
+var job = schedule.scheduleJob('0 0 4 * * *', function() {
+    startPrediction();
 });
