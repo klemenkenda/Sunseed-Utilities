@@ -2,6 +2,7 @@ var request = require("sync-request");
 var jsonfile = require("jsonfile");
 var jsonQuery = require("json-query");
 var request2 = require("request");
+var schedule = require("node-schedule");
 
 var env = process.env.NODE_ENV || 'development';
 
@@ -189,89 +190,105 @@ function push2QMiner(dataArray, shm) {
     // console.log(node[0]["node"]["measurements"]);
 };
 
+function processLast48h() {
+    // read the nodes
+    // match nodename   
+    var street = "KROMBERK-INDUSTRIJSKA CESTA";
+    var startTS = "2016-11-03T00:00:00Z";
+    var endTS = "2016-11-30T23:59:59Z";
+    var token = "5e63ca1e-4a27-457f-8bb6-486705df41ff";
 
-// read the nodes
-// match nodename   
-var street = "KROMBERK-INDUSTRIJSKA CESTA";
-var startTS = "2016-04-11T00:00:00Z";
-var endTS = "2016-11-03T23:59:59Z";
-var token = "5e63ca1e-4a27-457f-8bb6-486705df41ff";
+    var credentials = require('./credentials.js');
 
-var credentials = require('./credentials.js');
+    // automtically get new dates
+    var startDate = new Date();
+    var endDate = new Date();
+    startDate.setDate(startDate.getDate() - 2);
+    console.log("START DATE: ", startDate, "END DATE: ", endDate);
 
-// create UNIX timestamp from ISO String
-var startDate = new Date();
-var endDate = new Date();
-startDate = Date.parse(startTS);
-endDate = Date.parse(endTS);
+    // create UNIX timestamp from ISO String
+    var startDate = new Date();
+    var endDate = new Date();
+    startDate = Date.parse(startTS);
+    endDate = Date.parse(endTS);
 
-var startUTS = Math.round(startDate / 1000);
-var endUTS = Math.round(endDate / 1000);
+    var startUTS = Math.round(startDate / 1000);
+    var endUTS = Math.round(endDate / 1000);
 
 
-var n = 0;
+    var n = 0;
 
-for (var i = 0; i < nodes.length; i++) {
-    if (nodes[i].street == street) {
-        n++;
-        // skipping already loaded
-        // if (n < 5) continue;
+    for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].street == street) {
+            n++;
+            // skipping already loaded
+            // if (n < 5) continue;
 
-        // query the node
-        var nodeName = nodes[i].node_id;
-        var requestStr = 'https://api.sunseed-fp7.eu/smartmeter/measurements/interval?from=' + startUTS + '&to=' + endUTS + '&node_id=' + escape(nodeName);
-        console.log("Request for: " + nodeName);
-        
-        var ok = false;
-        var retry = 0;
-        var dataArray = [];
+            // query the node
+            var nodeName = nodes[i].node_id;
+            var requestStr = 'https://api.sunseed-fp7.eu/smartmeter/measurements/interval?from=' + startUTS + '&to=' + endUTS + '&node_id=' + escape(nodeName);
+            console.log("Request for: " + nodeName);
 
-        while ((ok == false) && (retry < 10)) {
-            try {
-                var res = request('POST', requestStr, {
-                    'headers': {
-                        'Authorization': 'Bearer ' + token
-                    }
-                });
+            var ok = false;
+            var retry = 0;
+            var dataArray = [];
 
-                // error message ?
-                dataArray = JSON.parse(res.body);                
-                
-                if ((dataArray != []) && ("error" in dataArray) && ((dataArray.error == "unauthorized") || (dataArray.error == "invalid_token"))) {
-                    console.log("GETTING NEW TOKEN!!!");
-                    // wrong token - get new one
-                    var tokenRequestStr = "https://api.sunseed-fp7.eu/uaa/oauth/token?grant_type=client_credentials";
-                    var tokenRes = request('POST', tokenRequestStr, {
-                        'auth': {
-                            'user': credentials.username,
-                            'pass': credentials.password,
-                            'sendImmediately': false
-                        },
+            while ((ok == false) && (retry < 10)) {
+                try {
+                    var res = request('POST', requestStr, {
                         'headers': {
-                            'Authorization': 'Basic ' + credentials.base64all                            
+                            'Authorization': 'Bearer ' + token
                         }
                     });
-                    
-                    tokenObj = JSON.parse(tokenRes.body);                    
-                    token = tokenObj.access_token;
-                    console.log("NEW TOKEN: " + token);
-                    // create request string
-                    requestStr = 'https://api.sunseed-fp7.eu/smartmeter/measurements/interval?from=' + startUTS + '&to=' + endUTS + '&node_id=' + escape(nodeName);
-                    retry++;
-                } else {                    
-                    console.log("ok:" + retry);
-                    ok = true;
-                    dataArray = JSON.parse(res.body);                    
-                }
-            } catch (err) {
-                console.log("ERROR:" + err.message + ": " + retry);
-                retry++;
-            }
-        }
-        console.log(i);
-        push2QMiner(dataArray, shm);
 
+                    // error message ?
+                    dataArray = JSON.parse(res.body);                
+
+                    if ((dataArray != []) && ("error" in dataArray) && ((dataArray.error == "unauthorized") || (dataArray.error == "invalid_token"))) {
+                        console.log("GETTING NEW TOKEN!!!");
+                        // wrong token - get new one
+                        var tokenRequestStr = "https://api.sunseed-fp7.eu/uaa/oauth/token?grant_type=client_credentials";
+                        var tokenRes = request('POST', tokenRequestStr, {
+                            'auth': {
+                                'user': credentials.username,
+                                'pass': credentials.password,
+                                'sendImmediately': false
+                            },
+                            'headers': {
+                                'Authorization': 'Basic ' + credentials.base64all                            
+                            }
+                        });
+
+                        tokenObj = JSON.parse(tokenRes.body);                    
+                        token = tokenObj.access_token;
+                        console.log("NEW TOKEN: " + token);
+                        // create request string
+                        requestStr = 'https://api.sunseed-fp7.eu/smartmeter/measurements/interval?from=' + startUTS + '&to=' + endUTS + '&node_id=' + escape(nodeName);
+                        retry++;
+                    } else {                    
+                        console.log("ok:" + retry);
+                        ok = true;
+                        dataArray = JSON.parse(res.body);                    
+                    }
+                } catch (err) {
+                    console.log("ERROR:" + err.message + ": " + retry);
+                    retry++;
+                }
+            }
+            console.log(i);
+            push2QMiner(dataArray, shm);
+
+        }
     }
+
+    console.log(n); 
 }
 
-console.log(n); 
+
+console.log("Waiting for the first job to start ...");
+
+// running loading script once per day
+var j = schedule.scheduleJob("0 0 3 * * *", function() {
+    console.log("Starting scheduled loading job");
+    processLast48h();
+})
