@@ -1,29 +1,8 @@
-﻿var schedule = require('node-schedule');
-var mysql = require('mysql');
+var schedule = require('node-schedule');
 var syncRequest = require('sync-request');
 var request = require('request');
-
-/*
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    passwrod: '',
-    database: 'sunseed'
-});
-*/
-
-var pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    passwrod: '',
-    database: 'sunseed'
-});
-
-pool.getConnection(function (err, connection) {
-    // connected! (unless `err` is set)
-    if (err) console.log(err.message);
-});
-
+var SyncHttpManager = require('./SyncHttpManager.js');
+var PredictionInterface = require('./PredictionInterface.js');
 
 function twoDigits(d) {
     if (0 <= d && d < 10) return "0" + d.toString();
@@ -55,12 +34,12 @@ function makePrediction(predictSensor) {
     
     console.log(tomorrow.toMysqlDateFormat());
     
-    console.log("Reading sensor data");
-    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=' + escape(predictSensor) + ':2015-10-01:' + tomorrow.toMysqlDateFormat());
+    console.log("Reading sensor data until " + tomorrow.toMysqlDateFormat());
+    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=' + escape(predictSensor) + ':2016-08-01:' + tomorrow.toMysqlDateFormat());
     var sensorData = JSON.parse(res.getBody());
     
     console.log("Reading holiday");
-    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=holiday:2015-10-01:' + dayAfterTomorrow.toMysqlDateFormat());
+    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=holiday:2016-08-01:' + dayAfterTomorrow.toMysqlDateFormat());
     var holiday = JSON.parse(res.getBody());
     
     console.log("Resampling sensor data");
@@ -113,7 +92,7 @@ function makePrediction(predictSensor) {
     
     console.log("MA PREDICTIONS");
     // find index of 11. 4. 2016
-    var start = new Date(2016, 3, 30, 0, 0, 0);
+    var start = new Date(2016, 9, 30, 0, 0, 0);
     var offset = Math.round ((start.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600);
     var last = sensor[sensor.length - 1];
     var lastTime = new Date;
@@ -131,25 +110,12 @@ function makePrediction(predictSensor) {
         var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
         var prediction = calculateMA(virtualOffset, sensor, 5);
         console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
-        insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
+        pi.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
     }
+    
+    pi.flushPredictions();
 }
 
-function insertPrediction(name, method, time, value) {
-    var sql = "INSERT INTO predictions (pr_sensor, pr_type, pr_timestamp, pr_value) VALUES ('" + name + "', '" + method + "', '" + time + "', " + value + ")";
-    sql += " ON DUPLICATE KEY UPDATE pr_value = " + value;
-    
-    console.log(sql);
-    pool.getConnection(function (err, connection) {
-        if (err) console.log(err);
-        shm.reqMade();
-        connection.query(sql, function (err, rows) {
-            if (err) console.log(err);
-            connection.release();
-            shm.resReceived();
-        });
-    });
-}
 
 function calculateMA(virtualOffset, sensor, N) {
     var sum = 0;
@@ -173,32 +139,9 @@ function calculateMA(virtualOffset, sensor, N) {
     return prediction;
 }
 
-/* sync object */
-function SyncHttpManager() {
-    this.requests = 0;
-    this.responses = 0;
-    
-    this.reqMade = function () {
-        this.requests++;
-        console.log("Request made.");
-    }
-    
-    this.resReceived = function () {
-        this.responses++;
-        console.log("Request received: " + this.responses + "/" + this.requests);
-    }
-    
-    this.isInSync = function () {
-        return this.requests == this.responses;
-    }
-    
-    this.stats = function () {
-        console.log("Requests/responses: " + this.requests + "/" + this.responses);
-    }
-}
+var pi = new PredictionInterface('api');
 
 var shm = new SyncHttpManager();
-
 
 var sensors = [
     "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",    
