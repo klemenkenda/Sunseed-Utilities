@@ -1,4 +1,4 @@
-﻿var schedule = require('node-schedule');
+var schedule = require('node-schedule');
 var mysql = require('mysql');
 var syncRequest = require('sync-request');
 var request = require('request');
@@ -139,16 +139,18 @@ function insertPrediction(name, method, time, value) {
     var sql = "INSERT INTO predictions (pr_sensor, pr_type, pr_timestamp, pr_value) VALUES ('" + name + "', '" + method + "', '" + time + "', " + value + ")";
     sql += " ON DUPLICATE KEY UPDATE pr_value = " + value;
     
-    console.log(sql);
-    pool.getConnection(function (err, connection) {
-        if (err) console.log(err);
-        shm.reqMade();
-        connection.query(sql, function (err, rows) {
+    if (time > '2016-08-17') {
+        console.log(sql);
+        pool.getConnection(function (err, connection) {
             if (err) console.log(err);
-            connection.release();
-            shm.resReceived();
+            shm.reqMade();
+            connection.query(sql, function (err, rows) {
+                if (err) console.log(err);
+                connection.release();
+                shm.resReceived();
+            });
         });
-    });
+    }
 }
 
 function calculateMA(virtualOffset, sensor, N) {
