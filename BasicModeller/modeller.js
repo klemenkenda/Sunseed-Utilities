@@ -2,28 +2,8 @@ var schedule = require('node-schedule');
 var mysql = require('mysql');
 var syncRequest = require('sync-request');
 var request = require('request');
-
-/*
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    passwrod: '',
-    database: 'sunseed'
-});
-*/
-
-var pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    passwrod: '',
-    database: 'sunseed'
-});
-
-pool.getConnection(function (err, connection) {
-    // connected! (unless `err` is set)
-    if (err) console.log(err.message);
-});
-
+var SyncHttpManager = require('./SyncHttpManager.js');
+var PredictionInterface = require('./PredictionInterface.js');
 
 function twoDigits(d) {
     if (0 <= d && d < 10) return "0" + d.toString();
@@ -46,21 +26,23 @@ Date.prototype.addHours = function (h) {
 // initial load
 // http://atena.ijs.si/api/get-measurements?p=000137187-Consumed%20real%20power-pc1:2015-02-11:2016-03-20
 
-function makePrediction(predictSensor) {    
+function makePrediction(fromDataDate, startPredictionDate, predictSensor) {    
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     
     var dayAfterTomorrow = new Date();
     dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
     
+    var from = fromDataDate.toMysqlDateFormat();
+    
     console.log(tomorrow.toMysqlDateFormat());
     
-    console.log("Reading sensor data");
-    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=' + escape(predictSensor) + ':2015-10-01:' + tomorrow.toMysqlDateFormat());
+    console.log("Reading sensor data until " + tomorrow.toMysqlDateFormat());
+    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=' + escape(predictSensor) + ':' + from + ':' + tomorrow.toMysqlDateFormat());
     var sensorData = JSON.parse(res.getBody());
     
     console.log("Reading holiday");
-    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=holiday:2015-10-01:' + dayAfterTomorrow.toMysqlDateFormat());
+    var res = syncRequest('GET', 'http://atena.ijs.si/api/get-measurements?p=holiday:2016-08-01:' + dayAfterTomorrow.toMysqlDateFormat());
     var holiday = JSON.parse(res.getBody());
     
     console.log("Resampling sensor data");
@@ -78,10 +60,10 @@ function makePrediction(predictSensor) {
         var nextTs = new Date(lastTs);
         nextTs.addHours(1);
         
-        console.log("next: " + nextTs.toMysqlFormat() + "; this: " + ts.toMysqlFormat());
+        // console.log("next: " + nextTs.toMysqlFormat() + "; this: " + ts.toMysqlFormat());
         
         if (nextTs.toMysqlFormat() == ts.toMysqlFormat()) {
-            console.log("OK");
+            // console.log("OK");
             lastTs = nextTs;
             lastValue = sensorData[i].Val;
             value = lastValue;
@@ -113,7 +95,8 @@ function makePrediction(predictSensor) {
     
     console.log("MA PREDICTIONS");
     // find index of 11. 4. 2016
-    var start = new Date(2016, 3, 30, 0, 0, 0);
+    // var start = new Date(2016, 9, 30, 0, 0, 0);
+    var start = startPredictionDate;
     var offset = Math.round ((start.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600);
     var last = sensor[sensor.length - 1];
     var lastTime = new Date;
@@ -123,33 +106,19 @@ function makePrediction(predictSensor) {
     console.log(offset);
     console.log(sensor.length);
     
-    currentTimestamp.setTime(sensor[offset].Timestamp.getTime());
-    
-    while (currentTimestamp < lastTime) {
-        currentTimestamp.addHours(1);
-        // why Math.round - possible problem with missing values (!)
-        var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
-        var prediction = calculateMA(virtualOffset, sensor, 5);
-        console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
-        insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
-    }
-}
+    if (offset <= sensor.length) {
+        currentTimestamp.setTime(sensor[offset].Timestamp.getTime());
 
-function insertPrediction(name, method, time, value) {
-    var sql = "INSERT INTO predictions (pr_sensor, pr_type, pr_timestamp, pr_value) VALUES ('" + name + "', '" + method + "', '" + time + "', " + value + ")";
-    sql += " ON DUPLICATE KEY UPDATE pr_value = " + value;
-    
-    if (time > '2016-08-17') {
-        console.log(sql);
-        pool.getConnection(function (err, connection) {
-            if (err) console.log(err);
-            shm.reqMade();
-            connection.query(sql, function (err, rows) {
-                if (err) console.log(err);
-                connection.release();
-                shm.resReceived();
-            });
-        });
+        while (currentTimestamp < lastTime) {
+            currentTimestamp.addHours(1);
+            // why Math.round - possible problem with missing values (!)
+            var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
+            var prediction = calculateMA(virtualOffset, sensor, 5);
+            console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
+            pi.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
+        }
+
+        pi.flushPredictions();
     }
 }
 
@@ -175,32 +144,9 @@ function calculateMA(virtualOffset, sensor, N) {
     return prediction;
 }
 
-/* sync object */
-function SyncHttpManager() {
-    this.requests = 0;
-    this.responses = 0;
-    
-    this.reqMade = function () {
-        this.requests++;
-        console.log("Request made.");
-    }
-    
-    this.resReceived = function () {
-        this.responses++;
-        console.log("Request received: " + this.responses + "/" + this.requests);
-    }
-    
-    this.isInSync = function () {
-        return this.requests == this.responses;
-    }
-    
-    this.stats = function () {
-        console.log("Requests/responses: " + this.requests + "/" + this.responses);
-    }
-}
+var pi = new PredictionInterface('api');
 
 var shm = new SyncHttpManager();
-
 
 var sensors = [
     "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",    
@@ -223,27 +169,41 @@ var sensors = [
     "TP Meblo Jogi_30488652-Consumed real power-pc",
     "174556 SE Alupla Meblo 35747740-Consumed real power-pc",
     "137187 Meblo JOGI 51237780-Consumed real power-pc"   
-]
+];
 
-var i = 0;
-var N = sensors.length;
+function startPrediction() {
+    var i = 0;
+    var N = sensors.length;
 
-var j = schedule.scheduleJob('*/5 * * * * *', function () {
-    
-    if (shm.isInSync()) {
-        try {
-            if (i < N) {
-                console.log(sensors[i]);
-                makePrediction(sensors[i]);
-                i++;
-            } else {
-                console.log("Safe to terminate!");
+    var fromDataDate = new Date();
+    fromDataDate.addHours(-60 * 24);
+    var startPredictionDate = new Date();
+    startPredictionDate.addHours(-2 * 24);
+
+    var j = schedule.scheduleJob('*/5 * * * * *', function () {
+
+        if (shm.isInSync()) {
+            try {
+                if (i < N) {
+                    console.log(fromDataDate, startPredictionDate, sensors[i]);
+                    makePrediction(fromDataDate, startPredictionDate, sensors[i]);
+                    i++;
+                } else {
+                    console.log("Safe to terminate prediction cycle!");
+                    j.cancel();
+                }
+            } catch (err) {
+                if (err) console.log(err);
             }
-        } catch (err) {
-            if (err) console.log(err.message);
+        } else {
+            console.log("Waiting for requests stack to finish.");
         }
-    } else {
-        console.log("Waiting for requests stack to finish.");
-    }
+    });
+};
 
+
+console.log("Waiting for the first prediction job to start ...");
+
+var job = schedule.scheduleJob('0 0 4 * * *', function() {
+    startPrediction();
 });

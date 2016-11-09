@@ -163,3 +163,5 @@ $RECYCLE.BIN/
 .DS_Store
 schema/db/
 logs/
+
+Loader3/credentials.js

@@ -1,4 +1,4 @@
-﻿var request = require("sync-request");
+var request = require("sync-request");
 var fs = require('fs');
 
 function push2QMiner(data, header) {
@@ -62,21 +62,25 @@ function push2QMiner(data, header) {
             }
         }];
     
-    var res = request("GET", "http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node));
+    var res = request("GET", "http://localhost:9201/data/add-measurement?data=" + JSON.stringify(node));
     // http.request("http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node));    
     //request("http://localhost:9301/data/add-measurement?data=" + JSON.stringify(node), function (error, response, body) {        
     //    if (error) console.error(error.stack);
     // });
 
     
-    // console.log(node[0]["node"]["measurements"]);
+    console.log(node[0]["node"]["measurements"]);
 };
 
 
+console.log("Starting push ...")
+
 // read header
 fs.readFile('staticFeatures.csv', function (err, data) {
+    console.log("Reading static features ...")
     if (err) throw err;
-    var array = data.toString().split("\r\n");
+    // for windows use .split("\r\n")
+    var array = data.toString().split("\n");
     
     header = array[0];
     
@@ -89,7 +93,7 @@ fs.readFile('staticFeatures.csv', function (err, data) {
     
     for (i in array) {
         if (i != 0) {
-            lineArray = array[i].split(";");
+            lineArray = array[i].split(";");            
             push2QMiner(lineArray, headerHash);
         }
     };
@@ -100,8 +104,3 @@ fs.readFile('staticFeatures.csv', function (err, data) {
 //    // push data synchronously to QMiner instance            
 //    push2QMiner(merged[i], shm);
 //}
- 
-
-            
-
-
