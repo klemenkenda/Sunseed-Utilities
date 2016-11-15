@@ -1,4 +1,5 @@
 var schedule = require('node-schedule');
+var mysql = require('mysql');
 var syncRequest = require('sync-request');
 var request = require('request');
 var SyncHttpManager = require('./SyncHttpManager.js');
@@ -120,7 +121,6 @@ function makePrediction(fromDataDate, startPredictionDate, predictSensor) {
         pi.flushPredictions();
     }
 }
-
 
 function calculateMA(virtualOffset, sensor, N) {
     var sum = 0;

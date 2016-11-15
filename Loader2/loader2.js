@@ -1,4 +1,4 @@
-﻿var request = require("sync-request");
+var request = require("sync-request");
 var jsonfile = require("jsonfile");
 var jsonQuery = require("json-query");
 var request2 = require("request");
@@ -103,7 +103,7 @@ function push2QMiner(dataArray, shm) {
 
     // go through all records
     for (var j in dataArray) {
-        var data = dataArray[j];
+        var data = dataArray[j];        
 
         // we do this for each record - not needed (!)
         nodeId = data["node_id"];
@@ -115,7 +115,7 @@ function push2QMiner(dataArray, shm) {
 
             var fieldName = sensor["name"];
 
-            // does sensor exist in the record
+            // does sensor exist in the record            
             if (fieldName in data) {
 
                 var value = data[fieldName];
@@ -193,8 +193,8 @@ function push2QMiner(dataArray, shm) {
 // read the nodes
 // match nodename   
 var street = "KROMBERK-INDUSTRIJSKA CESTA";
-var startTS = "2016-04-11T00:00:00Z";
-var endTS = "2016-07-31T23:59:59Z";
+var startTS = "2016-08-17T00:00:00Z";
+var endTS = "2016-09-20T23:59:59Z";
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwczovL3Rlc3QtYWRtaW4uc3Vuc2VlZC1mcDcuZXU6ODAiLCJzdWIiOjIwLCJwcm8iOiJsb2NhbCIsIm9yaSI6ImFwaSIsImV4cCI6MTQ2ODM4MjYyNiwiaWF0IjoxNDY4Mzc5MDI2LCJqdGkiOiIwZjhiZTcxNC1iN2ZkLTQxYzktYWQ1MC1hZTNjZDIzMDBlOTAifQ.VexN06LseppE3mx65bbyAwpZMxfyb_6_8YW4N2HVoP6sAQez9Bh1bGcOG7Wz8IG9kLTb8oeEPQCuDJn2xCg00g";
 
 var n = 0;
