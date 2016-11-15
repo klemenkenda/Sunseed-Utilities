@@ -204,6 +204,6 @@ function startPrediction() {
 
 console.log("Waiting for the first prediction job to start ...");
 
-var job = schedule.scheduleJob('0 0 4 * * *', function() {
+// var job = schedule.scheduleJob('0 0 4 * * *', function() {
     startPrediction();
-});
+//});
