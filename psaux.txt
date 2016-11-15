@@ -1,0 +1,1251 @@
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0  33888  1340 ?        Ss   okt18   0:13 /sbin/init
+root         2  0.0  0.0      0     0 ?        S    okt18   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    okt18   0:08 [ksoftirqd/0]
+root         4  0.0  0.0      0     0 ?        S    okt18   0:00 [kworker/0:0]
+root         5  0.0  0.0      0     0 ?        S<   okt18   0:00 [kworker/0:0H]
+root         7  0.2  0.0      0     0 ?        S    okt18  95:47 [rcu_sched]
+root         8  0.1  0.0      0     0 ?        S    okt18  60:25 [rcuos/0]
+root         9  0.1  0.0      0     0 ?        S    okt18  58:55 [rcuos/1]
+root        10  0.1  0.0      0     0 ?        S    okt18  58:04 [rcuos/2]
+root        11  0.1  0.0      0     0 ?        S    okt18  58:51 [rcuos/3]
+root        12  0.0  0.0      0     0 ?        S    okt18   0:00 [rcu_bh]
+root        13  0.0  0.0      0     0 ?        S    okt18   0:00 [rcuob/0]
+root        14  0.0  0.0      0     0 ?        S    okt18   0:00 [rcuob/1]
+root        15  0.0  0.0      0     0 ?        S    okt18   0:00 [rcuob/2]
+root        16  0.0  0.0      0     0 ?        S    okt18   0:00 [rcuob/3]
+root        17  0.0  0.0      0     0 ?        S    okt18   1:41 [migration/0]
+root        18  0.0  0.0      0     0 ?        S    okt18   0:15 [watchdog/0]
+root        19  0.0  0.0      0     0 ?        S    okt18   0:13 [watchdog/1]
+root        20  0.0  0.0      0     0 ?        S    okt18   1:44 [migration/1]
+root        21  0.0  0.0      0     0 ?        S    okt18   0:04 [ksoftirqd/1]
+root        23  0.0  0.0      0     0 ?        S<   okt18   0:00 [kworker/1:0H]
+root        24  0.0  0.0      0     0 ?        S    okt18   0:13 [watchdog/2]
+root        25  0.0  0.0      0     0 ?        S    okt18   1:43 [migration/2]
+root        26  0.0  0.0      0     0 ?        S    okt18   0:05 [ksoftirqd/2]
+root        28  0.0  0.0      0     0 ?        S<   okt18   0:00 [kworker/2:0H]
+root        29  0.0  0.0      0     0 ?        S    okt18   0:13 [watchdog/3]
+root        30  0.0  0.0      0     0 ?        S    okt18   1:42 [migration/3]
+root        31  0.0  0.0      0     0 ?        S    okt18   0:08 [ksoftirqd/3]
+root        33  0.0  0.0      0     0 ?        S<   okt18   0:00 [kworker/3:0H]
+root        34  0.0  0.0      0     0 ?        S<   okt18   0:00 [khelper]
+root        35  0.0  0.0      0     0 ?        S    okt18   0:00 [kdevtmpfs]
+root        36  0.0  0.0      0     0 ?        S<   okt18   0:00 [netns]
+root        37  0.0  0.0      0     0 ?        S<   okt18   0:00 [writeback]
+root        38  0.0  0.0      0     0 ?        S<   okt18   0:00 [kintegrityd]
+root        39  0.0  0.0      0     0 ?        S<   okt18   0:00 [bioset]
+root        40  0.0  0.0      0     0 ?        S<   okt18   0:00 [kworker/u9:0]
+root        41  0.0  0.0      0     0 ?        S<   okt18   0:00 [kblockd]
+root        42  0.0  0.0      0     0 ?        S<   okt18   0:00 [ata_sff]
+root        43  0.0  0.0      0     0 ?        S    okt18   0:00 [khubd]
+root        44  0.0  0.0      0     0 ?        S<   okt18   0:00 [md]
+root        45  0.0  0.0      0     0 ?        S<   okt18   0:00 [devfreq_wq]
+root        47  0.0  0.0      0     0 ?        S    okt18  13:47 [kworker/2:1]
+root        49  0.0  0.0      0     0 ?        S    okt18   0:06 [khungtaskd]
+root        50  0.0  0.0      0     0 ?        S    okt18  25:06 [kswapd0]
+root        51  0.0  0.0      0     0 ?        S<   okt18   0:00 [vmstat]
+root        52  0.0  0.0      0     0 ?        SN   okt18   0:00 [ksmd]
+root        53  0.0  0.0      0     0 ?        SN   okt18   0:22 [khugepaged]
+root        54  0.0  0.0      0     0 ?        S    okt18   0:00 [fsnotify_mark]
+root        55  0.0  0.0      0     0 ?        S    okt18   0:00 [ecryptfs-kthrea]
+root        56  0.0  0.0      0     0 ?        S<   okt18   0:00 [crypto]
+root        68  0.0  0.0      0     0 ?        S<   okt18   0:00 [kthrotld]
+root        69  0.0  0.0      0     0 ?        S    okt18  13:07 [kworker/3:1]
+root        71  0.0  0.0      0     0 ?        S    okt18   0:00 [scsi_eh_0]
+root        72  0.0  0.0      0     0 ?        S    okt18   0:00 [scsi_eh_1]
+root        93  0.0  0.0      0     0 ?        S<   okt18   0:00 [deferwq]
+root        94  0.0  0.0      0     0 ?        S<   okt18   0:00 [charger_manager]
+root       151  0.0  0.0      0     0 ?        S<   okt18   0:00 [mpt_poll_0]
+root       152  0.0  0.0      0     0 ?        S<   okt18   0:00 [mpt/0]
+root       153  0.0  0.0      0     0 ?        S<   okt18   0:00 [kpsmoused]
+root       154  0.0  0.0      0     0 ?        S    okt18   0:00 [kworker/3:2]
+root       155  0.0  0.0      0     0 ?        S    okt18   0:00 [scsi_eh_2]
+root       161  0.0  0.0      0     0 ?        S<   okt18   0:00 [kdmflush]
+root       162  0.0  0.0      0     0 ?        S<   okt18   0:00 [bioset]
+root       163  0.0  0.0      0     0 ?        S<   okt18   0:00 [kdmflush]
+root       165  0.0  0.0      0     0 ?        S<   okt18   0:00 [bioset]
+root       182  0.0  0.0      0     0 ?        S    okt18   1:07 [jbd2/dm-0-8]
+root       183  0.0  0.0      0     0 ?        S<   okt18   0:00 [ext4-rsv-conver]
+root       323  0.0  0.0  19604   168 ?        S    okt18   0:00 upstart-udev-bridge --daemon
+root       328  0.0  0.0  51980    92 ?        Ss   okt18   0:00 /lib/systemd/systemd-udevd --daemon
+loadfor+   344  0.0  0.0 452848   384 ?        Sl   okt18   1:19 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+igor       375  2.4  0.6 638568 51604 ?        SNl  12:56   0:25 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+root       392  0.0  0.0      0     0 ?        S<   okt18   0:00 [ext4-rsv-conver]
+root       406  0.0  0.0      0     0 ?        S<   okt18   0:00 [ttm_swap]
+root       462  0.0  0.0      0     0 ?        S    nov11   0:00 [kworker/1:0]
+message+   485  0.0  0.0  46824  7168 ?        Ss   okt18   1:54 dbus-daemon --system --fork
+root       543  0.0  0.0  43508   272 ?        Ss   okt18   0:07 /lib/systemd/systemd-logind
+syslog     560  0.0  0.0 262128  7296 ?        Ssl  okt18   0:25 rsyslogd
+root       586  0.0  0.0  19292    88 ?        Ss   okt18   0:00 /usr/sbin/bluetoothd
+root       620  0.0  0.0      0     0 ?        S<   okt18   0:00 [krfcommd]
+avahi      644  0.0  0.0  32340   476 ?        S    okt18   1:26 avahi-daemon: running [sunseed-analytics.local]
+avahi      647  0.0  0.0  32216    32 ?        S    okt18   0:00 avahi-daemon: chroot helper
+root       743  0.0  0.0 330236   364 ?        Ssl  okt18   0:00 /usr/sbin/ModemManager
+root       777  0.0  0.0  15796   508 ?        S    okt18   0:01 upstart-file-bridge --daemon
+root       780  0.0  0.0  15520   396 ?        S    okt18   0:01 upstart-socket-bridge --daemon
+root       785  0.0  0.0 347624  2608 ?        Ssl  okt18   1:42 NetworkManager
+root       792  0.0  0.0 290200  3648 ?        Sl   okt18   1:16 /usr/lib/policykit-1/polkitd --no-debug
+root       888  0.0  0.0  21228     8 tty4     Ss+  okt18   0:00 /sbin/getty -8 38400 tty4
+root       892  0.0  0.0  21228     8 tty5     Ss+  okt18   0:00 /sbin/getty -8 38400 tty5
+root       899  0.0  0.0  21228     8 tty2     Ss+  okt18   0:00 /sbin/getty -8 38400 tty2
+root       900  0.0  0.0  21228     8 tty3     Ss+  okt18   0:00 /sbin/getty -8 38400 tty3
+root       903  0.0  0.0  21228     8 tty6     Ss+  okt18   0:00 /sbin/getty -8 38400 tty6
+root       947  0.0  0.0  61376   108 ?        Ss   okt18   0:00 /usr/sbin/sshd -D
+root       956  0.0  0.0  23648    92 ?        Ss   okt18   0:04 cron
+root       988  0.0  0.0   4364     4 ?        Ss   okt18   0:00 acpid -c /etc/acpi/events -s /var/run/acpid.socket
+root      1035  0.0  0.0 111856  1032 ?        Ss   12:40   0:00 sshd: loadforecasting [priv]
+root      1043  0.0  0.0  75352   128 ?        Ss   okt18   0:04 /usr/sbin/cups-browsed
+whoopsie  1081  0.0  0.0 517056  1152 ?        Ssl  okt18   4:46 whoopsie
+kernoops  1206  0.0  0.0  37140   200 ?        Ss   okt18   0:47 /usr/sbin/kerneloops
+nobody    1208  0.0  0.0  36436    76 ?        S    okt18   1:10 /usr/sbin/dnsmasq --no-resolv --keep-in-foreground --no-hosts --bind-interfaces --pid-file=/run/sendsigs.omit.d/network-manager.dnsmasq.pid --listen-address=127.0.1.1 --conf-file=/var/run/NetworkManager/dnsmasq.conf --cache-size=0 --proxy-dnssec --enable-dbus=org.freedesktop.NetworkManager.dnsmasq --conf-dir=/etc/NetworkManager/dnsmasq.d
+root      1269  0.0  0.0  33784   808 ?        S    okt18  14:55 /usr/bin/perl /usr/sbin/x2gocleansessions
+root      1334  0.0  0.0 351720   464 ?        Ssl  okt18   0:00 lightdm
+root      1393  0.0  0.1 224352  9048 tty7     Ssl+ okt18   0:38 /usr/bin/X -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+root      1396  0.0  0.0 288192  1768 ?        Sl   okt18   0:16 /usr/lib/accountsservice/accounts-daemon
+root      1399  0.0  0.0  89932   688 ?        S    okt18  40:21 /usr/bin/vmtoolsd
+loadfor+  1400  0.0  0.0 111856  1164 ?        S    12:40   0:01 sshd: loadforecasting@pts/48
+loadfor+  1401  0.0  0.0  28268  2288 pts/48   Ss   12:40   0:00 -bash
+root      1467  0.0  0.0  21228     8 tty1     Ss+  okt18   0:00 /sbin/getty -8 38400 tty1
+root      1480  0.0  0.0 170368   592 ?        Sl   okt18   0:00 lightdm --session-child 16 19
+root      1487  0.0  0.0      0     0 ?        S    okt18   0:00 [kauditd]
+lightdm   1492  0.0  0.0   4440     4 ?        Ss   okt18   0:00 /bin/sh /usr/lib/lightdm/lightdm-greeter-session /usr/sbin/unity-greeter
+lightdm   1497  0.0  0.0  39440   464 ?        Ss   okt18   0:09 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+lightdm   1498  0.0  0.0 821496  6396 ?        Sl   okt18   1:54 /usr/sbin/unity-greeter
+lightdm   1500  0.0  0.0 337584     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher --launch-immediately
+lightdm   1504  0.0  0.0  39240     4 ?        S    okt18   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+lightdm   1507  0.0  0.0 124908   116 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+lightdm   1511  0.0  0.0 197860     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd
+lightdm   1515  0.0  0.0 280124     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/112/gvfs -f -o big_writes
+lightdm   1526  0.0  0.0 178172   388 ?        Sl   okt18   0:01 /usr/lib/dconf/dconf-service
+root      1529  0.0  0.0 100760     8 ?        S    okt18   0:00 lightdm --session-child 12 19
+lightdm   1533  0.0  0.0  41012     0 ?        S    okt18   0:00 init --user --startup-event indicator-services-start
+lightdm   1535  0.0  0.0 469620  1664 ?        Sl   okt18   0:10 nm-applet
+lightdm   1538  0.0  0.0 336316     0 ?        Ssl  okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+lightdm   1539  0.0  0.0 264740     0 ?        Ssl  okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+lightdm   1540  0.0  0.0 279696     0 ?        Ssl  okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-power/indicator-power-service
+lightdm   1542  0.0  0.0 454648  1112 ?        Ssl  okt18   0:43 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+lightdm   1543  0.0  0.0 554544  1256 ?        Ssl  okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+lightdm   1547  0.0  0.0 501748  2940 ?        Ssl  okt18   0:01 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+lightdm   1548  0.0  0.0 286780     0 ?        Ssl  okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+root      1568  0.0  0.0 231088   416 ?        Sl   okt18   0:06 /usr/lib/upower/upowerd
+lightdm   1571  0.0  0.0 482500  4224 ?        Sl   okt18   0:10 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+lightdm   1573  0.0  0.0 669596  1016 ?        Sl   okt18   0:21 /usr/lib/unity-settings-daemon/unity-settings-daemon
+loadfor+  1605  0.0  0.0 379116   928 ?        Sl   nov14   0:03 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+lightdm   1608  0.0  0.0 276264   136 ?        Sl   okt18   0:00 /usr/bin/pulseaudio --start --log-target=syslog
+rtkit     1612  0.0  0.0 168908   116 ?        SNl  okt18   0:57 /usr/lib/rtkit/rtkit-daemon
+loadfor+  1628  0.8  0.2 914308 22988 pts/48   Sl+  12:40   0:16 node /usr/local/bin/pm2 monit
+lightdm   1634  0.0  0.0 335964   740 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+  1703  3.6  0.6 963616 52472 ?        Rsl  okt18 1471:41 PM2 v2.0.18: God Daemon (/home/loadforecasting/.pm2)         
+lightdm   1710  0.0  0.0  59376   192 ?        S    okt18   0:04 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+colord    1777  0.0  0.0 301464   720 ?        Sl   okt18   0:00 /usr/lib/colord/colord
+loadfor+  1793  2.1 36.9 4629440 3020800 ?     Ssl  okt18 862:55 node /home/loadforecasting/seensy/seensy.js                     
+loadfor+  2022  0.0  0.0  28224     4 pts/30   Ss   nov04   0:00 bash
+root      2034  0.0  0.0      0     0 ?        S<   okt18   0:00 [kworker/u9:1]
+loadfor+  2062  1.7  0.0 953564  6756 pts/30   Sl+  nov04 270:57 node /usr/local/bin/pm2 logs
+kkenda    2275  0.0  0.0 552240   956 ?        Sl   okt18   0:12 gnome-terminal
+kkenda    2281  0.0  0.0  14816     8 ?        S    okt18   0:00 gnome-pty-helper
+kkenda    2282  0.0  0.0  28152     8 pts/16   Ss+  okt18   0:00 bash
+root      2640  0.0  0.0 2100624  660 ?        Sl   okt18   0:09 /usr/sbin/console-kit-daemon --no-daemon
+loadfor+  3498  0.0  0.0 125660     0 ?        Sl   nov08   0:00 /usr/lib/gvfs/gvfsd-metadata
+loadfor+  3876  0.6  0.2 918212 23920 pts/28   Rl+  nov04 100:20 node /usr/local/bin/pm2 monit
+loadfor+  3883  0.0  0.0 276496  1416 ?        Sl   12:41   0:00 /usr/bin/pulseaudio --start --log-target=syslog
+nx        4056  0.0  0.0  47368   884 ?        Sl   nov10   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx        4058  0.0  0.0  44152   652 pts/38   Ss+  nov10   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root      4064  0.0  0.0 107724   904 ?        Ss   nov10   0:00 sshd: loadforecasting [priv]
+loadfor+  4129  0.0  0.0 107724   908 ?        S    nov10   0:00 sshd: loadforecasting@notty
+root      4433  0.0  0.0 371432  1580 ?        Sl   okt18   0:03 /usr/lib/udisks2/udisksd --no-debug
+nx        4653  0.0  0.0  47368   908 ?        Sl   nov14   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx        4664  0.0  0.0  44152   684 pts/44   Ss+  nov14   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root      4675  0.0  0.0 107724   992 ?        Ss   nov14   0:00 sshd: loadforecasting [priv]
+loadfor+  4757  0.0  0.0 107724  1004 ?        S    nov14   0:00 sshd: loadforecasting@notty
+nx        4799  0.0  0.0  19044  1408 ?        S    nov10   0:00 /bin/bash /usr/bin/nxserver
+nx        4802  0.0  0.0  19064  1436 ?        S    nov10   0:00 /bin/bash /usr/bin/nxserver
+nx        4803  0.0  0.0  19052  1348 ?        S    nov10   0:00 /bin/bash /usr/bin/nxserver
+nx        4809  0.0  0.0  19080  1444 ?        S    nov10   0:00 /bin/bash /usr/bin/nxserver
+nx        4810  0.0  0.0  12628    92 ?        S    nov10   0:00 cat -
+loadfor+  4811  0.0  0.0  19376  1656 ?        S    nov10   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+  4813  0.0  0.0  19492  1856 ?        S    nov10   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5067  0.0  0.0  19556  1908 ?        S    nov10   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5069  0.0  0.0  19580  1940 ?        S    nov10   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5070  0.0  0.0  12616   100 ?        S    nov10   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3610-1D0E58805E621D22DBD5C7360AE2553C/session
+loadfor+  5072  0.0  0.0  19620  1952 ?        S    nov10   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5074  0.0  0.0  19568  1908 ?        S    nov10   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5103  0.3  1.4 241560 114580 ?       S    nov10  22:30 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3610 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3610-1D0E58805E621D22DBD5C7360AE2553C/options -nolisten tcp -dpi 96 :3610
+loadfor+  5164  0.0  0.0 570704  3472 ?        Sl   nov10   0:00 gnome-session --session gnome-fallback
+loadfor+  5186  0.0  0.0  24432   228 ?        S    nov10   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+  5226  0.0  0.0  39844  1188 ?        Ss   nov10   0:02 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+  5228  0.0  0.0 337568  2148 ?        Sl   nov10   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+  5234  0.0  0.0  39372   488 ?        S    nov10   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+  5237  0.0  0.0 124908  2544 ?        Sl   nov10   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+  5256  0.2  0.1 1141020 8720 ?        Sl   nov10  16:06 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+  5264  0.0  0.0 298268   752 ?        Sl   nov10   0:00 /usr/bin/gnome-keyring-daemon --start --components=gpg
+loadfor+  5277  0.0  0.0 197860   576 ?        Sl   nov10   0:00 /usr/lib/gvfs/gvfsd
+loadfor+  5295  0.0  0.0 491960  6068 ?        Sl   nov10   0:00 metacity
+loadfor+  5298  0.0  0.0 178296   480 ?        Sl   nov10   0:00 /usr/lib/dconf/dconf-service
+loadfor+  5305  0.0  0.6 849040 50252 ?        Sl   nov10   2:48 gnome-panel
+loadfor+  5311  0.0  0.0 583864  1552 ?        Sl   nov10   2:53 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+  5320  0.0  0.0 282088   696 ?        Sl   nov10   0:30 /usr/lib/ibus/ibus-dconf
+loadfor+  5324  0.0  0.0 307764  1824 ?        Sl   nov10   0:32 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+  5352  0.0  0.0 472028  4836 ?        Sl   nov10   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+  5360  0.0  0.1 1017104 11100 ?       Sl   nov10   3:19 nautilus -n
+loadfor+  5361  0.0  0.0 365312  3292 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+  5362  0.0  0.0 480636  1632 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+  5363  0.0  0.0 250572  2816 ?        Sl   nov10   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+  5365  0.0  0.0 264876   536 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+  5367  0.0  0.0 550168  6368 ?        Sl   nov10   0:02 nm-applet
+loadfor+  5370  0.0  0.0 286780  1076 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+  5376  0.0  0.0 1099032 3724 ?        Sl   nov10   1:08 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+  5381  0.0  0.0 763896  1156 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+  5384  0.0  0.0 335260  4776 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+  5387  0.0  0.0 336320   516 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+  5399  0.0  0.0 407752  5304 ?        Sl   nov10   0:37 /usr/bin/gnome-screensaver --no-daemon
+loadfor+  5415  0.0  0.0 226320  1980 ?        Sl   nov10   0:30 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+  5426  0.0  0.0 201464  2580 ?        Sl   nov10   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+  5432  0.0  0.0 1031124 2836 ?        Sl   nov10   0:00 /usr/lib/evolution/evolution-source-registry
+root      5434  0.0  0.0 111856  1036 ?        Ss   12:42   0:00 sshd: loadforecasting [priv]
+loadfor+  5443  0.0  0.0 287180   660 ?        Sl   nov10   0:29 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+  5449  0.0  0.0 213628   668 ?        Sl   nov10   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+  5476  0.0  0.0  59376  1568 ?        S    nov10   0:00 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+  5479  0.0  0.4 1075472 38900 ?       Sl   nov10   0:15 /usr/lib/evolution/evolution-calendar-factory
+nx        5489  0.0  0.0  19048  1448 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx        5493  0.0  0.0  19068  1472 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx        5494  0.0  0.0  19056  1460 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+loadfor+  5497  0.0  0.0 360628   980 ?        Sl   nov10   0:34 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+  5499  0.0  0.1 397272  9852 ?        Sl   nov10   0:27 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+nx        5504  0.0  0.0  19084  1488 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx        5506  0.0  0.0  12628    92 ?        S    nov14   0:00 cat -
+loadfor+  5509  0.0  0.0  19376  1772 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+  5510  0.0  0.0 271596   584 ?        Sl   nov10   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+  5513  0.0  0.0  19492  1920 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5534  0.0  0.0 563088  5136 ?        Sl   nov10   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+  5556  0.0  0.0 206368   852 ?        Sl   nov10   0:30 /usr/lib/ibus/ibus-engine-simple
+loadfor+  5766  0.0  0.0  19556  1980 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5768  0.0  0.0  19580  2004 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5769  0.0  0.0  12616   104 ?        S    nov14   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3613-86CB3E0568339C5C1B9D14DD984074C7/session
+loadfor+  5770  0.0  0.0  19620  2044 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5772  0.0  0.0 374000  3140 ?        Sl   nov10   0:00 telepathy-indicator
+loadfor+  5775  0.0  0.0  19568  1992 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  5789  0.0  0.0 322636  4052 ?        Sl   nov10   0:17 /usr/lib/telepathy/mission-control-5
+loadfor+  5808  0.0  1.1 211124 91380 ?        S    nov14   0:01 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3613 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3613-86CB3E0568339C5C1B9D14DD984074C7/options -nolisten tcp -dpi 96 :3613
+loadfor+  5854  0.0  0.0 410008  1848 ?        Sl   nov10   0:30 zeitgeist-datahub
+loadfor+  5866  0.0  0.0 275008  1008 ?        Sl   nov10   0:00 /usr/bin/zeitgeist-daemon
+loadfor+  5891  0.0  0.0 111856  1136 ?        S    12:42   0:00 sshd: loadforecasting@pts/45
+root      5911  0.0  0.0      0     0 ?        S    13:13   0:00 [kworker/u8:2]
+loadfor+  5959  0.0  0.0 570704  3552 ?        Sl   nov14   0:00 gnome-session --session gnome-fallback
+loadfor+  5966  0.0  0.0  24432   244 ?        S    nov14   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+  5976  0.0  0.0  39820  1204 ?        Ss   nov14   0:00 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+  5978  0.0  0.0 337568   544 ?        Sl   nov14   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+  5982  0.0  0.0  39240   508 ?        S    nov14   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+  5985  0.0  0.0 124908   612 ?        Sl   nov14   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+  6000  0.2  0.0 1141024 6980 ?        Sl   nov14   2:58 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+  6014  0.0  0.0 298124   736 ?        Sl   nov14   0:00 /usr/bin/gnome-keyring-daemon --start --components=pkcs11
+loadfor+  6020  0.0  0.0 197860   624 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfsd
+loadfor+  6044  0.0  0.0 351368  3776 ?        Sl   nov14   0:00 metacity
+loadfor+  6047  0.0  0.0 178296   536 ?        Sl   nov14   0:00 /usr/lib/dconf/dconf-service
+loadfor+  6061  0.0  0.1 730896  8400 ?        Sl   nov14   0:35 gnome-panel
+loadfor+  6069  0.0  0.0  28280  2856 pts/45   Ss   12:42   0:00 -bash
+loadfor+  6085  0.0  0.0 583860  1236 ?        Sl   nov14   0:35 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+  6093  0.0  0.0 282088   760 ?        Sl   nov14   0:06 /usr/lib/ibus/ibus-dconf
+loadfor+  6096  0.0  0.0 307764  1936 ?        Sl   nov14   0:06 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+  6139  0.0  0.0 761044  7340 ?        Sl   nov10   0:01 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+  6191  0.0  0.0 472028  2900 ?        Sl   nov14   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+  6197  0.0  0.1 858576 11012 ?        Sl   nov14   0:34 nautilus -n
+loadfor+  6199  0.0  0.0 365316  3496 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+  6201  0.0  0.0 554356  1560 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+  6202  0.0  0.0 250568  2836 ?        Sl   nov14   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+  6203  0.0  0.0 264744   544 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+  6209  0.0  0.0 335256  2836 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+  6210  0.0  0.0 550176  6492 ?        Sl   nov14   0:00 nm-applet
+loadfor+  6214  0.0  0.0 286780  1144 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+  6215  0.0  0.0 1164444 6140 ?        Sl   nov14   0:14 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+  6229  0.0  0.0 428016  1072 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+  6236  0.0  0.0 336320   508 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+  6245  0.0  0.0 407756  3088 ?        Sl   nov14   0:07 /usr/bin/gnome-screensaver --no-daemon
+loadfor+  6256  0.0  0.0 226320  4272 ?        Sl   nov14   0:06 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+  6271  0.0  0.0 201464   588 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+  6279  0.0  0.0 1096660 2972 ?        Sl   nov14   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+  6286  0.0  0.0 287180  2764 ?        Sl   nov14   0:05 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+  6298  0.0  0.0 213628   704 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+  6314  0.0  0.0  59376  1624 ?        S    nov14   0:00 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+  6318  0.0  0.4 1141008 39012 ?       Sl   nov14   0:03 /usr/lib/evolution/evolution-calendar-factory
+loadfor+  6330  0.0  0.0 271596   596 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+  6344  0.0  0.0 286896   860 ?        Sl   nov14   0:08 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+  6385  0.0  0.0 206368   880 ?        Sl   nov14   0:06 /usr/lib/ibus/ibus-engine-simple
+loadfor+  6469  0.0  0.0 373304  3816 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+  6474  0.0  0.0 237612   472 ?        Sl   nov08   0:01 /usr/lib/geoclue/geoclue-master
+loadfor+  6481  0.0  0.0 329960   608 ?        Sl   nov08   0:01 /usr/lib/x86_64-linux-gnu/ubuntu-geoip-provider
+loadfor+  6756  0.0  0.0 374004  3192 ?        Sl   nov14   0:00 telepathy-indicator
+loadfor+  6782  0.0  0.0 714152  3568 ?        Sl   nov10   2:21 update-notifier
+loadfor+  6879  0.0  0.0 475440  1960 ?        Sl   nov14   0:06 zeitgeist-datahub
+loadfor+  6905  0.4  0.1 553512 12944 ?        Sl   nov10  33:17 gnome-terminal
+loadfor+  6918  0.0  0.0  14816   156 ?        S    nov10   0:00 gnome-pty-helper
+loadfor+  6919  0.0  0.0  28288  2196 pts/39   Ss   nov10   0:00 bash
+loadfor+  7030  0.0  0.0 919408     0 ?        Sl   nov08   0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.11 /org/gtk/gvfs/exec_spaw/11
+loadfor+  7154  0.0  0.0 761052  7520 ?        Sl   nov14   0:00 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+  7629  0.0  0.0 257544  2868 ?        Sl   nov14   0:00 /usr/bin/zeitgeist-daemon
+root      7728  0.0  0.0  10688     8 ?        Ss   okt18   0:00 /usr/sbin/inetd
+loadfor+  7832  0.0  0.0 714024  6072 ?        Sl   nov14   0:32 update-notifier
+root      7967  0.0  0.0   4440   628 ?        S    13:13   0:00 sh -c /usr/lib/x2go/x2golistsessions_sql sunseed-analytics 2>/dev/null
+root      7992 10.5  0.1  55008 10908 ?        S    13:13   0:00 /usr/bin/perl /usr/lib/x2go/x2golistsessions_sql sunseed-analytics
+loadfor+  8046  0.0  0.0 378984   944 ?        Sl   nov10   0:14 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+root      8051  0.0  0.1  44596  8712 ?        D    13:14   0:00 /usr/bin/perl /usr/lib/x2go/x2gosqlitewrapper.pl listsessionsroot sunseed-analytics
+loadfor+  8054  0.0  0.0  23856  1336 pts/45   R+   13:14   0:00 ps aux
+loadfor+  8358  0.0  0.0 322640  1956 ?        Sl   nov14   0:04 /usr/lib/telepathy/mission-control-5
+root      8657  0.0  0.0 111856  1028 ?        Ss   12:44   0:00 sshd: nx [priv]     
+nx        8696  0.0  0.0  47368   912 ?        Sl   nov09   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx        8698  0.0  0.0  44152   680 pts/35   Ss+  nov09   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root      8704  0.0  0.0 107724   992 ?        Ss   nov09   0:00 sshd: loadforecasting [priv]
+nx        8752  7.5  0.0 112000  1204 ?        S    12:44   2:14 sshd: nx@notty      
+nx        8753  0.0  0.0  19032  1436 ?        Ss   12:44   0:00 /bin/bash /usr/bin/nxserver
+loadfor+  8771  0.0  0.0 107724   992 ?        S    nov09   0:00 sshd: loadforecasting@notty
+nx        8924  0.0  0.0  18552   948 ?        S    12:44   0:00 /bin/bash /usr/bin/nxserver
+nx        8925  0.0  0.0  47368   912 ?        Sl   12:44   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh igor 22 /usr/lib/nx/nxnode --slave
+nx        8927  0.0  0.0  44152   668 pts/46   Ss+  12:44   0:00 ssh -2 -x -l igor 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root      8934  0.0  0.0 107724   996 ?        Ss   12:44   0:00 sshd: igor [priv]   
+igor      8999  0.0  0.0 107724   992 ?        S    12:44   0:00 sshd: igor@notty    
+igor      9000  0.0  0.0  19376  1768 ?        Ss   12:44   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+  9297  0.0  0.0 379112  1052 ?        Sl   nov14   0:03 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+nx        9353  0.0  0.0  19044  1436 ?        S    nov09   0:00 /bin/bash /usr/bin/nxserver
+nx        9356  0.0  0.0  19064  1460 ?        S    nov09   0:00 /bin/bash /usr/bin/nxserver
+nx        9357  0.0  0.0  19052  1444 ?        S    nov09   0:00 /bin/bash /usr/bin/nxserver
+nx        9363  0.0  0.0  19080  1476 ?        S    nov09   0:00 /bin/bash /usr/bin/nxserver
+nx        9364  0.0  0.0  12628    96 ?        S    nov09   0:00 cat -
+loadfor+  9365  0.0  0.0  19376  1744 ?        S    nov09   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+  9367  0.0  0.0  19492  1892 ?        S    nov09   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+nx        9402  0.0  0.0  19044  1440 ?        S    12:44   0:00 /bin/bash /usr/bin/nxserver
+nx        9405  0.0  0.0  19064  1464 ?        S    12:44   0:00 /bin/bash /usr/bin/nxserver
+nx        9406  0.0  0.0  19048  1448 ?        S    12:44   0:00 /bin/bash /usr/bin/nxserver
+nx        9412  0.0  0.0  19080  1472 ?        S    12:44   0:00 /bin/bash /usr/bin/nxserver
+nx        9413  0.0  0.0  12628    92 ?        S    12:44   0:00 cat -
+igor      9414  0.0  0.0  19376  1772 ?        S    12:44   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+igor      9416  0.0  0.0  19492  1916 ?        S    12:44   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9537  0.0  0.6 3009788 52204 ?       Sl   okt18  22:01 /usr/bin/python /usr/bin/software-center
+loadfor+  9560  0.0  0.0 237604   416 ?        Sl   okt18   0:06 /usr/lib/geoclue/geoclue-master
+loadfor+  9564  0.0  0.0 329972   492 ?        Sl   okt18   0:07 /usr/lib/x86_64-linux-gnu/ubuntu-geoip-provider
+loadfor+  9613  0.0  0.0  19556  1948 ?        S    nov09   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9615  0.0  0.0  19580  1984 ?        S    nov09   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9617  0.0  0.0  12616   108 ?        S    nov09   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3609-A7F832BFF3CE36A82D3A91AF53BA03CA/session
+loadfor+  9618  0.0  0.0  19568  1972 ?        S    nov09   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9623  0.0  0.0  19620  2000 ?        S    nov09   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9653  0.0  2.0 301544 166092 ?       S    nov09   6:27 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3609 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3609-A7F832BFF3CE36A82D3A91AF53BA03CA/options -nolisten tcp -dpi 96 :3609
+loadfor+  9654  0.0  0.0 853764     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.31 /org/gtk/gvfs/exec_spaw/2
+loadfor+  9710  0.0  0.0 718164  5632 ?        Sl   nov09   0:00 gnome-session --session gnome-fallback
+loadfor+  9716  0.0  0.0  24432   236 ?        S    nov09   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+  9720  0.0  0.0  39968  1376 ?        Ss   nov09   0:03 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+  9723  0.0  0.0 337568  2564 ?        Sl   nov09   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+  9727  0.0  0.0  39372   552 ?        S    nov09   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+  9732  0.0  0.0 124908   560 ?        Sl   nov09   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+  9747  0.1  0.0 1141020 6796 ?        Sl   nov09  17:26 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+  9753  0.0  0.0 372000   752 ?        Sl   nov09   0:00 /usr/bin/gnome-keyring-daemon --start --components=pkcs11
+loadfor+  9776  0.0  0.0 197996   484 ?        Sl   nov09   0:00 /usr/lib/gvfs/gvfsd
+loadfor+  9793  0.0  0.0 490808  7192 ?        Sl   nov09   0:01 metacity
+loadfor+  9796  0.0  0.0 178296   524 ?        Sl   nov09   0:00 /usr/lib/dconf/dconf-service
+loadfor+  9805  0.0  0.1 813256 11444 ?        Sl   nov09   3:15 gnome-panel
+igor      9808  0.0  0.0  19556  1976 ?        S    12:44   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+igor      9811  0.0  0.0  19580  2000 ?        S    12:44   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+igor      9812  0.0  0.0  12616   112 ?        S    12:44   0:00 tee /home/igor/.nx/C-sunseed-analytics-3614-BCE9EC25B7EC1DCB6C1897FCAE6AC9A8/session
+loadfor+  9813  0.0  0.0 583864  1668 ?        Sl   nov09   3:19 /usr/bin/ibus-daemon --replace --xim --panel disable
+igor      9817  0.0  0.0  19580  1992 ?        S    12:44   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9820  0.0  0.0 282088   812 ?        Sl   nov09   0:36 /usr/lib/ibus/ibus-dconf
+igor      9822  0.0  0.0  19568  1988 ?        S    12:44   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+  9823  0.0  0.0 307764  1712 ?        Sl   nov09   0:38 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+  9830  0.0  0.0 472028  4844 ?        Sl   nov09   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+  9832  0.0  0.1 858656 11508 ?        Sl   nov09   3:35 nautilus -n
+loadfor+  9838  0.0  0.0 365316  3300 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+  9839  0.0  0.0 554348  1576 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+  9840  0.0  0.0 396832  6056 ?        Sl   nov09   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+  9841  0.0  0.0 264872  2596 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+  9846  0.0  0.0 550232  6168 ?        Sl   nov09   0:02 nm-applet
+loadfor+  9848  0.0  0.0 335260  2808 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+  9856  0.0  0.0 286780  1064 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+  9858  0.0  0.0 1025300 3824 ?        Sl   nov09   1:23 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+  9864  0.0  0.0 763892  1180 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+igor      9865 11.4  2.3 291944 190616 ?       S    12:44   3:23 /usr/lib/nx/bin/nxagent -persistent -D -name NX - igor@sunseed-analytics:3614 - sunseed-analytics (GPL Edition) -options /home/igor/.nx/C-sunseed-analytics-3614-BCE9EC25B7EC1DCB6C1897FCAE6AC9A8/options -nolisten tcp -dpi 96 :3614
+loadfor+  9867  0.0  0.0 336320   468 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+  9883  0.0  0.0 407752  3300 ?        Sl   nov09   0:43 /usr/bin/gnome-screensaver --no-daemon
+loadfor+  9901  0.0  0.0 1096660 2872 ?        Sl   nov09   0:00 /usr/lib/evolution/evolution-source-registry
+nx        9906  3.5  0.0  11216   144 ?        S    12:44   1:03 netcat 127.0.0.1 7614
+loadfor+  9911  0.0  0.0 226320  1752 ?        Sl   nov09   0:41 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+  9927  0.0  0.0 201464   556 ?        Sl   nov09   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+  9931  0.0  0.0 287180   616 ?        Sl   nov09   0:37 /usr/lib/gvfs/gvfs-afc-volume-monitor
+igor      9936  0.0  0.0 570716  3716 ?        Sl   12:44   0:00 gnome-session --session gnome-fallback
+loadfor+  9937  0.0  0.0 213628   664 ?        Sl   nov09   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+  9943  0.0  0.4 805136 36740 ?        Sl   nov09   0:19 /usr/lib/evolution/evolution-calendar-factory
+igor      9946  0.0  0.0  24432   244 ?        S    12:44   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+  9960  0.0  0.0  59376  1560 ?        S    nov09   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+  9962  0.0  0.0 434356   972 ?        Sl   nov09   0:42 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+igor      9964  0.0  0.0  39904  1328 ?        Ss   12:44   0:00 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+igor      9967  0.0  0.0 337580   520 ?        Sl   12:44   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+  9968  0.0  0.0 271596   524 ?        Sl   nov09   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+igor      9977  0.0  0.0  39372   556 ?        S    12:44   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+igor      9980  0.0  0.0 124908   612 ?        Sl   12:44   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+  9988  0.0  0.1 397648 10160 ?        Sl   nov09   0:34 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 10001  0.0  0.0 563088  7384 ?        Sl   nov09   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 10019  0.0  0.0 206368   780 ?        Sl   nov09   0:40 /usr/lib/ibus/ibus-engine-simple
+igor     10042  0.0  0.0 666052  7704 ?        Sl   12:44   0:00 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+igor     10047  0.0  0.0 298136   744 ?        Sl   12:44   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+igor     10063  0.0  0.0 295140  1484 ?        Sl   12:44   0:00 /usr/bin/pulseaudio --start --log-target=syslog
+root     10071  0.0  0.0  76308     4 ?        S    okt18   0:00 /usr/bin/python /usr/share/apt-xapian-index/update-apt-xapian-index-dbus
+igor     10118  0.0  0.0 197860   656 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfsd
+igor     10123  0.0  0.0 345660   604 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+igor     10157  0.0  0.0 517940  6416 ?        Sl   12:44   0:01 metacity
+igor     10160  0.0  0.0 178416   816 ?        Sl   12:44   0:00 /usr/lib/dconf/dconf-service
+igor     10167  0.2  0.1 740572 11632 ?        Sl   12:44   0:04 gnome-panel
+igor     10184  0.0  0.0 362664  1100 ?        Sl   12:44   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+igor     10191  0.0  0.0 282100   612 ?        Sl   12:44   0:00 /usr/lib/ibus/ibus-dconf
+igor     10193  0.0  0.0 307776  3668 ?        Sl   12:44   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+igor     10202  0.0  0.0 206368  2620 ?        Sl   12:44   0:00 /usr/lib/ibus/ibus-engine-simple
+igor     10216  0.0  0.0 471944  2892 ?        Sl   12:44   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+igor     10219  0.3  0.0 237392  3736 ?        S    12:44   0:06 /usr/bin/vmtoolsd -n vmusr
+igor     10221  0.1  0.3 875424 25028 ?        Sl   12:44   0:01 nautilus -n
+igor     10223  0.0  0.0 365316  3424 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+igor     10224  0.0  0.0 554384  2912 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+igor     10225  0.0  0.0 250476  2832 ?        Sl   12:44   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+igor     10226  0.0  0.0 264888   532 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 10229  0.0  0.0 374000  3140 ?        Sl   nov09   0:00 telepathy-indicator
+igor     10232  0.0  0.0 550176  6336 ?        Sl   12:44   0:00 nm-applet
+loadfor+ 10234  0.0  0.0 322640  1948 ?        Sl   nov09   0:20 /usr/lib/telepathy/mission-control-5
+igor     10239  0.0  0.0 335268  2992 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+igor     10242  0.0  0.0 286780  1220 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+igor     10244  0.0  0.0 1164504 4116 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+igor     10251  0.0  0.0 698372  1108 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+igor     10253  0.0  0.0 336332   516 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 10274  0.2  0.1 556044 11036 ?        Sl   nov09  25:34 gnome-terminal
+loadfor+ 10281  0.0  0.0  14816   140 ?        S    nov09   0:00 gnome-pty-helper
+loadfor+ 10282  0.0  0.0  28288  2132 pts/36   Ss   nov09   0:00 bash
+igor     10284  0.0  0.0 407760  3104 ?        Sl   12:44   0:00 /usr/bin/gnome-screensaver --no-daemon
+igor     10287  0.0  0.0 300052  3840 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+igor     10290  0.0  0.0 482292  2832 ?        Sl   12:44   0:00 /usr/lib/evolution/evolution-source-registry
+igor     10314  0.0  0.0 201464   600 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+igor     10318  0.0  0.0 287180   712 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+igor     10323  0.0  0.0 213628   724 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+igor     10330  0.0  0.4 1075488 36868 ?       Sl   12:44   0:00 /usr/lib/evolution/evolution-calendar-factory
+igor     10336  0.0  0.0  59376  1572 ?        S    12:44   0:00 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 10339  0.7  0.3 919112 26232 pts/36   Sl+  nov09  63:48 node /usr/local/bin/pm2 monit
+igor     10345  0.0  0.0 508088   776 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.12 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 10353  0.0  0.0 410032  3900 ?        Sl   nov09   0:37 zeitgeist-datahub
+loadfor+ 10358  0.0  0.0 275008  1004 ?        Sl   nov09   0:00 /usr/bin/zeitgeist-daemon
+igor     10388  0.0  0.0 271596   592 ?        Sl   12:44   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.12 /org/gtk/gvfs/exec_spaw/1
+igor     10390  0.0  0.1 396848  8696 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 10504  0.0  0.0 761052  7864 ?        Sl   nov09   0:01 /usr/lib/evolution/3.10/evolution-alarm-notify
+igor     10536  0.0  0.0 563096  5548 ?        Sl   12:44   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+igor     10838  0.0  0.0 373900  3296 ?        Sl   12:44   0:00 telepathy-indicator
+igor     10884  0.0  0.0 322520  1628 ?        Sl   12:44   0:00 /usr/lib/telepathy/mission-control-5
+loadfor+ 10945  0.0  0.0 714024  3816 ?        Sl   nov09   3:23 update-notifier
+igor     11003  0.0  0.0 483636  1804 ?        Sl   12:44   0:00 zeitgeist-datahub
+igor     11009  0.0  0.0 275132  1024 ?        Sl   12:44   0:00 /usr/bin/zeitgeist-daemon
+loadfor+ 11023  0.0  0.4 642652 35892 ?        SNl  nov09   0:07 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+kkenda   11080  0.0  0.0 643964     0 ?        SNl  nov08   0:07 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+igor     11178  4.7  0.1 505136 12220 ?        Sl   12:44   1:23 gnome-system-monitor
+loadfor+ 11273  0.0  0.0  28288  2276 pts/37   Ss   nov09   0:00 bash
+igor     11323  0.0  0.0 760668  7228 ?        Sl   12:44   0:00 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 11373  0.0  0.1 575700  9208 ?        Sl   nov08   1:55 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 11376  0.0  0.2 946428 19636 pts/37   Sl+  nov09   3:26 node /usr/local/bin/pm2 logs
+loadfor+ 11386  0.0  0.0 295028  2900 ?        S    nov08   0:00 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 11387  0.0  0.0 301108  1316 ?        S    nov08   0:00 /opt/brackets/Brackets --type=zygote --no-sandbox --lang=en-US --log-severity=disable
+loadfor+ 11409  0.0  1.5 756044 126684 ?       Sl   nov08   4:24 /opt/brackets/Brackets-node /opt/brackets/node-core
+igor     11467  0.2  0.1 482880 13008 ?        Sl   12:45   0:04 gnome-terminal
+loadfor+ 11849  0.0  0.0 642652  6668 ?        SNl  nov08   0:07 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+root     11905  0.0  0.0  24432     0 ?        S    nov04   0:00 dbus-launch --autolaunch 0944bc418be08f0f918d9f895452572a --binary-syntax --close-stderr
+root     11906  0.0  0.0  39108     0 ?        Ss   nov04   0:00 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+root     11908  0.0  0.0  59368   116 ?        S    nov04   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 11970  0.0  0.0 378984   880 ?        Sl   nov09   0:17 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+igor     12036  0.0  0.0  14816   212 ?        S    12:45   0:00 gnome-pty-helper
+igor     12038  0.0  0.0  28272  2408 pts/47   Ss   12:45   0:00 bash
+igor     12230  0.0  0.0 492912  3512 ?        Sl   12:45   0:00 update-notifier
+loadfor+ 12989  0.0  0.1 566308 11232 ?        Sl   nov09   1:54 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 13006  0.0  0.0 295028  4104 ?        S    nov09   0:00 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 13007  0.0  0.0 301108  4516 ?        S    nov09   0:00 /opt/brackets/Brackets --type=zygote --no-sandbox --lang=en-US --log-severity=disable
+loadfor+ 13026  0.0  1.5 748848 125404 ?       Sl   nov09   4:00 /opt/brackets/Brackets-node /opt/brackets/node-core
+root     13350  0.0  0.0      0     0 ?        S    nov11   0:00 [kworker/2:2]
+nx       13422  0.0  0.0  47368     0 ?        Sl   okt18   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       13424  0.0  0.0  44152     0 pts/20   Ss+  okt18   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     13430  0.0  0.0 107724     4 ?        Ss   okt18   0:00 sshd: loadforecasting [priv]
+loadfor+ 13485  0.0  0.0 107724     0 ?        S    okt18   0:00 sshd: loadforecasting@notty
+igor     14086  0.0  0.0 378996  1044 ?        Sl   12:46   0:00 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+loadfor+ 14102  0.7  0.3 919088 27916 pts/39   Sl+  nov10  52:39 node /usr/local/bin/pm2 monit
+nx       14253  0.0  0.0  47368     0 ?        Sl   nov04   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       14255  0.0  0.0  44152     0 pts/26   Ss+  nov04   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     14261  0.0  0.0 107724     4 ?        Ss   nov04   0:00 sshd: loadforecasting [priv]
+loadfor+ 14316  0.0  0.0 107724     0 ?        S    nov04   0:00 sshd: loadforecasting@notty
+loadfor+ 14651  0.0  0.2 949828 20876 ?        Ssl  nov08   8:03 node /home/loadforecasting/sunseed-utilities/Loader3/loader3.js 
+nx       14705  0.0  0.0  19044     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       14708  0.0  0.0  19064     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       14709  0.0  0.0  19052     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       14715  0.0  0.0  19084     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       14716  0.0  0.0  12628     0 ?        S    nov04   0:00 cat -
+loadfor+ 14717  0.0  0.0  19376     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 14719  0.0  0.0  19492     8 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 14811  0.0  0.0  28300  2336 pts/34   Ss+  nov08   0:00 bash
+loadfor+ 14940  0.0  0.0  19556     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 14942  0.0  0.0  19580     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 14943  0.0  0.0  12616     4 ?        S    nov04   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3606-7A541DE036192D51B2AF162F7E2F73A5/session
+loadfor+ 14944  0.0  0.0  19620     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 14948  0.0  0.0  19568     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 14963  0.0  0.1 370388 13912 ?        S    nov04   0:24 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3606 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3606-7A541DE036192D51B2AF162F7E2F73A5/options -nolisten tcp -dpi 96 :3606
+loadfor+ 15011  0.0  0.0 571200   892 ?        Sl   nov04   0:00 gnome-session --session gnome-fallback
+loadfor+ 15017  0.0  0.0  24432     0 ?        S    nov04   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 15018  0.0  0.0  39828  1048 ?        Ss   nov04   0:04 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 15020  0.0  0.0 337568     0 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 15024  0.0  0.0  39240     8 ?        S    nov04   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 15027  0.0  0.0 124908     0 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 15039  0.0  0.0 665968  4312 ?        Sl   nov04   0:15 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 15042  0.0  0.0 298268   312 ?        Sl   nov04   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 15062  0.0  0.0 197860     4 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 15075  0.0  0.0 350404     0 ?        Sl   nov04   0:00 metacity
+loadfor+ 15077  0.0  0.0 178296     4 ?        Sl   nov04   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 15082  0.0  0.0 617356  4460 ?        Sl   nov04   0:26 gnome-panel
+loadfor+ 15095  0.0  0.0 472656     0 ?        Sl   nov04   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 15097  0.0  0.0 784372  2780 ?        Sl   nov04   0:25 nautilus -n
+loadfor+ 15099  0.0  0.0 366084   700 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 15100  0.0  0.0 554476  2088 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 15102  0.0  0.0 251068  1072 ?        Sl   nov04   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 15105  0.0  0.0 264876     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 15106  0.0  0.0 557264  1364 ?        Sl   nov04   0:03 nm-applet
+nx       15110  0.0  0.0  19044     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       15113  0.0  0.0  19064     4 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       15114  0.0  0.0  19056     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+loadfor+ 15115  0.0  0.0 286780    88 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 15118  0.0  0.0 967860  2032 ?        Sl   nov04   0:17 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+nx       15120  0.0  0.0  19080     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       15121  0.0  0.0  12628     0 ?        S    okt18   0:00 cat -
+loadfor+ 15122  0.0  0.0  19376     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 15124  0.0  0.0  19492     8 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 15125  0.0  0.0 698360   944 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 15128  0.0  0.0 335868   208 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 15131  0.0  0.0 336320     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 15145  0.0  0.0 408376   336 ?        Sl   nov04   0:00 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 15158  0.0  0.0 1096704  736 ?        Sl   nov04   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 15176  0.0  0.0 300052   940 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 15186  0.0  0.0 201464     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 15194  0.0  0.0 944404  3100 ?        Sl   nov04   0:29 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 15198  0.0  0.0 287180     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 15202  0.0  0.0 362780     0 ?        Sl   nov04   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 15212  0.0  0.0 213628     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 15220  0.0  0.0 282088    92 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-dconf
+loadfor+ 15222  0.0  0.0 308504   148 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 15230  0.0  0.0  59368   112 ?        S    nov04   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 15239  0.0  0.1 472116  9448 ?        Sl   nov04   0:55 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 15246  0.0  0.0 434360   464 ?        Sl   nov04   0:21 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 15256  0.0  0.0 497624     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 15274  0.0  0.0 206368   100 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-engine-simple
+loadfor+ 15304  0.0  0.0 271596     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 15342  0.0  0.0  19556     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 15344  0.0  0.0  19580     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 15345  0.0  0.0  12616     0 ?        S    okt18   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3603-FE301D1E6674C84A080652375F4BE276/session
+loadfor+ 15346  0.0  0.0  19620     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 15351  0.0  0.0  19568     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 15361  0.0  0.0 374628     0 ?        Sl   nov04   0:00 telepathy-indicator
+loadfor+ 15366  0.0  0.2 374380 17496 ?        S    okt18   1:00 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3603 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3603-FE301D1E6674C84A080652375F4BE276/options -nolisten tcp -dpi 96 :3603
+loadfor+ 15367  0.0  0.0 322636  1092 ?        Sl   nov04   0:32 /usr/lib/telepathy/mission-control-5
+loadfor+ 15409  0.0  0.0 483772    20 ?        Sl   nov04   0:20 zeitgeist-datahub
+loadfor+ 15414  0.0  0.0 275008   396 ?        Sl   nov04   0:00 /usr/bin/zeitgeist-daemon
+loadfor+ 15434  0.0  0.0 571204   832 ?        Sl   okt18   0:00 gnome-session --session gnome-fallback
+loadfor+ 15440  0.0  0.0  24432     0 ?        S    okt18   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 15441  0.0  0.0  39956  1056 ?        Ss   okt18   0:11 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 15443  0.0  0.0 337568     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 15447  0.0  0.0  39372     4 ?        S    okt18   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 15450  0.0  0.0 124908     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 15462  0.0  0.0 665948  5664 ?        Sl   okt18   0:38 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 15463  0.0  0.0 298236   220 ?        Sl   okt18   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 15485  0.0  0.0 197860     4 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 15493  0.0  0.0 761548  1176 ?        Sl   nov04   0:02 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 15498  0.0  0.0 352508     0 ?        Sl   okt18   0:00 metacity
+loadfor+ 15500  0.0  0.0 178172     0 ?        Sl   okt18   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 15507  0.0  0.0 742308   776 ?        Sl   okt18   1:07 gnome-panel
+loadfor+ 15517  0.0  0.0 362780     0 ?        Sl   okt18   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 15521  0.0  0.0 282088   136 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-dconf
+loadfor+ 15523  0.0  0.0 308504   128 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 15532  0.0  0.0 407120     0 ?        Sl   okt18   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 15534  0.0  0.0 784400  4672 ?        Sl   okt18   0:57 nautilus -n
+loadfor+ 15537  0.0  0.0 439544   684 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 15539  0.0  0.0 554568  1816 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 15540  0.0  0.0 251088  1108 ?        Sl   okt18   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 15541  0.0  0.0 264872     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 15545  0.0  0.0 549132  1396 ?        Sl   okt18   0:09 nm-applet
+loadfor+ 15551  0.0  0.0 286780    80 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 15556  0.0  0.0 335868   144 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 15557  0.0  0.0 1033404 4072 ?        Sl   okt18   0:47 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 15564  0.0  0.0 632824  1036 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 15569  0.0  0.0 336320     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 15595  0.0  0.0 1096640  684 ?        Sl   okt18   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 15614  0.0  0.0 408376   308 ?        Sl   okt18   0:01 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 15628  0.0  0.0 300052  1052 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 15634  0.0  0.0 878868  1228 ?        Sl   okt18   1:28 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 15641  0.0  0.0  59368   112 ?        S    okt18   0:04 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 15643  0.0  0.0 201464     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 15650  0.0  0.0 287180     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 15656  0.0  0.0 213628     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 15662  0.0  0.1 400716 14944 ?        Sl   okt18   2:24 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 15668  0.0  0.0 434356   352 ?        Sl   okt18   0:54 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 15676  0.0  0.0 554964     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 15680  0.0  0.0 206368    92 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-engine-simple
+loadfor+ 15722  0.0  0.0 271596     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 15773  0.0  0.0 374628     0 ?        Sl   okt18   0:00 telepathy-indicator
+loadfor+ 15778  0.0  0.0 322640  1124 ?        Sl   okt18   1:37 /usr/lib/telepathy/mission-control-5
+loadfor+ 15783  0.0  0.0 492924  1740 ?        Sl   nov04   0:01 update-notifier
+loadfor+ 15804  0.0  0.0 409996  2104 ?        Sl   okt18   0:51 zeitgeist-datahub
+loadfor+ 15809  0.0  0.0 275008   392 ?        Sl   okt18   0:01 /usr/bin/zeitgeist-daemon
+loadfor+ 15862  0.0  0.0 761548  1064 ?        Sl   okt18   0:07 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 15935  0.0  0.0 550816     0 ?        Sl   okt18   0:00 gnome-terminal
+loadfor+ 15950  0.0  0.0  14816     4 ?        S    okt18   0:00 gnome-pty-helper
+loadfor+ 15951  0.0  0.0  28272     8 pts/21   Ss+  okt18   0:00 bash
+loadfor+ 16089  0.0  0.0 492940  1848 ?        Sl   okt18   0:02 update-notifier
+igor     16148  1.4  0.0  31348  1984 pts/47   S+   13:03   0:08 top
+loadfor+ 16389  0.0  0.0 379112   460 ?        Sl   okt18   1:19 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+kkenda   16418  0.0  0.0 907660  3940 ?        Ssl  okt18   0:23 PM2 v2.0.18: God Daemon (/home/kkenda/.pm2)                  
+nx       16681  0.0  0.0  47368     0 ?        Sl   nov08   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       16683  0.0  0.0  44152     4 pts/31   Ss+  nov08   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     16699  0.0  0.0 107724     4 ?        Ss   nov08   0:00 sshd: loadforecasting [priv]
+loadfor+ 16783  0.0  0.0 107724     0 ?        S    nov08   0:00 sshd: loadforecasting@notty
+loadfor+ 16940  0.0  0.0 237612  1128 ?        Sl   nov09   0:01 /usr/lib/geoclue/geoclue-master
+loadfor+ 16944  0.0  0.0 329996  1504 ?        Sl   nov09   0:01 /usr/lib/x86_64-linux-gnu/ubuntu-geoip-provider
+nx       17337  0.0  0.0  19044     0 ?        S    nov08   0:00 /bin/bash /usr/bin/nxserver
+nx       17340  0.0  0.0  19064     4 ?        S    nov08   0:00 /bin/bash /usr/bin/nxserver
+nx       17341  0.0  0.0  19052    92 ?        S    nov08   0:00 /bin/bash /usr/bin/nxserver
+nx       17347  0.0  0.0  19080     4 ?        S    nov08   0:00 /bin/bash /usr/bin/nxserver
+nx       17348  0.0  0.0  12628     0 ?        S    nov08   0:00 cat -
+loadfor+ 17349  0.0  0.0  19376     4 ?        S    nov08   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 17351  0.0  0.0  19492     8 ?        S    nov08   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 17382  0.0  0.0 379112   272 ?        Sl   nov04   0:28 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+loadfor+ 17650  0.0  0.0  19556     4 ?        S    nov08   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 17652  0.0  0.0  19580     4 ?        S    nov08   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 17653  0.0  0.0  12616     0 ?        S    nov08   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3608-D054A52F6E3AE0469E0027C6178992D9/session
+loadfor+ 17654  0.0  0.0  19620   252 ?        S    nov08   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 17658  0.0  0.0  19568     4 ?        S    nov08   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 17692  0.4  1.2 298196 103540 ?       S    nov08  45:33 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3608 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3608-D054A52F6E3AE0469E0027C6178992D9/options -nolisten tcp -dpi 96 :3608
+loadfor+ 17762  0.0  0.0 525700  1532 ?        Sl   nov09   0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.11 /org/gtk/gvfs/exec_spaw/2
+loadfor+ 17803  0.0  0.0 570708  1120 ?        Sl   nov08   0:00 gnome-session --session gnome-fallback
+loadfor+ 17819  0.0  0.0  24432     0 ?        S    nov08   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 17834  0.0  0.0  40108  1216 ?        Ss   nov08   0:03 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 17842  0.0  0.0 337568     0 ?        Sl   nov08   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 17846  0.0  0.0  39368     8 ?        S    nov08   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 17849  0.0  0.0 124908   224 ?        Sl   nov08   0:02 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 17890  0.1  0.0 1206548 3708 ?        Sl   nov08  19:24 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 17908  0.0  0.0 372000   352 ?        Sl   nov08   0:00 /usr/bin/gnome-keyring-daemon --start --components=ssh
+loadfor+ 17920  0.0  0.0 345456     0 ?        Sl   nov08   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 17955  0.0  0.0 565984  2752 ?        Sl   nov08   0:08 metacity
+loadfor+ 17958  0.0  0.0 178296     0 ?        Sl   nov08   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 17988  0.0  0.0 856032  4908 ?        Sl   nov08   3:59 gnome-panel
+loadfor+ 17992  0.0  0.0 583864   916 ?        Sl   nov08   3:46 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 17998  0.0  0.0 282088   472 ?        Sl   nov08   0:41 /usr/lib/ibus/ibus-dconf
+loadfor+ 18002  0.0  0.0 307764   488 ?        Sl   nov08   0:44 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 18039  0.0  0.0 406492   420 ?        Sl   nov08   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 18042  0.0  0.0 858452  5220 ?        Sl   nov08   3:50 nautilus -n
+loadfor+ 18045  0.0  0.0 365316  2728 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 18046  0.0  0.0 554356  1164 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 18047  0.0  0.0 397112  1616 ?        Sl   nov08   0:01 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 18048  0.0  0.0 264872     0 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 18052  0.0  0.0 549716  1440 ?        Sl   nov08   0:02 nm-applet
+loadfor+ 18057  0.0  0.0 335260   216 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 18066  0.0  0.0 286780   128 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 18067  0.0  0.0 1098908 2276 ?        Sl   nov08   1:32 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 18077  0.0  0.0 763896   948 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 18081  0.0  0.0 336320     0 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 18097  0.0  0.0 407752   628 ?        Sl   nov08   0:49 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 18105  0.0  0.0 226320  3240 ?        Sl   nov08   0:41 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 18124  0.0  0.0 1096656  716 ?        Sl   nov08   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 18126  0.0  0.0 201464     0 ?        Sl   nov08   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 18134  0.0  0.0 287180     0 ?        Sl   nov08   0:43 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 18148  0.0  0.0 213628     0 ?        Sl   nov08   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 18165  0.0  0.0  59376   204 ?        S    nov08   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 18180  0.0  0.4 878864 33752 ?        Sl   nov08   0:21 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 18202  0.0  0.0 286896  2452 ?        Sl   nov08   1:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 18226  0.0  0.1 398136  8972 ?        Sl   nov08   0:39 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 18269  0.0  0.0 562864  1972 ?        Sl   nov08   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 18380  0.0  0.0 206368   540 ?        Sl   nov08   0:41 /usr/lib/ibus/ibus-engine-simple
+loadfor+ 18482  0.0  0.0 271596     0 ?        Sl   nov08   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 18978  0.0  0.0 374000     0 ?        Sl   nov08   0:00 telepathy-indicator
+loadfor+ 19105  0.0  0.0 322640  1140 ?        Sl   nov08   0:23 /usr/lib/telepathy/mission-control-5
+loadfor+ 19245  0.0  0.0 410008  2360 ?        Sl   nov08   0:42 zeitgeist-datahub
+loadfor+ 19255  0.0  0.0 275008  2444 ?        Sl   nov08   0:00 /usr/bin/zeitgeist-daemon
+loadfor+ 19649  0.5  0.0 557308  3500 ?        Sl   nov08  51:00 gnome-terminal
+loadfor+ 19684  0.0  0.0  14816     8 ?        S    nov08   0:00 gnome-pty-helper
+loadfor+ 19685  0.0  0.0  28272     0 pts/33   Ss   nov08   0:00 bash
+loadfor+ 19744  0.0  0.0 761052  1108 ?        Sl   nov08   0:02 /usr/lib/evolution/3.10/evolution-alarm-notify
+root     19745  0.0  0.0      0     0 ?        S    nov06   7:32 [kworker/0:2]
+loadfor+ 19840  0.7  0.2 918184 22908 pts/33   Sl+  nov08  72:53 node /usr/local/bin/pm2 monit
+kkenda   20375  0.0  0.0 276260   124 ?        Sl   nov04   0:00 /usr/bin/pulseaudio --start --log-target=syslog
+nx       21021  0.0  0.0  47368     0 ?        Sl   nov04   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       21025  0.0  0.0  44152     0 pts/27   Ss+  nov04   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     21031  0.0  0.0 107724     4 ?        Ss   nov04   0:00 sshd: loadforecasting [priv]
+loadfor+ 21091  0.0  0.0 107724     0 ?        S    nov04   0:00 sshd: loadforecasting@notty
+kkenda   21105  0.0  0.6 642652 51436 ?        SNl  nov09   0:07 /usr/bin/python3 /usr/bin/update-manager --no-update --no-focus-on-map
+loadfor+ 21122  0.0  0.0 713732  2056 ?        Sl   nov08   3:21 update-notifier
+nx       21497  0.0  0.0  19044     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       21500  0.0  0.0  19064     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       21501  0.0  0.0  19052     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       21507  0.0  0.0  19080     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       21508  0.0  0.0  12628     0 ?        S    nov04   0:00 cat -
+loadfor+ 21509  0.0  0.0  19376     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 21511  0.0  0.0  19492     8 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 21748  0.0  0.0  19556     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 21750  0.0  0.0  19580     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 21751  0.0  0.0  12616     0 ?        S    nov04   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3607-7B4306319C44BC5DE7FD041FC2B7A1FC/session
+loadfor+ 21752  0.0  0.0  19620     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 21754  0.0  0.0  19568     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 21772  3.1  1.0 307428 83184 ?        S    nov04 503:53 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3607 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3607-7B4306319C44BC5DE7FD041FC2B7A1FC/options -nolisten tcp -dpi 96 :3607
+loadfor+ 21816  0.0  0.0 571200   880 ?        Sl   nov04   0:00 gnome-session --session gnome-fallback
+loadfor+ 21825  0.0  0.0  24432     0 ?        S    nov04   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 21826  0.0  0.0  40040  1128 ?        Ss   nov04   0:04 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 21828  0.0  0.0 337568     0 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 21832  0.0  0.0  39372   316 ?        S    nov04   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 21835  0.0  0.0 124908    96 ?        Sl   nov04   0:01 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 21847  0.0  0.0 665952  4284 ?        Sl   nov04   0:16 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 21854  0.0  0.0 372000   348 ?        Sl   nov04   0:00 /usr/bin/gnome-keyring-daemon --start --components=pkcs11
+loadfor+ 21870  0.0  0.0 197860   380 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 21883  0.0  0.0 492384  4188 ?        Sl   nov04   0:04 metacity
+loadfor+ 21885  0.0  0.0 178296   520 ?        Sl   nov04   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 21892  0.0  0.0 676784  7328 ?        Sl   nov04   0:35 gnome-panel
+loadfor+ 21901  0.0  0.0 362668     0 ?        Sl   nov04   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 21906  0.0  0.0 282088   132 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-dconf
+loadfor+ 21908  0.0  0.0 308504   140 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 21915  0.0  0.0 472656   160 ?        Sl   nov04   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 21917  0.0  0.0 858472  6632 ?        Sl   nov04   0:25 nautilus -n
+loadfor+ 21919  0.0  0.0 366104  1120 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 21920  0.0  0.0 554472  1956 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 21922  0.0  0.0 251064  1144 ?        Sl   nov04   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 21925  0.0  0.0 264876     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 21929  0.0  0.0 549732  1352 ?        Sl   nov04   0:03 nm-applet
+loadfor+ 21934  0.0  0.0 335872   260 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 21938  0.0  0.0 286780   140 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 21939  0.0  0.0 1098936 2400 ?        Sl   nov04   0:17 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 21945  0.0  0.0 763900  3004 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 21949  0.0  0.0 336320     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 21969  0.0  0.0 1096644  616 ?        Sl   nov04   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 21973  0.0  0.0 408372   240 ?        Sl   nov04   0:00 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 21979  0.0  0.0 300052  1040 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 22000  0.0  0.0 201464     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 22005  0.0  0.0 287180     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 22012  0.0  0.0 878864  1008 ?        Sl   nov04   0:31 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 22014  0.0  0.0  59368   148 ?        S    nov04   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 22016  0.0  0.0 213628     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 22021  0.0  0.1 398540 10244 ?        Sl   nov04   0:55 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 22031  0.0  0.0 434356  2500 ?        Sl   nov04   0:21 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 22041  0.0  0.0 563496   148 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 22048  0.0  0.0 206368    80 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-engine-simple
+loadfor+ 22076  0.0  0.0 271596     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 22127  0.0  0.0 678256  7304 ?        Sl   nov04   4:09 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 22131  0.0  0.0 295012   272 ?        S    nov04   0:00 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 22132  0.0  0.0 301140   316 ?        S    nov04   0:00 /opt/brackets/Brackets --type=zygote --no-sandbox --lang=en-US --log-severity=disable
+loadfor+ 22152  0.0  0.8 826296 66608 ?        Sl   nov04   6:47 /opt/brackets/Brackets-node /opt/brackets/node-core
+loadfor+ 22249  0.0  0.0 374628   180 ?        Sl   nov04   0:00 telepathy-indicator
+loadfor+ 22254  0.0  0.0 322636  1112 ?        Sl   nov04   0:34 /usr/lib/telepathy/mission-control-5
+loadfor+ 22264  2.0  0.0 560676  6028 ?        Sl   nov04 332:52 gnome-terminal
+loadfor+ 22276  0.0  0.0  14816     8 ?        S    nov04   0:00 gnome-pty-helper
+loadfor+ 22277  0.0  0.0  28272     8 pts/28   Ss   nov04   0:00 bash
+loadfor+ 22335  0.0  0.0 410016    36 ?        Sl   nov04   0:20 zeitgeist-datahub
+loadfor+ 22340  0.0  0.0 275008   404 ?        Sl   nov04   0:00 /usr/bin/zeitgeist-daemon
+loadfor+ 22396  0.0  0.0 761548  1124 ?        Sl   nov04   0:03 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 22555  0.0  0.0 492896  1800 ?        Sl   nov04   0:01 update-notifier
+loadfor+ 22744  0.0  0.0 298016     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.11 /org/gtk/gvfs/exec_spaw/2
+loadfor+ 22939  0.0  0.0 379116   308 ?        Sl   nov04   0:29 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+root     23190  0.0  0.0  76968  1212 ?        Ss   07:35   0:00 /usr/sbin/cupsd -f
+lp       23223  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23224  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23225  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23226  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23227  0.0  0.0  63156   524 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23228  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23229  0.0  0.0  63156   524 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23230  0.0  0.0  63156   524 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23231  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23232  0.0  0.0  63156   524 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23233  0.0  0.0  63156   520 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+lp       23234  0.0  0.0  63156   516 ?        S    07:35   0:00 /usr/lib/cups/notifier/dbus dbus:// 
+root     23316  0.0  0.0      0     0 ?        S    12:51   0:00 [kworker/u8:1]
+loadfor+ 23509  0.0  0.0 125696     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-metadata
+loadfor+ 23816  0.0  0.0 379116  2232 ?        Sl   nov08   0:19 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+loadfor+ 23877  0.0  0.0  28284     8 pts/29   Ss+  nov04   0:00 bash
+nx       23995  0.0  0.0  47368   916 ?        Sl   nov11   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       23997  0.0  0.0  44152   680 pts/40   Ss+  nov11   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     24003  0.0  0.0 107724   984 ?        Ss   nov11   0:00 sshd: loadforecasting [priv]
+loadfor+ 24068  0.0  0.0 107724   988 ?        S    nov11   0:00 sshd: loadforecasting@notty
+nx       24651  0.0  0.0  19044  1428 ?        S    nov11   0:00 /bin/bash /usr/bin/nxserver
+nx       24654  0.0  0.0  19064  1444 ?        S    nov11   0:00 /bin/bash /usr/bin/nxserver
+nx       24655  0.0  0.0  19052  1436 ?        S    nov11   0:00 /bin/bash /usr/bin/nxserver
+nx       24661  0.0  0.0  19080  1464 ?        S    nov11   0:00 /bin/bash /usr/bin/nxserver
+nx       24662  0.0  0.0  12628    96 ?        S    nov11   0:00 cat -
+loadfor+ 24663  0.0  0.0  19376  1752 ?        S    nov11   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 24665  0.0  0.0  19492  1916 ?        S    nov11   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+root     24669  0.1  0.1 226320 15804 ?        SNl  13:07   0:00 /usr/bin/python3 /usr/sbin/aptd
+loadfor+ 24906  0.0  0.0  19556  1976 ?        S    nov11   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 24909  0.0  0.0  19568  1992 ?        S    nov11   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 24914  0.0  0.0  19580  1996 ?        S    nov11   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 24915  0.0  0.0  12616   104 ?        S    nov11   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3611-C01F0EFC63D744EBA2033244A84DDC4F/session
+loadfor+ 24916  0.0  0.0  19620  2044 ?        S    nov11   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 24937  0.1  2.0 258512 164016 ?       S    nov11   9:19 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3611 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3611-C01F0EFC63D744EBA2033244A84DDC4F/options -nolisten tcp -dpi 96 :3611
+loadfor+ 25012  0.0  0.0 570708  3200 ?        Sl   nov11   0:00 gnome-session --session gnome-fallback
+root     25016  0.0  0.0      0     0 ?        S    13:07   0:00 [kworker/u8:0]
+loadfor+ 25018  0.0  0.0  24432   248 ?        S    nov11   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 25019  0.0  0.0  39824  1332 ?        Ss   nov11   0:01 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 25021  0.0  0.0 337568   460 ?        Sl   nov11   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 25025  0.0  0.0  39368   484 ?        S    nov11   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 25028  0.0  0.0 124908   540 ?        Sl   nov11   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 25040  0.2  0.1 1141020 8792 ?        Sl   nov11  12:17 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 25041  0.0  0.0 298124   668 ?        Sl   nov11   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 25062  0.0  0.0 197860   524 ?        Sl   nov11   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 25095  0.0  0.0 490144  5320 ?        Sl   nov11   0:00 metacity
+loadfor+ 25097  0.0  0.0 178296  4604 ?        Sl   nov11   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 25112  0.0  0.1 807380 10100 ?        Sl   nov11   2:19 gnome-panel
+loadfor+ 25119  0.0  0.0 583860  1620 ?        Sl   nov11   2:11 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 25129  0.0  0.0 282088   808 ?        Sl   nov11   0:20 /usr/lib/ibus/ibus-dconf
+loadfor+ 25132  0.0  0.0 307764  2036 ?        Sl   nov11   0:23 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 25139  0.0  0.0 472028  2628 ?        Sl   nov11   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 25141  0.0  0.4 858668 34108 ?        Sl   nov11   2:18 nautilus -n
+loadfor+ 25143  0.0  0.0 439052  3320 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 25144  0.0  0.0 554348  1516 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 25145  0.0  0.0 250568  2612 ?        Sl   nov11   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 25146  0.0  0.0 264876   468 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 25150  0.0  0.0 550208  6256 ?        Sl   nov11   0:01 nm-applet
+loadfor+ 25157  0.0  0.0 286780   980 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 25160  0.0  0.0 1099076 3824 ?        Sl   nov11   0:49 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 25162  0.0  0.0 335260  2696 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 25165  0.0  0.0 763892  3168 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 25168  0.0  0.0 336320   384 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 25192  0.0  0.0 407748  3028 ?        Sl   nov11   0:26 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 25207  0.0  0.0 226320  1900 ?        Sl   nov11   0:20 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 25208  0.0  0.0 1096660 2776 ?        Sl   nov11   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 25228  0.0  0.0  59368  1208 ?        S    nov11   0:00 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 25229  0.0  0.0 201464   540 ?        Sl   nov11   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 25234  0.0  0.0 287180   668 ?        Sl   nov11   0:24 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 25240  0.0  0.0 213628   624 ?        Sl   nov11   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 25245  0.0  0.1 397144 11572 ?        Sl   nov11   0:21 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 25255  0.0  0.4 878860 34112 ?        Sl   nov11   0:13 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 25280  0.0  0.0 271596   444 ?        Sl   nov11   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 25290  0.0  0.0 360628  1172 ?        Sl   nov11   0:28 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 25296  0.0  0.0 563084  6900 ?        Sl   nov11   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 25413  0.0  0.0 206368  1060 ?        Sl   nov11   0:20 /usr/lib/ibus/ibus-engine-simple
+igor     25459  0.0  0.0  28272  2312 pts/49   Ss+  13:07   0:00 bash
+nx       25573  0.0  0.0  47368     0 ?        Sl   nov04   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       25575  0.0  0.0  44152     0 pts/19   Ss+  nov04   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     25581  0.0  0.0 107724     4 ?        Ss   nov04   0:00 sshd: loadforecasting [priv]
+loadfor+ 25636  0.0  0.0 107724     0 ?        S    nov04   0:00 sshd: loadforecasting@notty
+loadfor+ 25639  0.0  0.0 374000  3140 ?        Sl   nov11   0:00 telepathy-indicator
+loadfor+ 25645  0.0  0.0 322636  3896 ?        Sl   nov11   0:15 /usr/lib/telepathy/mission-control-5
+loadfor+ 25759  0.0  0.0 409904  3660 ?        Sl   nov11   0:20 zeitgeist-datahub
+loadfor+ 25764  0.0  0.0 275140  1016 ?        Sl   nov11   0:00 /usr/bin/zeitgeist-daemon
+loadfor+ 26040  0.0  0.0 761052  7580 ?        Sl   nov11   0:01 /usr/lib/evolution/3.10/evolution-alarm-notify
+nx       26058  0.0  0.0  19044     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       26061  0.0  0.0  19064     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       26062  0.0  0.0  19056     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       26068  0.0  0.0  19080     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       26069  0.0  0.0  12628     0 ?        S    nov04   0:00 cat -
+loadfor+ 26070  0.0  0.0  19376     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 26072  0.0  0.0  19492    12 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 26148  0.0  0.0 547072  6868 ?        Sl   nov11   0:01 gnome-terminal
+loadfor+ 26163  0.0  0.0  14816   152 ?        S    nov11   0:00 gnome-pty-helper
+loadfor+ 26178  0.0  0.0  28300  2328 pts/41   Ss+  nov11   0:00 bash
+loadfor+ 26298  0.0  0.0  19556    12 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 26300  0.0  0.0  19580    12 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 26301  0.0  0.0  12616     0 ?        S    nov04   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3604-FDA62A330891640916D6A7702535C361/session
+loadfor+ 26302  0.0  0.0  19620   124 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 26307  0.0  0.0  19568     8 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 26327  0.2  0.3 374856 32704 ?        S    nov04  42:34 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3604 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3604-FDA62A330891640916D6A7702535C361/options -nolisten tcp -dpi 96 :3604
+loadfor+ 26366  0.0  0.0 571200   876 ?        Sl   nov04   0:00 gnome-session --session gnome-fallback
+loadfor+ 26372  0.0  0.0  24432     0 ?        S    nov04   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 26373  0.0  0.0  39848  1080 ?        Ss   nov04   0:04 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 26378  0.0  0.0 337568     0 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 26382  0.0  0.0  39372     8 ?        S    nov04   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 26385  0.0  0.0 124908     0 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 26397  0.0  0.0 665988  4456 ?        Sl   nov04   0:15 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 26398  0.0  0.0 298236   288 ?        Sl   nov04   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 26420  0.0  0.0 197988     4 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 26433  0.0  0.0 352156     0 ?        Sl   nov04   0:00 metacity
+loadfor+ 26435  0.0  0.0 178172     4 ?        Sl   nov04   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 26440  0.0  0.0 636636  2744 ?        Sl   nov04   0:26 gnome-panel
+loadfor+ 26460  0.0  0.0 362664     0 ?        Sl   nov04   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 26464  0.0  0.0 282088    96 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-dconf
+loadfor+ 26465  0.0  0.0 407120     0 ?        Sl   nov04   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 26467  0.0  0.0 308540   140 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 26471  0.0  0.0 858240  2660 ?        Sl   nov04   0:22 nautilus -n
+loadfor+ 26473  0.0  0.0 366080  1248 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 26475  0.0  0.0 554472  1856 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 26477  0.0  0.0  28256     8 pts/32   Ss+  nov04   0:00 bash
+loadfor+ 26478  0.0  0.0 251064  1108 ?        Sl   nov04   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 26482  0.0  0.0 264876     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 26484  0.0  0.0 557328  3108 ?        Sl   nov04   0:03 nm-applet
+loadfor+ 26486  0.0  0.0 286780   184 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 26489  0.0  0.0 1099024 4132 ?        Sl   nov04   0:16 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 26499  0.0  0.0 632824   908 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 26500  0.0  0.0 336320     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 26521  0.0  0.0 408376   368 ?        Sl   nov04   0:00 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 26524  0.0  0.0 335872   176 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 26525  0.0  0.0 1096704  756 ?        Sl   nov04   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 26545  0.0  0.0 300052  1036 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 26559  0.0  0.0 201464     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 26564  0.0  0.0 878868   992 ?        Sl   nov04   0:29 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 26569  0.0  0.0 287180     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 26574  0.0  0.0  59368   116 ?        S    nov04   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 26578  0.0  0.0 213628     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 26587  0.0  0.1 432136  9816 ?        Sl   nov04   0:56 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 26594  0.0  0.0 360624   456 ?        Sl   nov04   0:19 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 26601  0.0  0.0 563164     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 26609  0.0  0.0 206368    76 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-engine-simple
+loadfor+ 26620  0.0  0.0 271596     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 26709  0.0  0.0 374628     0 ?        Sl   nov04   0:00 telepathy-indicator
+loadfor+ 26714  0.0  0.0 322636  1184 ?        Sl   nov04   0:31 /usr/lib/telepathy/mission-control-5
+loadfor+ 26756  0.0  0.0 483732   148 ?        Sl   nov04   0:19 zeitgeist-datahub
+loadfor+ 26761  0.0  0.0 275008   396 ?        Sl   nov04   0:00 /usr/bin/zeitgeist-daemon
+loadfor+ 26798  0.4  0.0 551976  3372 ?        Sl   nov04  72:49 gnome-terminal
+loadfor+ 26804  0.0  0.0  14816     4 ?        S    nov04   0:00 gnome-pty-helper
+loadfor+ 26805  0.0  0.0  28272     8 pts/22   Ss   nov04   0:00 bash
+loadfor+ 26851  0.0  0.0 761548  1116 ?        Sl   nov04   0:02 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 26863  0.6  0.2 919128 23940 pts/22   Sl+  nov04 100:04 node /usr/local/bin/pm2 monit
+loadfor+ 26976  0.0  0.0 714024  3936 ?        Sl   nov11   2:07 update-notifier
+loadfor+ 27003  0.0  0.0 492916  1804 ?        Sl   nov04   0:01 update-notifier
+loadfor+ 27287  0.0  0.0 379116   272 ?        Sl   nov04   0:27 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+kkenda   27350  0.0  0.0  28272     4 pts/15   Ss+  okt18   0:00 bash
+nx       27568  0.0  0.0  47368     0 ?        Sl   okt18   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh kkenda 22 /usr/lib/nx/nxnode --slave
+nx       27570  0.0  0.0  44152     0 pts/11   Ss+  okt18   0:00 ssh -2 -x -l kkenda 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     27576  0.0  0.0 107724     0 ?        Ss   okt18   0:00 sshd: kkenda [priv] 
+kkenda   27631  0.0  0.0 107724     0 ?        S    okt18   0:00 sshd: kkenda@notty  
+nx       27749  0.0  0.0  47368     0 ?        Sl   nov04   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       27751  0.0  0.0  44152     0 pts/23   Ss+  nov04   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     27757  0.0  0.0 107724     4 ?        Ss   nov04   0:00 sshd: loadforecasting [priv]
+loadfor+ 27795  0.2  0.1 574180 10844 ?        Sl   nov11  15:08 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 27819  0.0  0.0 295028  5384 ?        S    nov11   0:00 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 27820  0.0  0.0 301108  5016 ?        S    nov11   0:00 /opt/brackets/Brackets --type=zygote --no-sandbox --lang=en-US --log-severity=disable
+loadfor+ 27821  0.0  0.0 107724     0 ?        S    nov04   0:00 sshd: loadforecasting@notty
+loadfor+ 27841  0.0  1.5 751516 123852 ?       Sl   nov11   2:43 /opt/brackets/Brackets-node /opt/brackets/node-core
+loadfor+ 27846  0.6  1.3 1568212 113804 ?      Dl   nov11  39:27 /opt/brackets/Brackets --type=renderer --no-sandbox --lang=en-US --lang=en-US --log-severity=disable --disable-accelerated-2d-canvas --disable-accelerated-video-decode --channel=27795.0.716990681
+nx       28077  0.0  0.0  19044     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       28080  0.0  0.0  19064     4 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       28081  0.0  0.0  19048     4 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       28087  0.0  0.0  19080     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       28088  0.0  0.0  12628     0 ?        S    okt18   0:00 cat -
+kkenda   28089  0.0  0.0  19376     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+kkenda   28091  0.0  0.0  19492     8 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+nx       28200  0.0  0.0  19044     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       28203  0.0  0.0  19064     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       28204  0.0  0.0  19052     4 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       28210  0.0  0.0  19084     0 ?        S    nov04   0:00 /bin/bash /usr/bin/nxserver
+nx       28211  0.0  0.0  12628     0 ?        S    nov04   0:00 cat -
+loadfor+ 28212  0.0  0.0  19376     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 28214  0.0  0.0  19492     8 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   28309  0.0  0.0  19556     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   28313  0.0  0.0  19580     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   28314  0.0  0.0  19568     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   28315  0.0  0.0  12616     4 ?        S    okt18   0:00 tee /home/kkenda/.nx/C-sunseed-analytics-3600-6CF67EADF1787970B1008481E7BDB33D/session
+kkenda   28317  0.0  0.0  19616     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   28337  0.0  0.2 371276 18580 ?        S    okt18   1:00 /usr/lib/nx/bin/nxagent -persistent -D -name NX - kkenda@sunseed-analytics:3600 - Sunseed Analytics (GPL Edition) -options /home/kkenda/.nx/C-sunseed-analytics-3600-6CF67EADF1787970B1008481E7BDB33D/options -nolisten tcp -dpi 96 :3600
+kkenda   28387  0.0  0.0 784212   928 ?        Sl   okt18   0:00 gnome-session --session gnome-fallback
+kkenda   28393  0.0  0.0  24432     0 ?        S    okt18   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+kkenda   28394  0.0  0.0  39972  1028 ?        Ss   okt18   0:11 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+kkenda   28396  0.0  0.0 337560     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+kkenda   28400  0.0  0.0  39372   316 ?        S    okt18   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+kkenda   28403  0.0  0.0 124908   120 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+kkenda   28416  0.0  0.0 178200   444 ?        Sl   okt18   0:00 /usr/lib/dconf/dconf-service
+kkenda   28442  0.0  0.0  59376   132 ?        S    okt18   0:04 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 28474  0.0  0.0  19556     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 28476  0.0  0.0  19580     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 28477  0.0  0.0  12616     4 ?        S    nov04   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3605-715F49689BC123473422293639265D08/session
+loadfor+ 28478  0.0  0.0  19620     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 28485  0.0  0.0  19568     4 ?        S    nov04   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   28488  0.0  0.0 665880  3792 ?        Sl   okt18   0:38 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+kkenda   28489  0.0  0.0 298248   316 ?        SLl  okt18   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 28503  0.1  0.4 333996 40288 ?        S    nov04  17:19 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3605 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3605-715F49689BC123473422293639265D08/options -nolisten tcp -dpi 96 :3605
+kkenda   28514  0.0  0.0 197860   236 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd
+kkenda   28519  0.0  0.0 345660     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/1001/gvfs -f -o big_writes
+kkenda   28540  0.0  0.0 351264  2280 ?        Sl   okt18   0:00 metacity
+kkenda   28550  0.0  0.0 653048  4532 ?        Sl   okt18   1:09 gnome-panel
+loadfor+ 28567  0.0  0.0 718664  1116 ?        Sl   nov04   0:00 gnome-session --session gnome-fallback
+loadfor+ 28573  0.0  0.0  24432     0 ?        S    nov04   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 28574  0.0  0.0  40088  1232 ?        Ss   nov04   0:04 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+kkenda   28576  0.0  0.0 362800   340 ?        Sl   okt18   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 28577  0.0  0.0 337568     0 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+kkenda   28578  0.0  0.0 472656    80 ?        Sl   okt18   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+kkenda   28580  0.6  0.0 238000  1152 ?        S    okt18 274:32 /usr/bin/vmtoolsd -n vmusr
+kkenda   28582  0.0  0.0 744348  4468 ?        Sl   okt18   0:57 nautilus -n
+kkenda   28583  0.0  0.0 365812   784 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+kkenda   28584  0.0  0.0 554572  1164 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+kkenda   28586  0.0  0.0 251068   872 ?        Sl   okt18   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+kkenda   28587  0.0  0.0 264876     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+kkenda   28588  0.0  0.0 477184  1624 ?        Sl   okt18   0:11 nm-applet
+kkenda   28590  0.0  0.0 294976    96 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+kkenda   28591  0.0  0.0 967860  2316 ?        Sl   okt18   0:47 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 28593  0.0  0.0  39372     8 ?        S    nov04   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+kkenda   28596  0.0  0.0 763900   968 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+kkenda   28597  0.0  0.0 336320     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 28600  0.0  0.0 124908   236 ?        Sl   nov04   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 28618  0.0  0.0 298260   352 ?        SLl  nov04   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 28621  0.0  0.0 665936  6124 ?        Sl   nov04   0:15 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+kkenda   28634  0.0  0.0 408376   224 ?        Sl   okt18   0:01 /usr/bin/gnome-screensaver --no-daemon
+kkenda   28637  0.0  0.0 300052  1036 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+kkenda   28643  0.0  0.0 335868   172 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+kkenda   28645  0.0  0.0 1096724  764 ?        Sl   okt18   0:00 /usr/lib/evolution/evolution-source-registry
+kkenda   28659  0.0  0.0 201464     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+kkenda   28668  0.0  0.0 287180     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+kkenda   28676  0.0  0.0 213628     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 28677  0.0  0.0 197860     4 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd
+kkenda   28682  0.0  0.0 892064  1268 ?        Sl   okt18   1:21 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 28687  0.0  0.0 378984   952 ?        Sl   nov11   0:12 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+kkenda   28694  0.0  0.1 433716 13092 ?        Sl   okt18   2:28 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 28699  0.0  0.0 491880   760 ?        Sl   nov04   0:03 metacity
+kkenda   28701  0.0  0.0 125660     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-metadata
+loadfor+ 28703  0.0  0.0 178292     0 ?        Sl   nov04   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 28709  0.0  0.0 700548   816 ?        Sl   nov04   0:38 gnome-panel
+kkenda   28714  0.0  0.0 282088     0 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-dconf
+kkenda   28716  0.0  0.0 308636     0 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 28723  0.0  0.0 362664     0 ?        Sl   nov04   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+kkenda   28724  0.0  0.0 508092   372 ?        Sl   okt18   0:54 /usr/lib/gvfs/gvfsd-trash --spawner :1.31 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 28736  0.0  0.0 282088    92 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-dconf
+loadfor+ 28738  0.0  0.0 308504   148 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+kkenda   28741  0.0  0.0 520652    44 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 28749  0.0  0.0 407124   312 ?        Sl   nov04   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 28755  0.0  0.0 784408  4388 ?        Sl   nov04   0:24 nautilus -n
+loadfor+ 28756  0.0  0.0 366104   704 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 28757  0.0  0.0 554472  2012 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 28759  0.0  0.0 396800  1100 ?        Sl   nov04   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 28761  0.0  0.0 264876     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 28764  0.0  0.0 557952  1384 ?        Sl   nov04   0:03 nm-applet
+loadfor+ 28771  0.0  0.0 286780   108 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 28772  0.0  0.0 335868   172 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 28773  0.0  0.0 967968  4084 ?        Sl   nov04   0:16 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 28776  0.0  0.0 763896   968 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 28777  0.0  0.0 336320     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 28791  0.0  0.0 300052  1028 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+kkenda   28797  0.0  0.0 271596     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.31 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 28814  0.0  0.0 1096704  708 ?        Sl   nov04   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 28821  0.0  0.0 442660   248 ?        Sl   nov04   0:00 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 28834  0.0  0.0 201464     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 28840  0.0  0.0 287180     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+kkenda   28849  0.0  0.0 374628   160 ?        Sl   okt18   0:00 telepathy-indicator
+loadfor+ 28850  0.0  0.0 944400  2752 ?        Sl   nov04   0:29 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 28853  0.0  0.0 213628     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+kkenda   28855  0.0  0.0 322732  1060 ?        Sl   okt18   1:26 /usr/lib/telepathy/mission-control-5
+loadfor+ 28860  0.0  0.0  59368   104 ?        S    nov04   0:01 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 28867  0.0  0.1 398764  9656 ?        Sl   nov04   0:57 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 28873  0.0  0.0 434360   464 ?        Sl   nov04   0:19 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+kkenda   28881  0.0  0.0 696884    60 ?        Sl   okt18   0:51 zeitgeist-datahub
+loadfor+ 28883  0.0  0.0 563164     0 ?        Sl   nov04   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+kkenda   28886  0.0  0.0 275000   432 ?        Sl   okt18   0:01 /usr/bin/zeitgeist-daemon
+loadfor+ 28891  0.0  0.0 206368    92 ?        Sl   nov04   0:00 /usr/lib/ibus/ibus-engine-simple
+nx       28908  0.0  0.0  47368   916 ?        Sl   nov14   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       28914  0.0  0.0  44152   680 pts/42   Ss+  nov14   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+loadfor+ 28917  0.0  0.0 271596     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+root     28925  0.0  0.0 107724   988 ?        Ss   nov14   0:00 sshd: loadforecasting [priv]
+kkenda   28944  0.0  0.0 761540  2748 ?        Sl   okt18   0:07 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 28989  0.0  0.0 107724  1000 ?        S    nov14   0:00 sshd: loadforecasting@notty
+loadfor+ 28995  0.0  0.0 374628     0 ?        Sl   nov04   0:00 telepathy-indicator
+loadfor+ 29004  0.0  0.0 322636   988 ?        Sl   nov04   0:31 /usr/lib/telepathy/mission-control-5
+loadfor+ 29030  0.0  0.0 483628     8 ?        Sl   nov04   0:19 zeitgeist-datahub
+loadfor+ 29035  0.0  0.0 275008   384 ?        Sl   nov04   0:00 /usr/bin/zeitgeist-daemon
+kkenda   29073  0.0  0.0 493176  3816 ?        Sl   okt18   0:02 update-notifier
+loadfor+ 29111  0.0  0.0 761540  1148 ?        Sl   nov04   0:02 /usr/lib/evolution/3.10/evolution-alarm-notify
+kkenda   29254  0.0  0.0 105832   176 ?        S    okt18   0:00 xterm
+kkenda   29258  0.0  0.0  28084     0 pts/13   Ss+  okt18   0:00 bash
+loadfor+ 29259  0.0  0.0 492880  1812 ?        Sl   nov04   0:01 update-notifier
+loadfor+ 29280  1.2  0.0 556264  2980 ?        Sl   nov04 192:19 gnome-terminal
+loadfor+ 29288  0.0  0.0  14816     8 ?        S    nov04   0:00 gnome-pty-helper
+loadfor+ 29289  0.0  0.0  28272     0 pts/24   Ss   nov04   0:00 bash
+loadfor+ 29342  0.6  0.2 918096 22688 pts/24   Sl+  nov04 100:20 node /usr/local/bin/pm2 monit
+kkenda   29361  0.0  0.0 452844   532 ?        Sl   okt18   1:12 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+root     29421  0.0  0.0      0     0 ?        S    nov07   4:49 [kworker/1:1]
+loadfor+ 29622  0.0  0.0 379116   352 ?        Sl   nov04   0:27 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+nx       29649  0.0  0.0  19048  1444 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx       29652  0.0  0.0  19068  1468 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx       29653  0.0  0.0  19056  1456 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx       29659  0.0  0.0  19084  1484 ?        S    nov14   0:00 /bin/bash /usr/bin/nxserver
+nx       29660  0.0  0.0  12628    92 ?        S    nov14   0:00 cat -
+loadfor+ 29661  0.0  0.0  19376  1772 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 29663  0.0  0.0  19492  1912 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 29674  0.0  0.0  28272     0 pts/25   Ss   nov04   0:00 bash
+loadfor+ 29714  1.7  0.0 946172  4500 pts/25   Sl+  nov04 280:44 node /usr/local/bin/pm2 logs
+loadfor+ 29927  0.0  0.0  19556  1972 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 29929  0.0  0.0  19580  1996 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 29930  0.0  0.0  12616   104 ?        S    nov14   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3612-89440B72DAA70B1C3D21391E4992EA61/session
+loadfor+ 29931  0.0  0.0  19620  2036 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 29933  0.0  0.0  19568  1984 ?        S    nov14   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 29964  0.0  1.6 256332 138512 ?       S    nov14   0:09 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3612 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3612-89440B72DAA70B1C3D21391E4992EA61/options -nolisten tcp -dpi 96 :3612
+loadfor+ 30039  0.0  0.0 570704  3556 ?        Sl   nov14   0:00 gnome-session --session gnome-fallback
+loadfor+ 30045  0.0  0.0  24432   244 ?        S    nov14   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 30046  0.0  0.0  39912  1416 ?        Ss   nov14   0:00 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 30048  0.0  0.0 337568   548 ?        Sl   nov14   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 30063  0.0  0.0  39372   536 ?        S    nov14   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 30066  0.0  0.0 124908   608 ?        Sl   nov14   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+loadfor+ 30102  0.2  0.0 1141020 6956 ?        Sl   nov14   3:13 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+loadfor+ 30110  0.0  0.0 298124   744 ?        Sl   nov14   0:00 /usr/bin/gnome-keyring-daemon --start --components=gpg
+loadfor+ 30128  0.0  0.0 197860   628 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 30176  0.0  0.0 490800  7080 ?        Sl   nov14   0:00 metacity
+loadfor+ 30179  0.0  0.0 178296   536 ?        Sl   nov14   0:00 /usr/lib/dconf/dconf-service
+loadfor+ 30194  0.0  0.1 807688 11000 ?        Sl   nov14   0:35 gnome-panel
+loadfor+ 30197  0.0  0.0 583864  1568 ?        Sl   nov14   0:38 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 30209  0.0  0.0 282088   648 ?        Sl   nov14   0:07 /usr/lib/ibus/ibus-dconf
+loadfor+ 30212  0.0  0.0 307764  1916 ?        Sl   nov14   0:08 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 30250  0.0  0.0 472028  2900 ?        Sl   nov14   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 30265  0.0  0.1 858696 13332 ?        Sl   nov14   0:39 nautilus -n
+loadfor+ 30266  0.3  0.0 240596  6852 ?        S    nov14   5:32 /usr/bin/vmtoolsd -n vmusr
+loadfor+ 30267  0.0  0.0 365316  3348 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 30268  0.0  0.0 480616  1552 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 30269  0.0  0.0 250568  2836 ?        Sl   nov14   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 30270  0.0  0.0 264872   552 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 30271  0.0  0.0 550232  6352 ?        Sl   nov14   0:00 nm-applet
+loadfor+ 30274  0.0  0.0 286780  1108 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 30277  0.0  0.0 1098908 3760 ?        Sl   nov14   0:16 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 30285  0.0  0.0 436216  1176 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 30287  0.0  0.0 335256  2832 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 30289  0.0  0.0 336320  2544 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 30301  0.0  0.0 407752  3208 ?        Sl   nov14   0:07 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 30314  0.0  0.0 226320  1952 ?        Sl   nov14   0:07 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 30320  0.0  0.0 201464   596 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 30326  0.0  0.0 1096660 3012 ?        Sl   nov14   0:00 /usr/lib/evolution/evolution-source-registry
+loadfor+ 30332  0.0  0.0 287180   700 ?        Sl   nov14   0:05 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 30337  0.0  0.0 213628   700 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 30395  0.0  0.0  59376  1568 ?        S    nov14   0:00 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 30416  0.0  0.4 1075468 36840 ?       Sl   nov14   0:03 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 30441  0.0  0.0 206368   688 ?        Sl   nov14   0:06 /usr/lib/ibus/ibus-engine-simple
+loadfor+ 30458  0.0  0.1 396892  8692 ?        Sl   nov14   0:07 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 30461  0.0  0.0 271596   592 ?        Sl   nov14   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 30492  0.0  0.0 286896  1076 ?        Sl   nov14   0:08 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 30516  0.0  0.0 628624  5392 ?        Sl   nov14   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+nx       30684  0.0  0.0  47368     0 ?        Sl   okt18   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh kkenda 22 /usr/lib/nx/nxnode --slave
+nx       30686  0.0  0.0  44152     0 pts/14   Ss+  okt18   0:00 ssh -2 -x -l kkenda 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     30692  0.0  0.0 107724     4 ?        Ss   okt18   0:00 sshd: kkenda [priv] 
+kkenda   30747  0.0  0.0 107724     0 ?        S    okt18   0:00 sshd: kkenda@notty  
+loadfor+ 30816  0.0  0.0 551176  6756 ?        Sl   nov14   0:00 gnome-terminal
+nx       30850  0.0  0.0  47368     0 ?        Sl   okt18   0:00 /usr/bin/expect /usr/lib/nx/nxnode-login -- ssh loadforecasting 22 /usr/lib/nx/nxnode --slave
+nx       30852  0.0  0.0  44152     0 pts/17   Ss+  okt18   0:00 ssh -2 -x -l loadforecasting 127.0.0.1 -o NumberOfPasswordPrompts 1 -p 22 /usr/lib/nx/nxnode --slave
+root     30858  0.0  0.0 107724     4 ?        Ss   okt18   0:00 sshd: loadforecasting [priv]
+loadfor+ 30861  0.0  0.0  14816   156 ?        S    nov14   0:00 gnome-pty-helper
+loadfor+ 30862  0.0  0.0  28300  2332 pts/43   Ss+  nov14   0:00 bash
+loadfor+ 30876  0.0  0.0 374000  3144 ?        Sl   nov14   0:00 telepathy-indicator
+loadfor+ 30882  0.0  0.0 322636  3908 ?        Sl   nov14   0:03 /usr/lib/telepathy/mission-control-5
+loadfor+ 30917  0.0  0.0 107724     0 ?        S    okt18   0:00 sshd: loadforecasting@notty
+loadfor+ 30989  0.0  0.1 575732 11264 ?        Sl   nov14   0:30 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 31021  0.0  0.0 295028  5372 ?        S    nov14   0:00 /opt/brackets/Brackets --lang=en-US --log-severity=disable --remote-debugging-port=9234 --no-sandbox
+loadfor+ 31022  0.0  0.0 301108  5016 ?        S    nov14   0:00 /opt/brackets/Brackets --type=zygote --no-sandbox --lang=en-US --log-severity=disable
+loadfor+ 31083  0.0  1.5 751440 130760 ?       Sl   nov14   0:58 /opt/brackets/Brackets-node /opt/brackets/node-core
+loadfor+ 31085  0.0  0.0 409904  3900 ?        Sl   nov14   0:07 zeitgeist-datahub
+nx       31109  0.0  0.0  19044     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31112  0.0  0.0  19064     4 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31113  0.0  0.0  19056     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31119  0.0  0.0  19080     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31120  0.0  0.0  12628     0 ?        S    okt18   0:00 cat -
+kkenda   31121  0.0  0.0  19376     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+kkenda   31123  0.0  0.0  19492     8 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 31131  0.1  1.1 982844 91224 ?        Sl   nov14   1:41 /opt/brackets/Brackets --type=renderer --no-sandbox --lang=en-US --lang=en-US --log-severity=disable --disable-accelerated-2d-canvas --disable-accelerated-video-decode --channel=30989.0.1227907143
+loadfor+ 31163  0.0  0.0 257544   828 ?        Sl   nov14   0:00 /usr/bin/zeitgeist-daemon
+nx       31283  0.0  0.0  19044     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31286  0.0  0.0  19064     4 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31287  0.0  0.0  19056     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31293  0.0  0.0  19080     0 ?        S    okt18   0:00 /bin/bash /usr/bin/nxserver
+nx       31294  0.0  0.0  12628     0 ?        S    okt18   0:00 cat -
+loadfor+ 31295  0.0  0.0  19376     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --slave
+loadfor+ 31297  0.0  0.0  19492     8 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31347  0.0  0.0  19556     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31349  0.0  0.0  19580     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31351  0.0  0.0  12616     4 ?        S    okt18   0:00 tee /home/kkenda/.nx/C-sunseed-analytics-3601-4CE7001377F741747BF6995E282CF446/session
+kkenda   31352  0.0  0.0  19568     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31353  0.0  0.0  19616     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31373  0.0  0.2 239320 23564 ?        S    okt18   1:27 /usr/lib/nx/bin/nxagent -persistent -D -name NX - kkenda@sunseed-analytics:3601 - Sunseed Analytics (GPL Edition) -options /home/kkenda/.nx/C-sunseed-analytics-3601-4CE7001377F741747BF6995E282CF446/options -nolisten tcp -dpi 96 :3601
+loadfor+ 31377  0.0  0.0 760656  7256 ?        Sl   nov14   0:01 /usr/lib/evolution/3.10/evolution-alarm-notify
+kkenda   31421  0.0  0.0 571196   908 ?        Sl   okt18   0:00 gnome-session --session gnome-fallback
+kkenda   31427  0.0  0.0  24432     0 ?        S    okt18   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+kkenda   31428  0.0  0.0  39940  1132 ?        Ss   okt18   0:11 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+kkenda   31430  0.0  0.0 337568     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+kkenda   31434  0.0  0.0  39372     0 ?        S    okt18   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+kkenda   31437  0.0  0.0 124908     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+kkenda   31449  0.0  0.0 665932  2428 ?        Sl   okt18   0:39 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+kkenda   31450  0.0  0.0 372000   260 ?        Sl   okt18   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+kkenda   31472  0.0  0.0 197860     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 31482  0.0  0.0 125696     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-metadata
+kkenda   31485  0.0  0.0 449568    40 ?        Sl   okt18   0:01 metacity
+kkenda   31487  0.0  0.0 178172     0 ?        Sl   okt18   0:00 /usr/lib/dconf/dconf-service
+kkenda   31494  0.0  0.1 718224  9248 ?        Sl   okt18   1:15 gnome-panel
+kkenda   31503  0.0  0.0 362780     0 ?        Sl   okt18   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+kkenda   31508  0.0  0.0 282088     0 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-dconf
+kkenda   31510  0.0  0.0 308528     0 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+kkenda   31521  0.0  0.0 472656     0 ?        Sl   okt18   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+kkenda   31525  0.0  0.0 830336  5936 ?        Sl   okt18   1:10 nautilus -n
+kkenda   31526  0.0  0.0 365812   740 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+kkenda   31527  0.0  0.0 554572  1280 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+kkenda   31528  0.0  0.0 251088  1080 ?        Sl   okt18   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+kkenda   31530  0.0  0.0 264876     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+kkenda   31534  0.0  0.0 468992  3236 ?        Sl   okt18   0:10 nm-applet
+kkenda   31543  0.0  0.0 335864   188 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+kkenda   31544  0.0  0.0 294976    44 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+kkenda   31545  0.0  0.0 967964  2296 ?        Sl   okt18   0:46 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+kkenda   31553  0.0  0.0 632824   972 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 31555  0.0  0.0 237612   428 ?        Sl   nov04   0:02 /usr/lib/geoclue/geoclue-master
+kkenda   31556  0.0  0.0 336320     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 31561  0.0  0.0 329992   544 ?        Sl   nov04   0:02 /usr/lib/x86_64-linux-gnu/ubuntu-geoip-provider
+kkenda   31573  0.0  0.0 408376   376 ?        Sl   okt18   0:01 /usr/bin/gnome-screensaver --no-daemon
+kkenda   31578  0.0  0.0 300052  1016 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+kkenda   31596  0.0  0.0 1096704  716 ?        Sl   okt18   0:00 /usr/lib/evolution/evolution-source-registry
+kkenda   31609  0.0  0.0 201464     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+kkenda   31614  0.0  0.0 826524  5028 ?        Sl   okt18   1:18 /usr/lib/evolution/evolution-calendar-factory
+kkenda   31617  0.0  0.0 287180     4 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+kkenda   31623  0.0  0.0  59376   112 ?        S    okt18   0:04 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+kkenda   31625  0.0  0.0 213628     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+kkenda   31636  0.0  0.0 125660     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-metadata
+kkenda   31638  0.0  0.1 548256 14820 ?        Sl   okt18   2:24 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 31647  0.0  0.0  19556     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31649  0.0  0.0 508088   436 ?        Sl   okt18   0:53 /usr/lib/gvfs/gvfsd-trash --spawner :1.11 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 31652  0.0  0.0  19580     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 31654  0.0  0.0  12616     0 ?        S    okt18   0:00 tee /home/loadforecasting/.nx/C-sunseed-analytics-3602-624C3BAEAF484E20C8639E16BC962F0C/session
+loadfor+ 31655  0.0  0.0  19620     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+loadfor+ 31658  0.0  0.0  19568     4 ?        S    okt18   0:00 /bin/bash /usr/lib/nx/nxnode --startsession
+kkenda   31663  0.0  0.0 523132    72 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 31669  0.0  0.0 451832     0 ?        Sl   nov04   0:00 /usr/lib/gvfs/gvfsd-http --spawner :1.11 /org/gtk/gvfs/exec_spaw/2
+kkenda   31672  0.0  0.0 206368     0 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-engine-simple
+kkenda   31680  0.0  0.0 271596     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.11 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 31683  0.0  0.3 292264 28252 ?        S    okt18   1:16 /usr/lib/nx/bin/nxagent -persistent -D -name NX - loadforecasting@sunseed-analytics:3602 - Sunseed Analytics (GPL Edition) -options /home/loadforecasting/.nx/C-sunseed-analytics-3602-624C3BAEAF484E20C8639E16BC962F0C/options -nolisten tcp -dpi 96 :3602
+loadfor+ 31732  0.0  0.0 644940  1060 ?        Sl   okt18   0:00 gnome-session --session gnome-fallback
+loadfor+ 31738  0.0  0.0  24432     0 ?        S    okt18   0:00 dbus-launch --exit-with-session gnome-session --session gnome-fallback
+loadfor+ 31739  0.0  0.0  40072  1068 ?        Ss   okt18   0:12 //bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+loadfor+ 31741  0.0  0.0 337568     0 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+loadfor+ 31745  0.0  0.0  39372     4 ?        S    okt18   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+loadfor+ 31748  0.0  0.0 124908   228 ?        Sl   okt18   0:00 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+kkenda   31756  0.0  0.0 374628    20 ?        Sl   okt18   0:00 telepathy-indicator
+kkenda   31761  0.0  0.0 322744  1156 ?        Sl   okt18   1:25 /usr/lib/telepathy/mission-control-5
+loadfor+ 31766  0.0  0.0 178200     4 ?        Sl   okt18   0:00 /usr/lib/dconf/dconf-service
+kkenda   31787  0.0  0.0 483632    36 ?        Sl   okt18   0:51 zeitgeist-datahub
+kkenda   31792  0.0  0.0 275008   380 ?        Sl   okt18   0:01 /usr/bin/zeitgeist-daemon
+loadfor+ 31809  0.0  0.0  59368   112 ?        S    okt18   0:04 /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+loadfor+ 31855  0.0  0.0 665868  3484 ?        Sl   okt18   0:39 /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+kkenda   31856  0.0  0.0 761548  1380 ?        Sl   okt18   0:07 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 31857  0.0  0.0 371964   296 ?        Sl   okt18   0:00 /usr/bin/gnome-keyring-daemon --start --components=secrets
+loadfor+ 31884  0.0  0.0 345456     4 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd
+loadfor+ 31888  0.0  0.0 345660     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/1003/gvfs -f -o big_writes
+loadfor+ 31906  0.0  0.0 515600   760 ?        Sl   okt18   0:01 metacity
+loadfor+ 31909  0.0  0.0 677312   972 ?        Sl   okt18   1:08 gnome-panel
+loadfor+ 31934  0.0  0.0 472652   540 ?        Sl   okt18   0:00 /usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+loadfor+ 31937  0.0  0.0 862700  4620 ?        Sl   okt18   0:58 nautilus -n
+loadfor+ 31941  0.0  0.0 365808   808 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-printers/indicator-printers-service
+loadfor+ 31942  0.0  0.0 554472  1752 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-sound/indicator-sound-service
+loadfor+ 31943  0.0  0.0 251068  1084 ?        Sl   okt18   0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+loadfor+ 31946  0.0  0.0 264876     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-bluetooth/indicator-bluetooth-service
+loadfor+ 31949  0.0  0.0 557332  1528 ?        Sl   okt18   0:10 nm-applet
+loadfor+ 31953  0.0  0.0 286780   136 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-application/indicator-application-service
+loadfor+ 31955  0.0  0.0 967832  2072 ?        Sl   okt18   0:48 /usr/lib/x86_64-linux-gnu/indicator-datetime/indicator-datetime-service
+loadfor+ 31963  0.0  0.0 763896  1036 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-session/indicator-session-service
+loadfor+ 31967  0.0  0.0 335872   232 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/notify-osd
+loadfor+ 31972  0.0  0.0 336320     0 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicator-messages-service
+loadfor+ 31973  0.0  0.0 1096716  704 ?        Sl   okt18   0:00 /usr/lib/evolution/evolution-source-registry
+kkenda   31986  0.0  0.0 493172  1784 ?        Sl   okt18   0:02 update-notifier
+loadfor+ 32002  0.0  0.0 408376   332 ?        Sl   okt18   0:01 /usr/bin/gnome-screensaver --no-daemon
+loadfor+ 32011  0.0  0.0 362800     0 ?        Sl   okt18   0:00 /usr/bin/ibus-daemon --replace --xim --panel disable
+loadfor+ 32026  0.0  0.0 826400  1156 ?        Sl   okt18   1:18 /usr/lib/evolution/evolution-calendar-factory
+loadfor+ 32028  0.0  0.0 300052  1028 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+loadfor+ 32042  0.0  0.0 282088   108 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-dconf
+loadfor+ 32043  0.0  0.0 201464     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+loadfor+ 32049  0.0  0.0 308508   128 ?        Sl   okt18   0:00 /usr/lib/ibus/ibus-x11 --kill-daemon
+loadfor+ 32058  0.0  0.0 287180     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+loadfor+ 32064  0.0  0.0 213628     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+loadfor+ 32066  0.0  0.0 125660     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-metadata
+loadfor+ 32074  0.0  0.1 752336 13240 ?        Sl   okt18   2:27 /usr/lib/x86_64-linux-gnu/indicator-applet-complete
+loadfor+ 32092  0.0  0.0 434360   304 ?        Sl   okt18   0:53 /usr/lib/gvfs/gvfsd-trash --spawner :1.31 /org/gtk/gvfs/exec_spaw/0
+loadfor+ 32114  0.0  0.0 594384   112 ?        Sl   okt18   0:00 /usr/lib/x86_64-linux-gnu/indicator-keyboard-service --use-gtk
+loadfor+ 32169  0.0  0.0 271596     0 ?        Sl   okt18   0:00 /usr/lib/gvfs/gvfsd-burn --spawner :1.31 /org/gtk/gvfs/exec_spaw/1
+loadfor+ 32220  0.0  0.0 374628     0 ?        Sl   okt18   0:00 telepathy-indicator
+loadfor+ 32226  0.0  0.0 322636  1188 ?        Sl   okt18   1:23 /usr/lib/telepathy/mission-control-5
+loadfor+ 32252  0.0  0.0 696880    44 ?        Sl   okt18   0:51 zeitgeist-datahub
+loadfor+ 32257  0.0  0.0 275004   420 ?        Sl   okt18   0:01 /usr/bin/zeitgeist-daemon
+kkenda   32273  0.0  0.0 379116   304 ?        Sl   okt18   1:11 /usr/lib/x86_64-linux-gnu/deja-dup/deja-dup-monitor
+loadfor+ 32329  0.0  0.0 761548  2768 ?        Sl   okt18   0:06 /usr/lib/evolution/3.10/evolution-alarm-notify
+loadfor+ 32378  0.0  0.0 552152  1124 ?        Sl   okt18   0:04 gnome-terminal
+loadfor+ 32384  0.0  0.0  14816     4 ?        S    okt18   0:00 gnome-pty-helper
+loadfor+ 32385  0.0  0.0  28284     8 pts/18   Ss+  okt18   0:00 bash
+loadfor+ 32502  0.0  0.0 714032  3992 ?        Sl   nov14   0:30 update-notifier
+loadfor+ 32509  0.0  0.0 418444   736 ?        Sl   okt18   0:02 update-notifier
