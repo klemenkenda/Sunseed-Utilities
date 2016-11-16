@@ -190,12 +190,10 @@ function push2QMiner(dataArray, shm) {
     // console.log(node[0]["node"]["measurements"]);
 };
 
-function processLast48h() {
+function processLast48h(batch) {
     // read the nodes
     // match nodename   
     var street = "KROMBERK-INDUSTRIJSKA CESTA";
-    var startTS = "2016-11-03T00:00:00Z";
-    var endTS = "2016-11-30T23:59:59Z";
     var token = "5e63ca1e-4a27-457f-8bb6-486705df41ff";
 
     var credentials = require('./credentials.js');
@@ -203,15 +201,17 @@ function processLast48h() {
     // automtically get new dates
     var startDate = new Date();
     var endDate = new Date();
-    startDate.setDate(startDate.getDate() - 2);
-    console.log("START DATE: ", startDate, "END DATE: ", endDate);
+    startDate.setDate(startDate.getDate() - 2);    
 
     // create UNIX timestamp from ISO String
-    var startDate = new Date();
-    var endDate = new Date();
-    startDate = Date.parse(startTS);
-    endDate = Date.parse(endTS);
-
+    if (batch == true) {        
+        var startTS = "2016-04-01T00:00:00Z";
+        var endTS = "2018-01-01T23:59:59Z";
+        startDate = Date.parse(startTS);
+        endDate = Date.parse(endTS);
+    }
+    
+    console.log("START DATE: ", startDate, "END DATE: ", endDate);
     var startUTS = Math.round(startDate / 1000);
     var endUTS = Math.round(endDate / 1000);
 
@@ -288,7 +288,10 @@ function processLast48h() {
 console.log("Waiting for the first job to start ...");
 
 // running loading script once per day
-var j = schedule.scheduleJob("0 0 3 * * *", function() {
-    console.log("Starting scheduled loading job");
-    processLast48h();
-})
+// var j = schedule.scheduleJob("0 0 3 * * *", function() {
+//    console.log("Starting scheduled loading job");
+//    processLast48h(false);
+// })
+
+// batch mode from start of time
+processLast48h(true);
