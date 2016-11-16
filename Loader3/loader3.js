@@ -288,10 +288,10 @@ function processLast48h(batch) {
 console.log("Waiting for the first job to start ...");
 
 // running loading script once per day
-// var j = schedule.scheduleJob("0 0 3 * * *", function() {
-//    console.log("Starting scheduled loading job");
-//    processLast48h(false);
-// })
+var j = schedule.scheduleJob("0 0 3 * * *", function() {
+    console.log("Starting scheduled loading job");
+    processLast48h(false);
+})
 
 // batch mode from start of time
-processLast48h(true);
+// processLast48h(true);

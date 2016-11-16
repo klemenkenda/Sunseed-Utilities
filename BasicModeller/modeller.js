@@ -115,11 +115,16 @@ function makePrediction(fromDataDate, startPredictionDate, predictSensor) {
             var virtualOffset = (currentTimestamp.getTime() - sensor[0].Timestamp.getTime()) / 1000 / 3600;
             var prediction = calculateMA(virtualOffset, sensor, 5);
             console.log("Time: " + currentTimestamp.toMysqlFormat() + ", Prediction: " + prediction);
-            pi.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
+            piapi.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
+            pirmq.insertPrediction(predictSensor, "ma", currentTimestamp.toMysqlFormat(), prediction);
         }
 
-        pi.flushPredictions();
+        piapi.flushPredictions();
+        pirmq.flushPredictions();
     }
+    
+    piapi.close();
+    pirmq.close();
 }
 
 function calculateMA(virtualOffset, sensor, N) {
@@ -144,32 +149,37 @@ function calculateMA(virtualOffset, sensor, N) {
     return prediction;
 }
 
-var pi = new PredictionInterface('api');
+var piapi = new PredictionInterface('api');
+var pirmq = new PredictionInterface('rabbitmq');
 
 var shm = new SyncHttpManager();
 
 var sensors = [
-    "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc",    
-    "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc",
-    "129728 MGM Kromberk 85024272-Consumed real power-pc",
-    "TP Meblo - Pikolud_30442750-Consumed real power-pc",
-    "TP Meblo kotlarna TR2_30488597-Consumed real power-pc",
-    "TP Meblo kotlarna TR2_30488610-Consumed real power-pc",
-    "TP Meblo Jogi_30488589-Consumed real power-pc",
-    "TP Meblo kotlarna TR2_30488614-Consumed real power-pc",
-    "TP Meblo Jogi_30488641-Consumed real power-pc",
-    "TP Meblo kotlarna TR2_30488617-Consumed real power-pc",
-    "175632 SE Marchiol Meblo 50279962-Consumed real power-pc",
-    "174185 SE Nova Gorica 99690099-Consumed real power-pc",
-    "TP Meblo kotlarna TR1_30488600-Consumed real power-pc",
-    "TP Meblo kotlarna TR2_30488611-Consumed real power-pc",
-    "175579 SE Kovent Meblo 35747726-Consumed real power-pc",
-    "TP Meblo kotlarna TR2_30488604-Consumed real power-pc",
-    "TP Meblo_16137120-Consumed real power-pc",
-    "TP Meblo Jogi_30488652-Consumed real power-pc",
-    "174556 SE Alupla Meblo 35747740-Consumed real power-pc",
-    "137187 Meblo JOGI 51237780-Consumed real power-pc"   
+    { name: "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc", nodeid: "1" },
+    { name: "8001722 Poslovni prostor Sirra Meblo Kro. 50831726-Consumed real power-pc", nodeid: "1" },
+    { name: "129728 MGM Kromberk 85024272-Consumed real power-pc", nodeid: "1" },
+    { name: "TP Meblo - Pikolud_30442750-Consumed real power-pc", nodeid: "1" },
+    { name: "TP Meblo kotlarna TR2_30488597-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo kotlarna TR2_30488610-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo Jogi_30488589-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo kotlarna TR2_30488614-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo Jogi_30488641-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo kotlarna TR2_30488617-Consumed real power-pc", nodeid: "" },
+    { name: "175632 SE Marchiol Meblo 50279962-Consumed real power-pc", nodeid: "" },
+    { name: "174185 SE Nova Gorica 99690099-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo kotlarna TR1_30488600-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo kotlarna TR2_30488611-Consumed real power-pc", nodeid: "" },
+    { name: "175579 SE Kovent Meblo 35747726-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo kotlarna TR2_30488604-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo_16137120-Consumed real power-pc", nodeid: "" },
+    { name: "TP Meblo Jogi_30488652-Consumed real power-pc", nodeid: "" },
+    { name: "174556 SE Alupla Meblo 35747740-Consumed real power-pc", nodeid: "" },
+    { name: "137187 Meblo JOGI 51237780-Consumed real power-pc", nodeid: "" }
 ];
+
+// var sensors = [
+//    { name: "175339 Avtocenter ABC Kromberk 98441643-Consumed real power-pc", nodeid: "1" }
+// ];
 
 function startPrediction() {
     var i = 0;
@@ -185,8 +195,8 @@ function startPrediction() {
         if (shm.isInSync()) {
             try {
                 if (i < N) {
-                    console.log(fromDataDate, startPredictionDate, sensors[i]);
-                    makePrediction(fromDataDate, startPredictionDate, sensors[i]);
+                    console.log(fromDataDate, startPredictionDate, sensors[i].name);
+                    makePrediction(fromDataDate, startPredictionDate, sensors[i].name);
                     i++;
                 } else {
                     console.log("Safe to terminate prediction cycle!");
@@ -204,6 +214,6 @@ function startPrediction() {
 
 console.log("Waiting for the first prediction job to start ...");
 
-// var job = schedule.scheduleJob('0 0 4 * * *', function() {
+var job = schedule.scheduleJob('0 0 4 * * *', function() {
     startPrediction();
-//});
+});
