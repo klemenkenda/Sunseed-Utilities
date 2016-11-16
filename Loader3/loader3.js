@@ -288,7 +288,7 @@ function processLast48h() {
 console.log("Waiting for the first job to start ...");
 
 // running loading script once per day
-var j = schedule.scheduleJob("0 50 * * * *", function() {
+var j = schedule.scheduleJob("0 53 * * * *", function() {
     console.log("Starting scheduled loading job");
     processLast48h();
 })
