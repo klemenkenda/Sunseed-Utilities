@@ -190,7 +190,7 @@ function push2QMiner(dataArray, shm) {
     // console.log(node[0]["node"]["measurements"]);
 };
 
-function processLast48h(batch) {
+function processLast48h(batch, from, to) {
     // read the nodes
     // match nodename   
     var street = "KROMBERK-INDUSTRIJSKA CESTA";
@@ -205,8 +205,8 @@ function processLast48h(batch) {
 
     // create UNIX timestamp from ISO String
     if (batch == true) {        
-        var startTS = "2016-04-01T00:00:00Z";
-        var endTS = "2018-01-01T23:59:59Z";
+        var startTS = from + "T00:00:00Z";
+        var endTS = to + "T23:59:59Z";
         startDate = Date.parse(startTS);
         endDate = Date.parse(endTS);
     }
@@ -285,13 +285,20 @@ function processLast48h(batch) {
 }
 
 
-console.log("Waiting for the first job to start ...");
+var typeInstance = (process.argv[2] == null) ? "streaming" : process.argv[2];
+var from = (process.argv[3] == null) ? "2016-04-01" : process.argv[3];
+var to = (process.argv[4] == null) ? "2017-04-01" : process.argv[4];
 
-// running loading script once per day
-var j = schedule.scheduleJob("0 0 3 * * *", function() {
-    console.log("Starting scheduled loading job");
-    processLast48h(false);
-})
-
-// batch mode from start of time
-// processLast48h(true);
+if (typeInstance == "streaming") {
+    console.log("Waiting for the first job to start ...");
+    // running loading script once per day
+    var j = schedule.scheduleJob("0 0 3 * * *", function() {
+        console.log("Starting scheduled loading job");
+        processLast48h(false, "", "");
+    }) 
+} else if (typeInstance == "batch") {
+    // batch mode from start of time
+    processLast48h(true, from, to);
+} else {
+    console.log("First argument should be streaming or batch.")
+}
