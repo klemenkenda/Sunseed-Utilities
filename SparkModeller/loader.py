@@ -3,15 +3,20 @@ import urllib.parse
 import json
 import dateutil.parser
 import datetime
+import numpy
 
 """Loader class
 """
 class Loader:
     # object properties
-    config = [];
-    loadURL = "";
-    loadURLSensor = "";
-    loadURLAggregate = "";
+    config = []
+    loadURL = ""
+    loadURLSensor = ""
+    loadURLAggregate = ""
+    minDate = datetime.date.today()
+    maxDate = datetime.date.today()
+    mergerConf = []
+    mergedTable = []
 
     # object methods
     def __init__(self, config):
@@ -73,6 +78,8 @@ class Loader:
 
         print("from: ", minDate, "\nto:   ", maxDate)
         startDate = minDate.replace(minute = 00, second = 00)
+        self.minDate = startDate
+        self.maxDate = maxDate.replace(minute = 00, second = 00)
 
         # traverse all sensors
         for sensor in self.config["sensors"]:
@@ -80,7 +87,7 @@ class Loader:
                 self.resampleSensor(sensor, "measurements", minDate, maxDate, "Timestamp");
             if "aggregates" in sensor:
                 self.resampleSensor(sensor, "aggregates", minDate, maxDate, "Time");
-                print(sensor["resaggregates"])
+                #print(sensor["resaggregates"])
 
     def resampleSensor(self, sensor, srcprop, minDate, maxDate, timeprop):
         # go from start to end and resample
@@ -104,3 +111,66 @@ class Loader:
             sensor["res" + srcprop].append(sensor[srcprop][i])
 
             currentDate = currentDate + datetime.timedelta(hours = 1)
+
+    def merge(self):
+        self.defineMerger()
+        # main sensor with target value with offset 24
+        mainSensor = self.config["sensors"][0]["resmeasurements"]
+
+        # row
+        n = len(self.mergerConf) + 1               # number of attributes
+        row = numpy.empty(n, dtype = object);
+
+        # main loop over all sensor measurements
+        measurementId = 0
+        # getting max measurements
+        maxOffset = len(mainSensor) - 1
+
+        for measurement in mainSensor:
+            sensorOK = True
+            attributeId = 0
+            # column zero = time
+            row[attributeId] = measurement["Timestamp"];
+
+            for attribute in self.mergerConf:
+                attributeId = attributeId + 1
+                attributeOffset = measurementId + attribute["offset"];
+                if (attributeOffset < 0) or (attributeOffset > maxOffset):
+                    print(attributeOffset)
+                    sensorOK = False
+                    break
+
+                #print(attribute["sensorid"], attribute["table"], attributeOffset, attribute["field"])
+                row[attributeId] = self.config["sensors"][attribute["sensorid"]][attribute["table"]][attributeOffset][attribute["field"]]
+
+
+
+            if (sensorOK == True):
+                print("Row added!")
+                self.mergedTable.append(row);
+
+
+
+
+            measurementId = measurementId + 1
+
+
+    def defineMerger(self):
+        self.mergerConf = []
+        sensorid = 0
+        for sensor in self.config["sensors"]:
+            tsId = 0
+            # measurements
+            for ts in sensor["ts"]:
+                tsId = tsId + 1
+                print(sensor["name"] + str(tsId))
+                self.mergerConf.append({ "name": sensor["name"] + str(tsId), "sensorid": sensorid, "table": "resmeasurements", "offset": ts, "field": "Val" })
+            if "aggrs" in sensor:
+                for aggr in sensor["aggrs"]:
+                    print(sensor["name"] + aggr)
+                    self.mergerConf.append({ "name": sensor["name"] + aggr, "sensorid": sensorid, "table": "resaggregates", "offset": 0, "field": aggr })
+            # going to a new sensor
+            sensorid = sensorid + 1
+
+        # check the table of sensors
+        # print(self.mergerConf)

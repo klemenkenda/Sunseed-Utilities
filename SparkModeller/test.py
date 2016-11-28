@@ -7,14 +7,21 @@ import model
 from loader import Loader
 
 
+# load model
 loaderM = Loader(model.model)
-#print(loaderM.config);
 
+# print(loaderM.config);
 
+# load data
 toDate = date.today();
 fromDate = date(2016, 11, 1);
 loaderM.load(fromDate, toDate);
+
+# resample data
 loaderM.resample();
+
+# merge data
+loaderM.merge();
 
 
 
