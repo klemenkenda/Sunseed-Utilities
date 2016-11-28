@@ -166,3 +166,4 @@ logs/
 
 Loader3/credentials.js
 */.ipynb_checkpoints/*
+*/__pycache__/*
