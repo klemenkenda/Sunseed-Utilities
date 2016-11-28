@@ -165,6 +165,6 @@ schema/db/
 logs/
 
 Loader3/credentials.js
-.ipynb_checkpoints/
+SparkModeller/.ipynb_checkpoints/*
 __pycache__/
 *.pyc
