@@ -138,14 +138,9 @@ class Loader:
                 #print(attribute["sensorid"], attribute["table"], attributeOffset, attribute["field"])
                 row[attributeId] = self.config["sensors"][attribute["sensorid"]][attribute["table"]][attributeOffset][attribute["field"]]
 
-
-
             if (sensorOK == True):
                 print("Row added!")
                 self.mergedTable.append(row);
-
-
-
 
             measurementId = measurementId + 1
 

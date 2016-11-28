@@ -5,6 +5,7 @@
 import datetime
 import model
 from loader import Loader
+import numpy
 
 
 # load model
@@ -23,6 +24,7 @@ loaderM.resample();
 # merge data
 loaderM.merge();
 
+dataset = loaderM.mergerTable;
 
 
 
