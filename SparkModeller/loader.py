@@ -36,6 +36,7 @@ class Loader:
         self.loadSensors(fromStr, toStr);
 
     def loadSensors(self, fromStr, toStr):
+        # TODO: retry if result is not OK
         for sensor in self.config["sensors"]:
             # load measurements
             values = { "p" : sensor["name"] + ":" + fromStr + ":" + toStr };
@@ -57,42 +58,35 @@ class Loader:
     def resample(self):
         # get start & end timestamp
         minDate = datetime.datetime(1970, 1, 1)
-        maxDate = datetime.datetime(2050, 1, 1)
 
         for sensor in self.config["sensors"]:
             if "measurements" in sensor:
                 date = dateutil.parser.parse(sensor["measurements"][0]["Timestamp"])
                 if (date > minDate):
                     minDate = date;
-                date = dateutil.parser.parse(sensor["measurements"][-1]["Timestamp"])
-                if (date < maxDate):
-                    maxDate = date;
 
             if "aggregates" in sensor:
                 date = dateutil.parser.parse(sensor["aggregates"][0]["Time"])
                 if (date > minDate):
                     minDate = date;
-                date = dateutil.parser.parse(sensor["aggregates"][-1]["Time"])
-                if (date < maxDate):
-                    maxDate = date;
 
-        print("from: ", minDate, "\nto:   ", maxDate)
+        print("from: ", minDate)
         startDate = minDate.replace(minute = 00, second = 00)
         self.minDate = startDate
-        self.maxDate = maxDate.replace(minute = 00, second = 00)
 
         # traverse all sensors
         for sensor in self.config["sensors"]:
             if "measurements" in sensor:
-                self.resampleSensor(sensor, "measurements", minDate, maxDate, "Timestamp");
+                self.resampleSensor(sensor, "measurements", minDate, "Timestamp");
             if "aggregates" in sensor:
-                self.resampleSensor(sensor, "aggregates", minDate, maxDate, "Time");
+                self.resampleSensor(sensor, "aggregates", minDate, "Time");
                 #print(sensor["resaggregates"])
 
-    def resampleSensor(self, sensor, srcprop, minDate, maxDate, timeprop):
+    def resampleSensor(self, sensor, srcprop, minDate, timeprop):
         # go from start to end and resample
         print("Resampling " + sensor["name"] + "['" + srcprop + "']");
         currentDate = minDate;
+        maxDate = dateutil.parser.parse(sensor[srcprop][-1][timeprop]).replace(minute = 00, second = 00)
         i = 0;
         sensor["res" + srcprop] = [];
         while (currentDate <= maxDate):
@@ -135,7 +129,8 @@ class Loader:
             for attribute in self.mergerConf:
                 attributeId = attributeId + 1
                 attributeOffset = measurementId + attribute["offset"];
-                if (attributeOffset < 0) or (attributeOffset > maxOffset):
+                maxAttributeOffset = len(self.config["sensors"][attribute["sensorid"]][attribute["table"]])
+                if (attributeOffset < 0) or (attributeOffset > maxAttributeOffset):
                     print(attributeOffset)
                     sensorOK = False
                     break

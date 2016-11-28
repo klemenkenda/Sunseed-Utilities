@@ -2,7 +2,7 @@
 #from pyspark.mllib.tree import RandomForest, RandomForestModel
 #from pyspark.mllib.util import MLUtils
 
-from datetime import date
+import datetime
 import model
 from loader import Loader
 
@@ -13,8 +13,8 @@ loaderM = Loader(model.model)
 # print(loaderM.config);
 
 # load data
-toDate = date.today();
-fromDate = date(2016, 11, 1);
+toDate = datetime.date.today() + datetime.timedelta(days = 3)
+fromDate = datetime.date(2016, 11, 1);
 loaderM.load(fromDate, toDate);
 
 # resample data
