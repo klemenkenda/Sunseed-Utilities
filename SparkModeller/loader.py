@@ -3,7 +3,8 @@ import urllib.parse
 import json
 import dateutil.parser
 import datetime
-import numpy
+import numpy as np
+import pandas as pd
 
 """Loader class
 """
@@ -17,6 +18,7 @@ class Loader:
     maxDate = datetime.date.today()
     mergerConf = []
     mergedTable = []
+    mergedTableHeader = ()
 
     # object methods
     def __init__(self, config):
@@ -112,8 +114,12 @@ class Loader:
         mainSensor = self.config["sensors"][0]["resmeasurements"]
 
         # row
-        n = len(self.mergerConf) + 1               # number of attributes
-        row = numpy.empty(n, dtype = object);
+        n = len(self.mergerConf) + 2               # number of attributes
+        #dtypeStr = "S30"
+        #for i in range(n - 1):
+        #    dtypeStr = dtypeStr + ",f4"
+        #print(dtypeStr)
+        row = np.empty(n, dtype=object)
 
         # main loop over all sensor measurements
         measurementId = 0
@@ -125,13 +131,19 @@ class Loader:
             attributeId = 0
             # column zero = time
             row[attributeId] = measurement["Timestamp"];
+            # column one = target value
+            attributeId = attributeId + 1
+            if (measurementId + 24 < maxOffset):
+                row[attributeId] = mainSensor[measurementId + 24]
+            else:
+                row[attributeId] = np.nan
 
             for attribute in self.mergerConf:
                 attributeId = attributeId + 1
                 attributeOffset = measurementId + attribute["offset"];
                 maxAttributeOffset = len(self.config["sensors"][attribute["sensorid"]][attribute["table"]])
                 if (attributeOffset < 0) or (attributeOffset > maxAttributeOffset):
-                    print(attributeOffset)
+                    # print(attributeOffset)
                     sensorOK = False
                     break
 
@@ -139,11 +151,13 @@ class Loader:
                 row[attributeId] = self.config["sensors"][attribute["sensorid"]][attribute["table"]][attributeOffset][attribute["field"]]
 
             if (sensorOK == True):
-                print("Row added!")
+                # print("Row added!")
                 self.mergedTable.append(row);
 
             measurementId = measurementId + 1
 
+        # create numpy array
+        self.mergedTable = np.array(self.mergedTable)
 
     def defineMerger(self):
         self.mergerConf = []
@@ -155,10 +169,12 @@ class Loader:
                 tsId = tsId + 1
                 print(sensor["name"] + str(tsId))
                 self.mergerConf.append({ "name": sensor["name"] + str(tsId), "sensorid": sensorid, "table": "resmeasurements", "offset": ts, "field": "Val" })
+                self.mergedTableHeader = self.mergedTableHeader + (sensor["name"] + str(tsId),)
             if "aggrs" in sensor:
                 for aggr in sensor["aggrs"]:
                     print(sensor["name"] + aggr)
                     self.mergerConf.append({ "name": sensor["name"] + aggr, "sensorid": sensorid, "table": "resaggregates", "offset": 0, "field": aggr })
+                    self.mergedTableHeader = self.mergedTableHeader + (sensor["name"] + aggr,)
             # going to a new sensor
             sensorid = sensorid + 1
 

@@ -5,7 +5,8 @@
 import datetime
 import model
 from loader import Loader
-import numpy
+import numpy as np
+import pandas as pd
 
 
 # load model
@@ -23,8 +24,13 @@ loaderM.resample();
 
 # merge data
 loaderM.merge();
+dataset = loaderM.mergedTable;
+#dataset.dtype.names = loaderM.mergedTableHeader;
 
-dataset = loaderM.mergerTable;
+# save merged table
+outfile = open('dataset.txt', 'wb')
+np.save(outfile, dataset)
+outfile.close()
 
 
 
