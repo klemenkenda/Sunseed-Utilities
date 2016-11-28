@@ -119,7 +119,6 @@ class Loader:
         #for i in range(n - 1):
         #    dtypeStr = dtypeStr + ",f4"
         #print(dtypeStr)
-        row = np.empty(n, dtype=object)
 
         # main loop over all sensor measurements
         measurementId = 0
@@ -127,6 +126,7 @@ class Loader:
         maxOffset = len(mainSensor) - 1
 
         for measurement in mainSensor:
+            row = np.empty(n, dtype=object)
             sensorOK = True
             attributeId = 0
             # column zero = time
@@ -134,7 +134,7 @@ class Loader:
             # column one = target value
             attributeId = attributeId + 1
             if (measurementId + 24 < maxOffset):
-                row[attributeId] = mainSensor[measurementId + 24]
+                row[attributeId] = mainSensor[measurementId + 24]["Val"]
             else:
                 row[attributeId] = np.nan
 

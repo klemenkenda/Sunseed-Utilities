@@ -16,7 +16,7 @@ loaderM = Loader(model.model)
 
 # load data
 toDate = datetime.date.today() + datetime.timedelta(days = 3)
-fromDate = datetime.date(2016, 11, 1);
+fromDate = datetime.date(2016, 4, 1);
 loaderM.load(fromDate, toDate);
 
 # resample data
@@ -28,9 +28,13 @@ dataset = loaderM.mergedTable;
 #dataset.dtype.names = loaderM.mergedTableHeader;
 
 # save merged table
-outfile = open('dataset.txt', 'wb')
+outfile = open('dataset-tr2-597.txt', 'wb')
 np.save(outfile, dataset)
 outfile.close()
+#infile = open('dataset.txt', 'rb')
+#dataset = np.load(infile)
+#infile.close()
+
 
 
 
