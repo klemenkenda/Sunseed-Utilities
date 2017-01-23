@@ -11,6 +11,7 @@
 db/*
 server/logs/*
 test/db/*
+*.swp
 
 # Build results
 [Dd]ebug/

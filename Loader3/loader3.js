@@ -292,7 +292,7 @@ var to = (process.argv[4] == null) ? "2017-04-01" : process.argv[4];
 if (typeInstance == "streaming") {
     console.log("Waiting for the first job to start ...");
     // running loading script once per day
-    var j = schedule.scheduleJob("0 0 3 * * *", function() {
+    var j = schedule.scheduleJob("0 0 6 * * *", function() {
         console.log("Starting scheduled loading job");
         processLast48h(false, "", "");
     }) 

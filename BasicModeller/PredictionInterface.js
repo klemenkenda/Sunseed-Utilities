@@ -84,6 +84,7 @@ PredictionInterface.prototype.insertPrediction = function(name, method, time, va
     if (this.type == "mysql") this.insertPredictionMySQL(name, method, time, value);
     else if (this.type == "api") this.insertPredictionAPI(name, method, time, value);
     else if (this.type == "rabbitmq") this.insertPredictionRMQ(name, method, time, value);
+    else if (this.type == "dummy") { /* do nothing */ }
     else console.debug("Wrong type: " + this.type);
 }
 
@@ -143,6 +144,7 @@ PredictionInterface.prototype.flushPredictions = function() {
     if (this.type == "mysql") console.debug("No flush needed for MySQL type.");
     else if (this.type == "api") this.flushPredictionsAPI();
     else if (this.type == "rabbitmq") this.flushPredictionsRMQ();
+    else if (this.type == "dummy") { /* do nothing */ }
     else console.debug("Wrong type: " + this.type);
 }
 
