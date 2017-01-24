@@ -169,3 +169,6 @@ Loader3/credentials.js
 SparkModeller/.ipynb_checkpoints/*
 __pycache__/
 *.pyc
+
+# data
+*.csv
