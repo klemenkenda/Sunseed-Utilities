@@ -172,3 +172,4 @@ __pycache__/
 
 # data
 *.csv
+*.gz
