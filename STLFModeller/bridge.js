@@ -55,13 +55,13 @@ function STLFModeller(node_id, bridge_resample, debug) {
       value: "psp_v"
     });
 
-    this.winbuffPSPV1s = this.rawstore.addStreamAggr({
-      type: "timeSeriesWinBuf",
-      timestamp: "Time",
-      value: "v1",
+    this.winbufPSPV1s = this.rawstore.addStreamAggr({
+      type: "timeSeriesWinBufVector",
+      inAggr: this.tickPSPV,
       winsize: 1 * 1000
     });
 
+/*
     this.winbuffPSPV1m = this.rawstore.addStreamAggr({
       type: "timeSeriesWinBuf",
       timestamp: "Time",
@@ -75,7 +75,7 @@ function STLFModeller(node_id, bridge_resample, debug) {
       value: "v1",
       winsize: 10 * 60 * 1000
     });
-
+*/
     this.emaPSPV1u = this.rawstore.addStreamAggr({
       type: "ema",
       inAggr: this.tickPSPV,
@@ -83,6 +83,11 @@ function STLFModeller(node_id, bridge_resample, debug) {
       interval: 1 * 1000,
       initWindow: 1* 1000
     });
+
+    this.stdevPSPV1s = this.rawstore.addStreamAggr({
+      type: 'variance',
+      inAggr: this.winbufPSPV1s
+    })
 
     // end of constructor
 
@@ -113,10 +118,10 @@ function STLFModeller(node_id, bridge_resample, debug) {
         f1: rec["f1"], f2: rec["f2"], f3: rec["f3"], f4: rec["f3"]
       });
       // trigger stream aggregates bound to Raw store
-      // this.rawstore.triggerOnAddCallbacks(rawRecord);
-      this.rawstore.push(rawRecord.toJSON());
+      this.rawstore.triggerOnAddCallbacks(rawRecord);
+      // this.rawstore.push(rawRecord.toJSON());
 
-      if (this.msgcounter % 50 == 0) console.log(this.emaPSPV1u.getFloat() - this.tickPSPV.getFloat());
+      if (this.msgcounter % 50 == 0) console.log("Razlika: ", this.emaPSPV1u.getFloat() - this.tickPSPV.getFloat(), "Stdev(1s)", this.stdevPSPV1s.getFloat());
 
     }
 
