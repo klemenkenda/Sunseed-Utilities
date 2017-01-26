@@ -1,93 +1,294 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
     <script src="http://code.highcharts.com/highcharts.js"></script>	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/deepstream.io-client-js/2.1.1/deepstream.js"></script>
   </head>
   <body>
     <script type="text/javascript">
-	var client = deepstream('sunseed-analytics.ijs.si:6020').login();
-	client.event.subscribe('example', eventCallback);
+    $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results==null){
+        return null;
+        }
+        else{
+        return results[1] || 0;
+        }
+    }
 
-	var chart; // global
+
+	var client = deepstream('atena.ijs.si:6020').login();
+	// handle node name
+    $(document).ready(function() {
+        var nodeName = $.urlParam("node");
+        if (nodeName == null) nodeName ="167002045410006104bfa000a0000094";
+        $("#node_name").text(nodeName);        
+    });    
+
+    client.event.subscribe('spm/167002045410006104bfa000a0000094', eventCallback);
+
+	var chartv; // global
+    var chartf;
+    var chartt;
 
 	function eventCallback(dataStr) {
-    		// console.log(data);            
-
-	    
+        console.log(dataStr);
 	    data = JSON.parse(dataStr);
-            var unixts = 10 * 365 * 24 * 60 * 60 * 1000 + (data["week_id"] + 1) * 7 * 24 * 60 * 60 * 1000 + data["sec_id"] * 1000 + data["report_n"] * 20;  
+        var unixts = 10 * 365 * 24 * 60 * 60 * 1000 + (data["week_id"] + 1) * 7 * 24 * 60 * 60 * 1000 + data["sec_id"] * 1000 + data["report_n"] * 20;  
 
 	    var pointv1 = [ unixts, data["v1"] ];
 	    var pointv2 = [ unixts, data["v2"] ];
 	    var pointv3 = [ unixts, data["v3"] ];
-	
-	    console.log(pointv1);
-            var series = chart.series[0],
-                shift = series.data.length > 40; // shift if the series is 
-                                                 // longer than 20
 
-            // add the point
-            chart.series[0].addPoint(pointv1, true, shift);
+        var f1 = [ unixts, data["f1"]];
+        var f2 = [ unixts, data["f2"]];        
+        var f3 = [ unixts, data["f3"]];
+        var f4 = [ unixts, data["f4"]];
+	
+        var t1 = [ unixts, data["th1"]];
+        var t2 = [ unixts, data["th2"]];        
+        var t3 = [ unixts, data["th3"]];
+
+	    // console.log(pointv1);
+        var len = 10;
+        // Voltage
+        // series1
+        var series1 = chartv.series[0],
+        shift = series1.data.length > len; 
+        series1.addPoint(pointv1, true, shift);
 	   
-            // series 2
-	    var series2 = chart.series[1],
-                shift2 = series2.data.length > 40;
-	    chart.series[1].addPoint(pointv2, true, shift2);
+        // series 2
+	    var series2 = chartv.series[1],
+        shift2 = series2.data.length > len;
+	    chartv.series[1].addPoint(pointv2, true, shift2);
 	    
 	    // series 3
-  	    var series3 = chart.series[2],
-                shift3 = series3.data.length > 40;
-            chart.series[2].addPoint(pointv3, true, shift3);
+  	    var series3 = chartv.series[2],
+        shift3 = series3.data.length > len;
+        chartv.series[2].addPoint(pointv3, true, shift3);
+
+
+        // Frequency
+        var sf1 = chartf.series[0];
+        sfshift1 = sf1.data.length > len;
+        sf1.addPoint(f1, true, sfshift1);
+
+        var sf2 = chartf.series[1];
+        sfshift2 = sf2.data.length > len;
+        sf2.addPoint(f2, true, sfshift2);
+
+        var sf3 = chartf.series[2];
+        sfshift3 = sf3.data.length > len;
+        sf3.addPoint(f3, true, sfshift3);
+
+        var sf4 = chartf.series[3];
+        sfshift4 = sf4.data.length > len;
+        sf4.addPoint(f4, true, sfshift4);
+
+
+        // Phase
+        var st1 = chartt.series[0];
+        stshift1 = st1.data.length > len;
+        st1.addPoint(t1, true, stshift1);
+
+        var st2 = chartt.series[1];
+        stshift2 = st2.data.length > len;
+        st2.addPoint(t2, true, stshift2);
+
+        var st3 = chartt.series[2];
+        stshift3 = st3.data.length > len;
+        st3.addPoint(t3, true, stshift3);
+       
 	}
 
 	
 	$(document).ready(function() {
-	    chart = new Highcharts.Chart({
-        chart: {
-            renderTo: 'container',
-            type: 'scatter',
-	    //defaultSeriesType: 'spline',
-            events: {
-                // load: requestData
-            }
-        },
-        title: {
-            text: 'Live data from WAMS'
-        },
-        xAxis: {
-            type: 'datetime',
-            tickPixelInterval: 150,
-            maxZoom: 20 * 1000
-        },
-        yAxis: {
-            minPadding: 0.2,
-            maxPadding: 0.2,
+	    // voltage
+        chartv = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container_v',
+                type: 'scatter',
+                //defaultSeriesType: 'spline',
+                events: {
+                    // load: requestData
+                }
+            },
             title: {
-                text: 'Value',
-                margin: 80
-            }
-        },
-        series: [{
-            name: 'V1',
-            data: []
-        },
-	{
-	    name: 'V2',
-	    data: []
-	},
-	{
-	    name: 'V3',
-	    data: []
-	}]
-    });        
-});
+                text: 'Voltage'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150,
+                maxZoom: 10 * 1000
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'Value',
+                    margin: 80
+                }
+            },
+            series: [
+                {
+                    name: 'V1',
+                    data: []
+                },
+                {
+                    name: 'V2',
+                    data: []
+                },
+                {
+                    name: 'V3',
+                    data: []
+                }
+            ]
+        });       
+
+        // frequency
+        chartf = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container_f',
+                type: 'scatter',
+                //defaultSeriesType: 'spline',
+                events: {
+                    // load: requestData
+                }
+            },
+            title: {
+                text: 'Frequency'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150,
+                maxZoom: 10 * 1000
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'Value',
+                    margin: 80
+                }
+            },
+            series: [
+                {
+                    name: 'F1',
+                    data: []
+                },
+                {
+                    name: 'F2',
+                    data: []
+                },
+                {
+                    name: 'F3',
+                    data: []
+                },
+                {
+                    name: 'F4',
+                    data: []
+                }
+            ]
+        });   
+
+        // phase
+        chartt = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container_th',
+                type: 'scatter',
+                //defaultSeriesType: 'spline',
+                events: {
+                    // load: requestData
+                }
+            },
+            title: {
+                text: 'Phase'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150,
+                maxZoom: 10 * 1000
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'Value',
+                    margin: 80
+                }
+            },
+            series: [
+                {
+                    name: 'T1',
+                    data: []
+                },
+                {
+                    name: 'T2',
+                    data: []
+                },
+                {
+                    name: 'T3',
+                    data: []
+                }
+            ]
+        });   
+    });
 
     </script>
-    <div id="container" style="width:100%; height:400px;"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Sunseed STLF</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="hidden"><a href="http://atena.ijs.si">Daily Load Forecasting</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <br><br>
+        <h2 style="margin-bottom: 0px">Node</h2> 
+        <p><span id="node_name" style="font-size: 18px; font-weight: bold;">%node%</span></p>
+        <p>
+            Select node:<br>
+            <select class="form-control" style="margin-bottom: 5px">
+                <option>167002045410006104bfa000a0000094</option>
+            </select>
+            <button type="button" class="btn btn-info">Live data</button>
+            <button type="button" class="btn btn-primary">Predictions</button>
+        </p>
+      </div>
+    </div>
+    <div class="container">        
+        <h2>Live data from WAMS</h1>
+        <p>Due to performance issues of web browsers, data stream is downsampled from 50Hz to 1Hz.</p>
+        <div id="container_v" style="width:100%; height:300px;"></div>
+        <div id="container_f" style="width:100%; height:300px;"></div>
+        <div id="container_th" style="width:100%; height:300px;"></div>
+        <hr>
+        <footer>
+            <p>&copy; 2017 IJS, AI lab.</p>
+        </footer>
+    </div>    
   </body>
 </html>

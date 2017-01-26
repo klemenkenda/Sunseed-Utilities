@@ -173,3 +173,6 @@ __pycache__/
 # data
 *.csv
 *.gz
+data/
+db/
+.vscode/
