@@ -2,6 +2,7 @@ var mqtt = require('mqtt')
 var fs = require('fs')
 var dateFormat = require('dateformat')
 var qm = require('qminer');
+var StreamEvaluation = require('./streamEvaluation.js');
 
 // global
 var deepstream = require('deepstream.io-client-js')
@@ -22,8 +23,13 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   this.model = model.type;
   this.frequency = model.frequency;
   this.horizon = model.horizon;
+  this.prediction = [];
+  this.evaluation = new StreamEvaluation(100);
+
   // calculate horizon in seconds
   this.horizonunit = this.horizon * this.unit / 50;
+  // calculate horizon in steps
+  this.horizonsteps = this.horizon / this.frequency;
   
   this.dbPath = "./db/" + this.node_id;
   // create directory if it does not exits
@@ -149,7 +155,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     };
     // this.rawstore.push(rawRecord.toJSON());
 
-    if ((this.debug) && (this.msgcounter % 50 == 0)) console.log("Razlika: ", this.emaPSPV1u.getFloat() - this.tickPSPV.getFloat(), "Stdev(1s)", this.stdevPSPV1s.getFloat());
+    // if ((this.debug) && (this.msgcounter % 50 == 0)) console.log("Razlika: ", this.emaPSPV1u.getFloat() - this.tickPSPV.getFloat(), "Stdev(1s)", this.stdevPSPV1s.getFloat());
   }
 
   this.predict = function() {
@@ -160,9 +166,23 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
 
     var prediction = -99.9;
     if (this.model == "ma") {      
-      prediction = this.predictMA();      
-      this.broadcastPrediction(prediction);
+      prediction = this.predictMA();            
     }
+
+    // save prediction into buffer
+    this.prediction.push(prediction);
+    // do we already have a measurement for prediction
+    // get error measures
+    var MSE = "N/A";
+    if (this.prediction.length > this.horizonsteps) {      
+      this.evaluation.add(this.prediction[0].value, this.emaPSPV1u.getFloat());
+      var errors = this.evaluation.get();
+      if (debug) console.log(errors);
+      prediction["mse"] = errors.mse;
+      this.prediction.shift();
+    }
+
+    this.broadcastPrediction(prediction);
   }
 
   this.predictMA = function() {
@@ -192,8 +212,8 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   }
 }
 
-var m1 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, true);
-var m1 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, true);
+var m1_1 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, true);
+var m1_2 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, true);
 var m2 = new STLFModeller("167002045410006104a9a000a00000f6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m3 = new STLFModeller("167002045410006104c7a000a00000fb", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m4 = new STLFModeller("167002045410006104bba000a0000088", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);

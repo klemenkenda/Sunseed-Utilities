@@ -57,6 +57,11 @@
 	function predictionCallback(dataStr) {
         console.log(dataStr);
 	    data = JSON.parse(dataStr);
+
+        mse = data.mse;
+        rmse = Math.sqrt(mse);
+        $("#mse").text(mse.toFixed(5));
+        $("#rmse").text(rmse.toFixed(5));
         
         var len = 25;
         var point = [data.unixts, data.value ];
@@ -200,7 +205,12 @@
         })
     </script>
     <div class="container">        
-        <h2>Live predictions (<span id="horizon_str"></span>)</h1>        
+        <h2>Live predictions (<span id="horizon_str"></span>)</h1>      
+
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#">MSE <span class="badge" id="mse">0.00000</span></a></li>
+            <li role="presentation" class="active"><a href="#">RMSE <span class="badge" id="rmse">0.00000</span></a></li>
+        </ul>  
         <div id="container" style="width:100%; height:300px;"></div>
         <hr>
         <footer>
