@@ -17,14 +17,18 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   this.client = mqtt.connect('mqtt://10.122.248.42');
   this.bridge_resample = bridge_resample;
   this.debug = debug;
-
+  
   // model specific
   this.unit = model.unit;
   this.model = model.type;
   this.frequency = model.frequency;
   this.horizon = model.horizon;
   this.prediction = [];
+  this.trainV = [];
   this.evaluation = new StreamEvaluation(100);
+
+  // record
+  this.rawrecord;
 
   // calculate horizon in seconds
   this.horizonunit = this.horizon * this.unit / 50;
@@ -71,7 +75,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     value: "psp_v"
   });
 
-  this.winbufPSPV1s = this.rawstore.addStreamAggr({
+  this.winbufPSPV1u = this.rawstore.addStreamAggr({
     type: "timeSeriesWinBufVector",
     inAggr: this.tickPSPV,
     winsize: 1 * 1000
@@ -100,8 +104,8 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     type: "ema",
     inAggr: this.tickPSPV,
     emaType: "previous",
-    interval: 1 * 1000,
-    initWindow: 1* 1000
+    interval: 0.2 * 1000,
+    initWindow: 1 * 1000
   });
 
   this.emaPSPV5u = this.rawstore.addStreamAggr({
@@ -112,12 +116,13 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     initWindow: 5 * 1000
   });
 
-  this.stdevPSPV1s = this.rawstore.addStreamAggr({
+  this.stdevPSPV1u = this.rawstore.addStreamAggr({
     type: 'variance',
-    inAggr: this.winbufPSPV1s
+    inAggr: this.winbufPSPV1u
   });
 
-
+  // create stream predictor
+  this.lr = new qm.analytics.RecLinReg( {"dim": 3, "forgetFact": 0.9999 });  
 
   // end of constructor
 
@@ -141,7 +146,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     var unixts = 10 * 365 * 24 * 60 * 60 * 1000 + (rec["week_id"] + 1) * 7 * 24 * 60 * 60 * 1000 + rec["sec_id"] * 1000 + rec["report_n"] * 20;  
     var date = new Date(unixts);
     var isoTime = date.toISOString();
-    var rawRecord = this.rawstore.newRecord({
+    this.rawRecord = this.rawstore.newRecord({
       Time: isoTime,
       v1: rec["v1"], v2: rec["v2"], v3: rec["v3"], psp_v: rec["psp_v"],
       th1: rec["th1"], th2: rec["th2"], th3: rec["th3"], psp_th: rec["psp_th"],
@@ -150,7 +155,8 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     // trigger stream aggregates bound to Raw store
     if (this.msgcounter % this.unit == 0) {
       this.addcounter++;
-      this.rawstore.triggerOnAddCallbacks(rawRecord);
+      this.rawstore.triggerOnAddCallbacks(this.rawRecord);
+      // this is basically the resampler
       if (this.addcounter % this.frequency == 0) this.predict();
     };
     // this.rawstore.push(rawRecord.toJSON());
@@ -167,6 +173,10 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     var prediction = -99.9;
     if (this.model == "ma") {      
       prediction = this.predictMA();            
+    } else if (this.model = "lr") {
+      var predictionVec = new qm.la.Vector([ this.emaPSPV1u.getFloat(), this.stdevPSPV1u.getFloat(), this.emaPSPV5u.getFloat() ]);      
+      prediction = this.predictLR(predictionVec);
+      this.trainV.push(predictionVec);
     }
 
     // save prediction into buffer
@@ -177,9 +187,23 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     if (this.prediction.length > this.horizonsteps) {      
       this.evaluation.add(this.prediction[0].value, this.emaPSPV1u.getFloat());
       var errors = this.evaluation.get();
-      if (debug) console.log(errors);
+      if (this.debug) console.log(errors);
       prediction["mse"] = errors.mse;
+      
+      // learn phase
+      if (this.model == "lr") {
+        if (this.addcounter > 2000) {
+          if (this.debug) console.log("Fitting LR", this.addcounter);
+          var trainV = this.trainV[0];
+          var target = this.emaPSPV1u.getFloat();
+          this.lr.partialFit(trainV, target);
+        } else {
+          if (this.debug) console.log("Waiting for addcounter to fit LR.");
+        }
+      }
+      
       this.prediction.shift();
+      this.trainV.shift();
     }
 
     this.broadcastPrediction(prediction);
@@ -190,6 +214,13 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     var unixts = this.emaPSPV5u.getTimestamp();
     // add horizon to the timestamp
     unixts += this.unit * 20 * this.horizon;
+    return { "unixts": unixts, "value": prediction };
+  }
+
+  this.predictLR = function(vec) {
+    var unixts = this.emaPSPV5u.getTimestamp();
+    unixts += this.unit * 20 * this.horizon;
+    var prediction = this.lr.predict(vec);
     return { "unixts": unixts, "value": prediction };
   }
 
@@ -212,23 +243,26 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   }
 }
 
-var m1_1 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, true);
-var m1_2 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, true);
+var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "lr", unit: 1, frequency: 50, horizon: 250 }, true);
+var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
+var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
+
 var m2 = new STLFModeller("167002045410006104a9a000a00000f6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m3 = new STLFModeller("167002045410006104c7a000a00000fb", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m4 = new STLFModeller("167002045410006104bba000a0000088", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m5 = new STLFModeller("167002045410006104c5a000a00000f5", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m6 = new STLFModeller("167002045410006104bfa000a0000094", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m7 = new STLFModeller("167002045410006104b3a000a00000b0", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m8 = new STLFModeller("167002045410006104b4a000a00000a5", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m9 = new STLFModeller("167002045410006104baa000a000008f", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m10 = new STLFModeller("167002045410006104aaa000a00000ff", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m11 = new STLFModeller("167002045410006104c0a000a00000ee", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m12 = new STLFModeller("167002045410006104c1a000a00000e9", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m13 = new STLFModeller("167002045410006104ada000a00000ea", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m14 = new STLFModeller("167002045410006104afa000a00000e4", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m15 = new STLFModeller("167002045410006104c8a000a00000d6", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
-var m16 = new STLFModeller("167002045410006104cea000a00000c4", 50, { type: "ma", unit: 50, frequency: 50, horizon: 250 }, false);
+var m7 = new STLFModeller("167002045410006104b3a000a00000b0", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m8 = new STLFModeller("167002045410006104b4a000a00000a5", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m9 = new STLFModeller("167002045410006104baa000a000008f", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m10 = new STLFModeller("167002045410006104aaa000a00000ff", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m11 = new STLFModeller("167002045410006104c0a000a00000ee", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m12 = new STLFModeller("167002045410006104c1a000a00000e9", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m13 = new STLFModeller("167002045410006104ada000a00000ea", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m14 = new STLFModeller("167002045410006104afa000a00000e4", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m15 = new STLFModeller("167002045410006104c8a000a00000d6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+var m16 = new STLFModeller("167002045410006104cea000a00000c4", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 
 
 /*

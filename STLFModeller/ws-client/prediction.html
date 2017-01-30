@@ -46,8 +46,9 @@
         $("#node_name").text(nodeName);    
         $("#horizon_str").text(horizonStr);
 
-        client.event.subscribe('prediction/ma/' + horizon + '/' + nodeName, predictionCallback);
-        client.event.subscribe('aggregate/ma/' + horizon + '/' + nodeName, aggregateCallback);
+        client.event.subscribe('prediction/lr/' + horizon + '/' + nodeName, predictionCallback);
+        client.event.subscribe('prediction/ma/' + horizon + '/' + nodeName, baselineCallback);
+        client.event.subscribe('aggregate/lr/' + horizon + '/' + nodeName, aggregateCallback);
     });    
 
     
@@ -59,14 +60,29 @@
 	    data = JSON.parse(dataStr);
 
         mse = data.mse;
-        rmse = Math.sqrt(mse);
-        $("#mse").text(mse.toFixed(5));
-        $("#rmse").text(rmse.toFixed(5));
+        rmse = Math.sqrt(mse);        
+        $("#rmse").text(rmse.toFixed(4));
         
         var len = 25;
         var point = [data.unixts, data.value ];
         
         var series1 = chartv.series[1],
+        shift = series1.data.length > len; 
+        series1.addPoint(point, true, shift);
+	}
+
+    function baselineCallback(dataStr) {
+        console.log(dataStr);
+	    data = JSON.parse(dataStr);
+
+        mse = data.mse;
+        rmse = Math.sqrt(mse);        
+        $("#rmse_base").text(rmse.toFixed(4));
+        
+        var len = 25;
+        var point = [data.unixts, data.value ];
+        
+        var series1 = chartv.series[2],
         shift = series1.data.length > len; 
         series1.addPoint(point, true, shift);
 	}
@@ -116,7 +132,11 @@
                     data: []
                 },
                 {
-                    name: 'Prediction',
+                    name: 'Prediction (LR)',
+                    data: []
+                },                
+                {
+                    name: 'Prediction (baseline)',
                     data: []
                 }
             ]
@@ -207,9 +227,9 @@
     <div class="container">        
         <h2>Live predictions (<span id="horizon_str"></span>)</h1>      
 
-        <ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class="active"><a href="#">MSE <span class="badge" id="mse">0.00000</span></a></li>
+        <ul class="nav nav-pills" role="tablist">            
             <li role="presentation" class="active"><a href="#">RMSE <span class="badge" id="rmse">0.00000</span></a></li>
+            <li role="presentation" class="active"><a href="#" style="background-color: darkorange !important">RMSE (baseline) <span class="badge" id="rmse_base">0.00000</span></a></li>
         </ul>  
         <div id="container" style="width:100%; height:300px;"></div>
         <hr>
