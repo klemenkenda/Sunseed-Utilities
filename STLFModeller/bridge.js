@@ -1,16 +1,15 @@
+// includes
 var mqtt = require('mqtt')
 var fs = require('fs')
 var dateFormat = require('dateformat')
 var qm = require('qminer');
 var StreamEvaluation = require('./streamEvaluation.js');
 
-// global
+// global deepstream.io client
 var deepstream = require('deepstream.io-client-js')
 const dsclient = deepstream('atena.ijs.si:6020').login()
 
-// create base
-
-
+// basic class for short term prediction modeller
 function STLFModeller(node_id, bridge_resample, model, debug) {
   // constructor
   this.node_id = node_id;
@@ -35,6 +34,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   // calculate horizon in steps
   this.horizonsteps = this.horizon / this.frequency;
   
+  // create base for each model
   this.dbPath = "./db/" + this.node_id;
   // create directory if it does not exits
   if (!fs.existsSync(this.dbPath)){
@@ -67,12 +67,112 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   this.addcounter = -1;
   this.rawstore = this.base.store("Raw");
 
+  // automated generation of aggregates
+  var aggrDef = [
+    { "field": "psp_v", 
+      "tick": [ 
+        { "type": "ema", "interval": 0.2 * 1000, "initWindow": 1 * 1000 },
+        { "type": "winbuf", "winsize": 1000,
+          "sub": [
+            { "type": "variance" },
+            { "type": "ma" }
+          ]
+        },
+        { "type": "winbuf", "winsize": 5000,
+          "sub": [
+            { "type": "variance" },
+            { "type": "ma" },
+            { "type": "min" },
+            { "type": "max" }
+          ]
+        }
+      ] 
+    }
+  ]
+  
+  this.aggregate = [];
+    
+  // create aggregates from definition
+  this.createAggregates = function(def) {
+    for (var i in def) {
+      var field = def[i];
+      var fieldName = field["field"];
+      var ticks = field["tick"];
+
+      // create tick
+      var aggregate = this.rawstore.addStreamAggr({
+        "type": "timeSeriesTick",
+        "timestamp": "Time",
+        "value": fieldName
+      });
+
+      var tickName = fieldName+"|tick";
+      this.aggregate[tickName] = aggregate;
+
+      // handle tick sub aggregates
+      for (var j in ticks) {
+        var aggr = ticks[j];
+        var type = aggr["type"];
+        if (type == "ema") {
+          var interval = aggr["interval"];
+          var initWindow = aggr["initWindow"];
+          var aggregate = this.rawstore.addStreamAggr({
+            type: "ema",
+            inAggr: this.aggregate[tickName],
+            emaType: "previous",
+            interval: interval,
+            initWindow: initWindow
+          });
+          var emaName = fieldName + "|ema|" + interval;
+          this.aggregate[emaName] = aggregate;
+        } else if (type == "winbuf") {
+          var winsize = aggr["winsize"];
+          var aggregate = this.rawstore.addStreamAggr({
+            type: "timeSeriesWinBufVector",
+            inAggr: this.aggregate[tickName],
+            winsize: winsize
+          });
+          var winBufName = fieldName + "|winbuf|" + winsize;
+          this.aggregate[winBufName] = aggregate;
+          // handle winbuf sub aggregates
+          var sub = aggr["sub"];
+          for (var k in sub) {
+            var subaggr = sub[k];
+            var subtype = subaggr["type"];
+            if (subtype == "variance") {
+              var aggregate = this.rawstore.addStreamAggr({
+                type: 'variance',
+                inAggr: this.aggregate[winBufName]
+              });
+              var varianceName = fieldName + "|variance|" + winsize;
+              this.aggregate[varianceName] = aggregate;
+            } else if (subtype = "ma") {
+              // TODO
+            } else if (subtype = "min") {
+              // TODO
+            } else if (subtype = "max") {
+              // TODO
+            }
+          }
+        }
+      }
+    }
+  }  
+
+  this.createAggregates(aggrDef);
+
   // create stream agregates
   // create tick and winbuff - base for all other aggregates
   this.tickPSPV = this.rawstore.addStreamAggr({
     type: "timeSeriesTick",
     timestamp: "Time",
     value: "psp_v"
+  });
+
+  this.tickF1 = this.rawstore.addStreamAggr({
+    type: "timeSeriesTick",
+    timestamp: "Time",
+    value: "f1"
   });
 
   this.winbufPSPV1u = this.rawstore.addStreamAggr({
@@ -108,6 +208,14 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     initWindow: 1 * 1000
   });
 
+  this.emaF11u = this.rawstore.addStreamAggr({
+    type: "ema",
+    inAggr: this.tickF1,
+    emaType: "previous",
+    interval: 0.2 * 1000,
+    initWindow: 1 * 1000
+  });
+
   this.emaPSPV5u = this.rawstore.addStreamAggr({
     type: "ema",
     inAggr: this.tickPSPV,
@@ -122,21 +230,28 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   });
 
   // create stream predictor
-  this.lr = new qm.analytics.RecLinReg( {"dim": 3, "forgetFact": 0.9999 });  
+  this.lr = new qm.analytics.RecLinReg( {"dim": 4, "forgetFact": 0.9999 });  
 
   // end of constructor
 
+
+  
+
+  // subscribing to MQTT data for a specific node (relevant for model)
   this.client.on('connect', function () {
     this.subscribe('spm/' + modeller.node_id);
   });
   
+  // handle message from MQTT
   this.client.on('message', function (topic, message) {      
     var m = JSON.parse(message);
     modeller.processRecord(m);      
   });
 
+  // process record of data received by MQTT (measurements for a particular node)
   this.processRecord = function (rec) {      
     this.msgcounter++;
+    // send data to web client (deepstream.io), only send downsampled data
     if ((this.bridge_resample > 0) && (this.msgcounter % this.bridge_resample == 0)) {
       this.broadcast(rec);
       if (this.debug) console.log("Deepstream.IO send: " + this.node_id + ", " + this.msgcounter);
@@ -164,27 +279,30 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     // if ((this.debug) && (this.msgcounter % 50 == 0)) console.log("Razlika: ", this.emaPSPV1u.getFloat() - this.tickPSPV.getFloat(), "Stdev(1s)", this.stdevPSPV1s.getFloat());
   }
 
+  // make prediction
   this.predict = function() {
     if (this.debug) console.log("Predict triggered.");
 
-    // send aggregate
+    // send aggregate to web client (deepstream.io)
     this.broadcastAggregate(this.getAggregate());
 
+    // make prediction with selected model
     var prediction = -99.9;
     if (this.model == "ma") {      
       prediction = this.predictMA();            
     } else if (this.model = "lr") {
-      var predictionVec = new qm.la.Vector([ this.emaPSPV1u.getFloat(), this.stdevPSPV1u.getFloat(), this.emaPSPV5u.getFloat() ]);      
+      // TODO: handle creation of prediction vector better, including previous values of aggregates (use Resampled store or cyclic buffer)
+      var predictionVec = new qm.la.Vector([ this.emaPSPV1u.getFloat(), this.stdevPSPV1u.getFloat(), this.emaPSPV5u.getFloat(), this.emaF11u.getFloat() ]);      
       prediction = this.predictLR(predictionVec);
       this.trainV.push(predictionVec);
     }
 
     // save prediction into buffer
     this.prediction.push(prediction);
-    // do we already have a measurement for prediction
-    // get error measures
-    var MSE = "N/A";
-    if (this.prediction.length > this.horizonsteps) {      
+    // evaluation
+    // do we already have a enough prediction to make evaluation step
+    if (this.prediction.length > this.horizonsteps) { 
+      // get error measures (TODO: MSE (RMSE) only for now, implement R2)     
       this.evaluation.add(this.prediction[0].value, this.emaPSPV1u.getFloat());
       var errors = this.evaluation.get();
       if (this.debug) console.log(errors);
@@ -192,6 +310,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
       
       // learn phase
       if (this.model == "lr") {
+        // delay for learn phase to avoid nonaccurate values of aggregate
         if (this.addcounter > 2000) {
           if (this.debug) console.log("Fitting LR", this.addcounter);
           var trainV = this.trainV[0];
@@ -202,13 +321,16 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
         }
       }
       
+      // shift prediction and training vector array
       this.prediction.shift();
       this.trainV.shift();
     }
 
+    // broadcast prediction to web interface (deepstream.io)
     this.broadcastPrediction(prediction);
   }
 
+  // moving average predictor
   this.predictMA = function() {
     var prediction = this.emaPSPV5u.getFloat();
     var unixts = this.emaPSPV5u.getTimestamp();
@@ -217,6 +339,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     return { "unixts": unixts, "value": prediction };
   }
 
+  // linear regression predictor
   this.predictLR = function(vec) {
     var unixts = this.emaPSPV5u.getTimestamp();
     unixts += this.unit * 20 * this.horizon;
@@ -224,29 +347,34 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     return { "unixts": unixts, "value": prediction };
   }
 
+  // get current aggregate of target value to broadcast to web client
   this.getAggregate = function() {
     var aggregate = this.emaPSPV1u.getFloat();
     var unixts = this.emaPSPV1u.getTimestamp();
     return { "unixts": unixts, "value": aggregate };
   }
 
+  // broadcast measurements to web client (deepstream.io)
   this.broadcast = function(rec) {
     dsclient.event.emit("spm/" + this.node_id, JSON.stringify(rec));
   }
 
+  // broadcast predictinos to web client (deepstream.io)
   this.broadcastPrediction = function(prediction) {
     dsclient.event.emit("prediction/" + this.model + "/" + this.horizonunit + "/" + this.node_id, JSON.stringify(prediction));
   }
 
+  // broadcast aggregates to web client (deepstream.io)
   this.broadcastAggregate = function(aggregate) {
     dsclient.event.emit("aggregate/" + this.model + "/" + this.horizonunit + "/" + this.node_id, JSON.stringify(aggregate));
   }
 }
 
-var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
+// var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "lr", unit: 1, frequency: 50, horizon: 250 }, true);
+/*
 var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
-var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
+var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
 
 var m2 = new STLFModeller("167002045410006104a9a000a00000f6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m3 = new STLFModeller("167002045410006104c7a000a00000fb", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
@@ -263,7 +391,7 @@ var m13 = new STLFModeller("167002045410006104ada000a00000ea", 50, { type: "ma",
 var m14 = new STLFModeller("167002045410006104afa000a00000e4", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m15 = new STLFModeller("167002045410006104c8a000a00000d6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 var m16 = new STLFModeller("167002045410006104cea000a00000c4", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-
+*/
 
 /*
 167002045410006104c2a000a00000e0
