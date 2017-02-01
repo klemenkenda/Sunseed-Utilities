@@ -10,24 +10,28 @@ var deepstream = require('deepstream.io-client-js')
 const dsclient = deepstream('atena.ijs.si:6020').login()
 
 // basic class for short term prediction modeller
-function STLFModeller(node_id, bridge_resample, model, debug) {
+function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   // constructor
   this.node_id = node_id;
   this.client = mqtt.connect('mqtt://10.122.248.42');
   this.bridge_resample = bridge_resample;
   this.debug = debug;
+  this.aggrConf = aggrConf;
   
   // model specific
+  this.modelConf = model;
   this.unit = model.unit;
   this.model = model.type;
   this.frequency = model.frequency;
   this.horizon = model.horizon;
+  this.bufferLength = model.bufferLength;
   this.prediction = [];
   this.trainV = [];
   this.evaluation = new StreamEvaluation(100);
 
   // record
   this.rawrecord;
+  this.aggregateV = [];   // table of aggregate vectors
 
   // calculate horizon in seconds
   this.horizonunit = this.horizon * this.unit / 50;
@@ -66,31 +70,10 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   this.msgcounter = -1;
   this.addcounter = -1;
   this.rawstore = this.base.store("Raw");
-
-  // automated generation of aggregates
-  var aggrDef = [
-    { "field": "psp_v", 
-      "tick": [ 
-        { "type": "ema", "interval": 0.2 * 1000, "initWindow": 1 * 1000 },
-        { "type": "winbuf", "winsize": 1000,
-          "sub": [
-            { "type": "variance" },
-            { "type": "ma" }
-          ]
-        },
-        { "type": "winbuf", "winsize": 5000,
-          "sub": [
-            { "type": "variance" },
-            { "type": "ma" },
-            { "type": "min" },
-            { "type": "max" }
-          ]
-        }
-      ] 
-    }
-  ]
   
   this.aggregate = [];
+
+  // end of constructor
     
   // create aggregates from definition
   this.createAggregates = function(def) {
@@ -106,7 +89,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
         "value": fieldName
       });
 
-      var tickName = fieldName+"|tick";
+      var tickName = fieldName + "|tick";
       this.aggregate[tickName] = aggregate;
 
       // handle tick sub aggregates
@@ -146,97 +129,34 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
               });
               var varianceName = fieldName + "|variance|" + winsize;
               this.aggregate[varianceName] = aggregate;
-            } else if (subtype = "ma") {
-              // TODO
-            } else if (subtype = "min") {
-              // TODO
-            } else if (subtype = "max") {
-              // TODO
+            } else if (subtype == "ma") {
+              var aggregate = this.rawstore.addStreamAggr({
+                type: 'ma',
+                inAggr: this.aggregate[winBufName]
+              });
+              var maName = fieldName + "|ma|" + winsize;
+              this.aggregate[maName] = aggregate;
+            } else if (subtype == "min") {
+              var aggregate = this.rawstore.addStreamAggr({
+                type: 'winBufMin',
+                inAggr: this.aggregate[winBufName]
+              });
+              var minName = fieldName + "|min|" + winsize;
+              this.aggregate[minName] = aggregate;
+            } else if (subtype == "max") {
+              var aggregate = this.rawstore.addStreamAggr({
+                type: 'winBufMax',
+                inAggr: this.aggregate[winBufName]
+              });
+              var maxName = fieldName + "|max|" + winsize;
+              this.aggregate[maxName] = aggregate;
             }
           }
         }
       }
     }
   }  
-
-  this.createAggregates(aggrDef);
-
-  // create stream agregates
-  // create tick and winbuff - base for all other aggregates
-  this.tickPSPV = this.rawstore.addStreamAggr({
-    type: "timeSeriesTick",
-    timestamp: "Time",
-    value: "psp_v"
-  });
-
-  this.tickF1 = this.rawstore.addStreamAggr({
-    type: "timeSeriesTick",
-    timestamp: "Time",
-    value: "f1"
-  });
-
-  this.winbufPSPV1u = this.rawstore.addStreamAggr({
-    type: "timeSeriesWinBufVector",
-    inAggr: this.tickPSPV,
-    winsize: 1 * 1000
-  });
-
-
-  this.winbuffPSPV15u = this.rawstore.addStreamAggr({
-    type: "timeSeriesWinBufVector",
-    inAggr: this.tickPSPV,
-    winsize: 15 * 1000
-  });
-
-  this.winbuffPSPV60u = this.rawstore.addStreamAggr({
-    type: "timeSeriesWinBufVector",
-    inAggr: this.tickPSPV,
-    winsize: 60 * 1000
-  });
-
-  this.winbuffPSPV600m = this.rawstore.addStreamAggr({
-    type: "timeSeriesWinBufVector",
-    inAggr: this.tickPSPV,
-    winsize: 10 * 60 * 1000
-  });
-
-  this.emaPSPV1u = this.rawstore.addStreamAggr({
-    type: "ema",
-    inAggr: this.tickPSPV,
-    emaType: "previous",
-    interval: 0.2 * 1000,
-    initWindow: 1 * 1000
-  });
-
-  this.emaF11u = this.rawstore.addStreamAggr({
-    type: "ema",
-    inAggr: this.tickF1,
-    emaType: "previous",
-    interval: 0.2 * 1000,
-    initWindow: 1 * 1000
-  });
-
-  this.emaPSPV5u = this.rawstore.addStreamAggr({
-    type: "ema",
-    inAggr: this.tickPSPV,
-    emaType: "previous",
-    interval: 5 * 1000,
-    initWindow: 5 * 1000
-  });
-
-  this.stdevPSPV1u = this.rawstore.addStreamAggr({
-    type: 'variance',
-    inAggr: this.winbufPSPV1u
-  });
-
-  // create stream predictor
-  this.lr = new qm.analytics.RecLinReg( {"dim": 4, "forgetFact": 0.9999 });  
-
-  // end of constructor
-
-
   
-
   // subscribing to MQTT data for a specific node (relevant for model)
   this.client.on('connect', function () {
     this.subscribe('spm/' + modeller.node_id);
@@ -267,10 +187,15 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
       th1: rec["th1"], th2: rec["th2"], th3: rec["th3"], psp_th: rec["psp_th"],
       f1: rec["f1"], f2: rec["f2"], f3: rec["f3"], f4: rec["f3"]
     });
-    // trigger stream aggregates bound to Raw store
+    // trigger stream aggregates bound to Raw store - first stage of resampling
     if (this.msgcounter % this.unit == 0) {
       this.addcounter++;
       this.rawstore.triggerOnAddCallbacks(this.rawRecord);
+      // create and remember aggregates
+      var aggregates = this.getAggregates();      
+      this.aggregateV.push(aggregates);
+      if (this.aggregateV.length > this.bufferLength) this.aggregateV.shift();
+
       // this is basically the resampler
       if (this.addcounter % this.frequency == 0) this.predict();
     };
@@ -279,6 +204,64 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     // if ((this.debug) && (this.msgcounter % 50 == 0)) console.log("Razlika: ", this.emaPSPV1u.getFloat() - this.tickPSPV.getFloat(), "Stdev(1s)", this.stdevPSPV1s.getFloat());
   }
 
+  // make vector of all agregates
+  this.getAggregates = function() {
+    var aggrVector = {};
+    for (key in this.aggregate) {
+      if (!((key.indexOf("tick") > 0) || (key.indexOf("winbuf") > 0))) {        
+        aggrVector[key] = this.aggregate[key].getFloat();
+      };
+    };
+    return aggrVector;
+  }
+
+  // return attribute vector for a particular model
+  this.getAttributes = function() {
+    var vec = [];
+
+    for (var i in this.modelConf.attributes) {
+      var offset = (this.aggregateV.length - 1) + this.modelConf.attributes[i].time;      
+      var attributes = this.modelConf.attributes[i].attributes;
+
+      for (var j in attributes) {
+        var type = attributes[j].type; // value, timeDiff
+        var attrName = attributes[j].name;
+        
+        if (type == "value") {
+          var value = this.aggregateV[offset][attrName];
+          vec.push(value);
+        } else if (type == "timeDiff") {
+          var offset2 = offset - attributes[j].interval;
+          var value = this.aggregateV[offset2][attrName] - this.aggregateV[offset][attrName];
+          vec.push(value);
+        }
+      }
+    }
+
+    return vec;
+  }
+
+  // count number of attributes
+  this.countAttributes = function() {
+    var attrN = 0;
+
+    for (var i in this.modelConf.attributes) {      
+      var attributes = this.modelConf.attributes[i].attributes;
+
+      for (var j in attributes) {
+        var type = attributes[j].type; // value, timeDiff
+                
+        if (type == "value") {
+          attrN++;
+        } else if (type == "timeDiff") {
+          attrN++;
+        }
+      }
+    }
+
+    return attrN;
+  }
+  
   // make prediction
   this.predict = function() {
     if (this.debug) console.log("Predict triggered.");
@@ -287,14 +270,17 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     this.broadcastAggregate(this.getAggregate());
 
     // make prediction with selected model
-    var prediction = -99.9;
+    var prediction = { "unixts": 0, "value": 0.0 };
     if (this.model == "ma") {      
       prediction = this.predictMA();            
     } else if (this.model = "lr") {
       // TODO: handle creation of prediction vector better, including previous values of aggregates (use Resampled store or cyclic buffer)
-      var predictionVec = new qm.la.Vector([ this.emaPSPV1u.getFloat(), this.stdevPSPV1u.getFloat(), this.emaPSPV5u.getFloat(), this.emaF11u.getFloat() ]);      
-      prediction = this.predictLR(predictionVec);
-      this.trainV.push(predictionVec);
+      if (this.aggregateV.length == this.bufferLength) {
+        var attributeVec = this.getAttributes();        
+        var predictionVec = new qm.la.Vector(attributeVec);      
+        prediction = this.predictLR(predictionVec);
+        this.trainV.push(predictionVec);
+      }      
     }
 
     // save prediction into buffer
@@ -302,8 +288,10 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
     // evaluation
     // do we already have a enough prediction to make evaluation step
     if (this.prediction.length > this.horizonsteps) { 
-      // get error measures (TODO: MSE (RMSE) only for now, implement R2)     
-      this.evaluation.add(this.prediction[0].value, this.emaPSPV1u.getFloat());
+      // get error measures (TODO: MSE (RMSE) only for now, implement R2)   
+      console.log("Prediction:", this.prediction, this.horizonsteps);
+      console.log("Value:", this.aggregate[this.modelConf.target].getFloat())
+      this.evaluation.add(this.prediction[0].value, this.aggregate[this.modelConf.target].getFloat());
       var errors = this.evaluation.get();
       if (this.debug) console.log(errors);
       prediction["mse"] = errors.mse;
@@ -311,10 +299,10 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
       // learn phase
       if (this.model == "lr") {
         // delay for learn phase to avoid nonaccurate values of aggregate
-        if (this.addcounter > 2000) {
+        if (this.aggregateV.length == this.bufferLength) {
           if (this.debug) console.log("Fitting LR", this.addcounter);
           var trainV = this.trainV[0];
-          var target = this.emaPSPV1u.getFloat();
+          var target = this.aggregate[this.modelConf.target].getFloat();
           this.lr.partialFit(trainV, target);
         } else {
           if (this.debug) console.log("Waiting for addcounter to fit LR.");
@@ -332,8 +320,10 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
 
   // moving average predictor
   this.predictMA = function() {
-    var prediction = this.emaPSPV5u.getFloat();
-    var unixts = this.emaPSPV5u.getTimestamp();
+    // var prediction = this.emaPSPV5u.getFloat();
+    // var unixts = this.emaPSPV5u.getTimestamp();
+    var prediction = this.aggregate[this.modelConf.source].getFloat();
+    var unixts = this.aggregate[this.modelConf.source].getTimestamp();
     // add horizon to the timestamp
     unixts += this.unit * 20 * this.horizon;
     return { "unixts": unixts, "value": prediction };
@@ -341,7 +331,7 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
 
   // linear regression predictor
   this.predictLR = function(vec) {
-    var unixts = this.emaPSPV5u.getTimestamp();
+    var unixts = this.aggregate["psp_v|ema|5000"].getTimestamp();
     unixts += this.unit * 20 * this.horizon;
     var prediction = this.lr.predict(vec);
     return { "unixts": unixts, "value": prediction };
@@ -349,8 +339,8 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
 
   // get current aggregate of target value to broadcast to web client
   this.getAggregate = function() {
-    var aggregate = this.emaPSPV1u.getFloat();
-    var unixts = this.emaPSPV1u.getTimestamp();
+    var aggregate = this.aggregate["psp_v|ma|1000"].getFloat();
+    var unixts = this.aggregate["psp_v|ma|1000"].getTimestamp();
     return { "unixts": unixts, "value": aggregate };
   }
 
@@ -368,10 +358,132 @@ function STLFModeller(node_id, bridge_resample, model, debug) {
   this.broadcastAggregate = function(aggregate) {
     dsclient.event.emit("aggregate/" + this.model + "/" + this.horizonunit + "/" + this.node_id, JSON.stringify(aggregate));
   }
+
+  // part of constructor
+
+  this.createAggregates(this.aggrConf);
+  
+  // get model dimensions
+  this.modelDim = this.countAttributes();
+
+  // create stream predictor
+  console.log(this.modelConf.forgetFact);
+  if (this.model == "lr") this.lr = new qm.analytics.RecLinReg( {"dim": this.modelDim, "forgetFact": this.modelConf.forgetFact });  
+
+  
+
 }
 
-// var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, { type: "lr", unit: 1, frequency: 50, horizon: 250 }, true);
+// 5s horizon definitions
+// aggregate definition
+var aggrDefLR5s = [
+  { "field": "psp_v", 
+    "tick": [ 
+      { "type": "ema", "interval": 0.2 * 1000, "initWindow": 1 * 1000 },
+      { "type": "ema", "interval": 5 * 1000, "initWindow": 5 * 1000 },
+      { "type": "ema", "interval": 60 * 1000, "initWindow": 60 * 1000 },
+      { "type": "winbuf", "winsize": 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+          { "type": "min" },
+          { "type": "max" }
+        ]
+      }
+    ] 
+  },
+  { "field": "f1", 
+    "tick": [ 
+      { "type": "ema", "interval": 0.2 * 1000, "initWindow": 1 * 1000 },
+      { "type": "ema", "interval": 5 * 1000, "initWindow": 5 * 1000 },
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [
+          { "type": "variance" },
+        ]
+      }
+    ]
+  }
+];
+
+var aggrDefMA5s = [
+  { "field": "psp_v", 
+    "tick": [       
+      { "type": "ema", "interval": 5 * 1000, "initWindow": 5 * 1000 },
+      { "type": "winbuf", "winsize": 1000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [
+          { "type": "ma" },
+        ]
+      }
+    ]
+  }
+];
+
+// model definition
+var modelConfLR5s = {
+  "type": "lr",               // linear regression
+  "unit": 1,                  // basic unit for updating aggregates (1 ... 20ms, 50 ... 1s)
+  "frequency": 50,            // frequency of updating the prediction (in units)
+  "horizon": 250,             // horizon for prediction (in units)
+  "dim": 13,                  // model dimensions (TODO: could be calcupated from attributes)
+  forgetFact: 0.99999,        // forget factor for recursive linear regression
+  bufferLength: 300,          // length of buffer of vectors
+  "target": "psp_v|ma|1000",
+  "attributes": [
+    { "time": 0,
+      "attributes": [
+        { type: "value", "name": "psp_v|ma|1000" },
+        { type: "value", "name": "psp_v|ma|5000" },
+        { type: "value", "name": "psp_v|ema|60000" },
+        { type: "value", "name": "f1|variance|5000" },
+        { type: "value", "name": "psp_v|variance|5000" },
+        { type: "value", "name": "psp_v|min|5000" },
+        { type: "value", "name": "psp_v|max|5000" },
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 },
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 250 }
+      ]
+    },
+    { "time": -50,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    },
+    { "time": -100,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    },
+    { "time": -150,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    },
+    { "time": -200,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    }
+  ]
+};
+
+var modelConfMA5s = { type: "ma", unit: 1, frequency: 50, horizon: 250, bufferLength: 0, target: 'psp_v|ma|1000', source: 'psp_v|ma|5000' };
+
+var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5s, aggrDefMA5s, false);
+var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, modelConfLR5s, aggrDefLR5s, true);
 /*
 var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
 var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
