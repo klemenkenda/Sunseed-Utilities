@@ -367,7 +367,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
 
   // save model
   this.save = function() {
-    var filePath = "./models/" + this.node_id + ".bin";
+    var filePath = "./models/" + this.node_id + "-" + this.horizonunit  + ".bin";
     var thisWeights = "./models/weights-" + this.node_id + ".txt";
     if (this.model == "lr") {
       // create an output stream object and save the model
@@ -381,7 +381,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
 
   // load model
   this.load = function() {
-    var filePath = "./models/" + this.node_id + ".bin";
+    var filePath = "./models/" + this.node_id + "-" + this.horizonunit + ".bin";
 
     if (fs.existsSync(filePath)){
       var fin = qm.fs.openRead(filePath);
@@ -870,6 +870,7 @@ var modelConfLR15m = {
 var modelConfMA15m = { type: "ma", unit: 50, frequency: 10, horizon: 15 * 60, bufferLength: 0, target: 'psp_v|ma|5000', source: 'psp_v|ma|900000' };
 
 
+/*
 // NODE 1
 // 5 sec
 var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5s, aggrDefMA5s, false);
@@ -883,43 +884,45 @@ var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR
 // 15 min
 var m1_31 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA15m, aggrDefMA15m, false);
 var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR15m, aggrDefLR15m, false);
-
-/*
-var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
-var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
-
-var m2 = new STLFModeller("167002045410006104a9a000a00000f6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m3 = new STLFModeller("167002045410006104c7a000a00000fb", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m4 = new STLFModeller("167002045410006104bba000a0000088", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m5 = new STLFModeller("167002045410006104c5a000a00000f5", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m6 = new STLFModeller("167002045410006104bfa000a0000094", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m7 = new STLFModeller("167002045410006104b3a000a00000b0", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m8 = new STLFModeller("167002045410006104b4a000a00000a5", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m9 = new STLFModeller("167002045410006104baa000a000008f", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m10 = new STLFModeller("167002045410006104aaa000a00000ff", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m11 = new STLFModeller("167002045410006104c0a000a00000ee", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m12 = new STLFModeller("167002045410006104c1a000a00000e9", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m13 = new STLFModeller("167002045410006104ada000a00000ea", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m14 = new STLFModeller("167002045410006104afa000a00000e4", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m15 = new STLFModeller("167002045410006104c8a000a00000d6", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
-var m16 = new STLFModeller("167002045410006104cea000a00000c4", 50, { type: "ma", unit: 1, frequency: 50, horizon: 250 }, false);
 */
 
-/*
-167002045410006104c2a000a00000e0
-167002045410006104a9a000a00000f6
-167002045410006104c7a000a00000fb
-167002045410006104bba000a0000088
-167002045410006104c5a000a00000f5
-167002045410006104bfa000a0000094
-167002045410006104b3a000a00000b0
-167002045410006104b4a000a00000a5
-167002045410006104baa000a000008f
-167002045410006104aaa000a00000ff
-167002045410006104c0a000a00000ee
-167002045410006104c1a000a00000e9
-167002045410006104ada000a00000ea
-167002045410006104afa000a00000e4
-167002045410006104c8a000a00000d6
-167002045410006104cea000a00000c4
-*/
+// generate models dynamically
+var nodes = [
+  '167002045410006104c2a000a00000e0',
+  '167002045410006104a9a000a00000f6',
+  '167002045410006104c7a000a00000fb',
+  '167002045410006104bba000a0000088',
+  '167002045410006104c5a000a00000f5',
+  '167002045410006104bfa000a0000094',
+  '167002045410006104b3a000a00000b0',
+  '167002045410006104b4a000a00000a5',
+  '167002045410006104baa000a000008f',
+  '167002045410006104aaa000a00000ff',
+  '167002045410006104c0a000a00000ee',
+  '167002045410006104c1a000a00000e9',
+  '167002045410006104ada000a00000ea',
+  '167002045410006104afa000a00000e4',
+  '167002045410006104c8a000a00000d6',
+  '167002045410006104cea000a00000c4'
+];
+
+var models = [];
+
+for (var i in nodes) {
+  var node = nodes[i];
+  // models[node + "11"] = new STLFModeller(node, -1, modelConfMA5s, aggrDefMA5s, false);
+  // 5 sec
+  models[node + "11"] = new STLFModeller(node, -1, modelConfMA5s, aggrDefMA5s, false);
+  models[node + "12"] = new STLFModeller(node, 50, modelConfLR5s, aggrDefLR5s, false);
+  // 1 min
+  models[node + "21"] = new STLFModeller(node, -1, modelConfMA1m, aggrDefMA1m, false);
+  models[node + "22"] = new STLFModeller(node, -1, modelConfLR1m, aggrDefLR1m, false);
+  // 5 min
+  models[node + "31"] = new STLFModeller(node, -1, modelConfMA5m, aggrDefMA5m, false);
+  models[node + "32"] = new STLFModeller(node, -1, modelConfLR5m, aggrDefLR5m, false);
+  // 15 min
+  models[node + "41"] = new STLFModeller(node, -1, modelConfMA15m, aggrDefMA15m, false);
+  models[node + "42"] = new STLFModeller(node, -1, modelConfLR15m, aggrDefLR15m, false);
+}
+
+
