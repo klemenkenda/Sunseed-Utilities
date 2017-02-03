@@ -27,7 +27,8 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   this.bufferLength = model.bufferLength;
   this.prediction = [];
   this.trainV = [];
-  this.evaluation = new StreamEvaluation(100);
+  var evaluationSize = Math.floor(3 * this.horizon / (this.frequency));  
+  this.evaluation = new StreamEvaluation(evaluationSize);
 
   // record
   this.rawrecord;
@@ -37,7 +38,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   this.horizonunit = this.horizon * this.unit / 50;  
   // calculate horizon in steps
   this.horizonsteps = this.horizon / this.frequency;
-  
+
   // create base for each model
   this.dbPath = "./db/" + this.node_id;
   // create directory if it does not exits
