@@ -265,7 +265,8 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   
   // make prediction
   this.predict = function() {
-    if (this.debug) console.log("Predict triggered.");
+    // if (this.debug) // this is informative, so we know, our service is alive
+    console.log("Predict triggered: " + this.node_id + " : " + this.model);
 
     // send aggregate to web client (deepstream.io)
     this.broadcastAggregate(this.getAggregate());
