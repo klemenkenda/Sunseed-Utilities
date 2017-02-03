@@ -34,7 +34,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   this.aggregateV = [];   // table of aggregate vectors
 
   // calculate horizon in seconds
-  this.horizonunit = this.horizon * this.unit / 50;
+  this.horizonunit = this.horizon * this.unit / 50;  
   // calculate horizon in steps
   this.horizonsteps = this.horizon / this.frequency;
   
@@ -372,8 +372,12 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
 
 }
 
+
+// --------------------------------------------------------------------------
 // 5s horizon definitions
 // aggregate definition
+// --------------------------------------------------------------------------
+
 var aggrDefLR5s = [
   { "field": "psp_v", 
     "tick": [ 
@@ -479,8 +483,128 @@ var modelConfLR5s = {
 
 var modelConfMA5s = { type: "ma", unit: 1, frequency: 50, horizon: 250, bufferLength: 0, target: 'psp_v|ma|1000', source: 'psp_v|ma|5000' };
 
+
+
+// --------------------------------------------------------------------------
+// 1min horizon definitions
+// aggregate definition
+// --------------------------------------------------------------------------
+
+var aggrDefLR1m = [
+  { "field": "psp_v", 
+    "tick": [       
+      { "type": "winbuf", "winsize": 1000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 1 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+          { "type": "min" },
+          { "type": "max" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 5 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+          { "type": "min" },
+          { "type": "max" }
+        ]
+      }
+    ] 
+  },
+  { "field": "f1", 
+    "tick": [       
+      { "type": "winbuf", "winsize": 60000,
+        "sub": [
+          { "type": "ma" },
+          { "type": "variance" }
+        ]
+      }
+    ]
+  }
+];
+
+var aggrDefMA1m = [
+  { "field": "psp_v", 
+    "tick": [             
+      { "type": "winbuf", "winsize": 1000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 60000,
+        "sub": [
+          { "type": "ma" },
+        ]
+      }
+    ]
+  }
+];
+
+// model definition
+var modelConfLR1m = {
+  type: "lr",               // linear regression
+  unit: 50,                 // basic unit for updating aggregates (1 ... 20ms, 50 ... 1s)
+  frequency: 10,            // frequency of updating the prediction (in units)
+  horizon: 1 * 60,              // horizon for prediction (in units)
+  forgetFact: 1.0,          // forget factor for recursive linear regression
+  bufferLength: 300,        // length of buffer of vectors
+  target: "psp_v|ma|1000",
+  attributes: [
+    { "time": 0,
+      "attributes": [
+        { type: "value", "name": "psp_v|ma|1000" },
+        { type: "value", "name": "psp_v|ma|5000" },
+        { type: "value", "name": "psp_v|ema|60000" },
+        { type: "value", "name": "f1|variance|5000" },
+        { type: "value", "name": "psp_v|variance|5000" },
+        { type: "value", "name": "psp_v|min|5000" },
+        { type: "value", "name": "psp_v|max|5000" },
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 },
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 250 }
+      ]
+    },
+    { "time": -50,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    },
+    { "time": -100,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    },
+    { "time": -150,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    },
+    { "time": -200,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|1000"},
+        { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
+      ]
+    }
+  ]
+};
+
+var modelConfMA1m = { type: "ma", unit: 50, frequency: 10, horizon: 1 * 60, bufferLength: 0, target: 'psp_v|ma|1000', source: 'psp_v|ma|60000' };
+
+
+// NODE 1
+// 5 sec
 var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5s, aggrDefMA5s, false);
 var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, modelConfLR5s, aggrDefLR5s, true);
+// 1 min
+var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA1m, aggrDefMA1m, false);
+var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", 50, modelConfLR1m, aggrDefLR1m, true);
 /*
 var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
 var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
