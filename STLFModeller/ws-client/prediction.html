@@ -64,11 +64,13 @@
         $("#rmse").text(rmse.toFixed(4));
         
         var len = 25;
-        var point = [data.unixts, data.value ];
-        
-        var series1 = chartv.series[1],
-        shift = series1.data.length > len; 
-        series1.addPoint(point, true, shift);
+        if (data.unixts > 0 ) {
+            var point = [data.unixts, data.value ];
+            
+            var series1 = chartv.series[1],
+            shift = series1.data.length > len; 
+            series1.addPoint(point, true, shift);
+        }
 	}
 
     function baselineCallback(dataStr) {
