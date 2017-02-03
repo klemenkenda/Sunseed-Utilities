@@ -194,7 +194,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
       // create and remember aggregates
       var aggregates = this.getAggregates();     
       this.aggregateV.push(aggregates);
-      console.log("Rows: " + this.aggregateV.length);
+      if (debug) console.log("Rows: " + this.aggregateV.length);
       if (this.aggregateV.length > this.bufferLength) this.aggregateV.shift();
 
       // this is basically the resampler
@@ -292,8 +292,8 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
     // do we already have a enough prediction to make evaluation step
     if (this.prediction.length > this.horizonsteps) { 
       // get error measures (TODO: MSE (RMSE) only for now, implement R2)   
-      console.log("Prediction:", this.prediction, this.horizonsteps);
-      console.log("Value:", this.aggregate[this.modelConf.target].getFloat())
+      if (this.debug) console.log("Prediction:", this.prediction, this.horizonsteps);
+      if (this.debug) console.log("Value:", this.aggregate[this.modelConf.target].getFloat())
       this.evaluation.add(this.prediction[0].value, this.aggregate[this.modelConf.target].getFloat());
       var errors = this.evaluation.get();
       if (this.debug) console.log(errors);
@@ -334,7 +334,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
 
   // linear regression predictor
   this.predictLR = function(vec) {
-    var unixts = this.aggregate["psp_v|ma|1000"].getTimestamp();
+    var unixts = this.aggregate[this.modelConf.target].getTimestamp();
     unixts += this.unit * 20 * this.horizon;
     var prediction = this.lr.predict(vec);
     return { "unixts": unixts, "value": prediction };
@@ -342,8 +342,8 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
 
   // get current aggregate of target value to broadcast to web client
   this.getAggregate = function() {
-    var aggregate = this.aggregate["psp_v|ma|1000"].getFloat();
-    var unixts = this.aggregate["psp_v|ma|1000"].getTimestamp();
+    var aggregate = this.aggregate[this.modelConf.target].getFloat();
+    var unixts = this.aggregate[this.modelConf.target].getTimestamp();
     return { "unixts": unixts, "value": aggregate };
   }
 
@@ -601,13 +601,138 @@ var modelConfLR1m = {
 var modelConfMA1m = { type: "ma", unit: 50, frequency: 10, horizon: 1 * 60, bufferLength: 0, target: 'psp_v|ma|1000', source: 'psp_v|ma|60000' };
 
 
+
+// --------------------------------------------------------------------------
+// 1min horizon definitions
+// aggregate definition
+// --------------------------------------------------------------------------
+
+var aggrDefLR5m = [
+  { "field": "psp_v", 
+    "tick": [       
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 1 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+        ]
+      },
+      { "type": "winbuf", "winsize": 5 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+          { "type": "min" },
+          { "type": "max" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 15 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+        ]
+      }
+    ] 
+  },
+  { "field": "f1", 
+    "tick": [       
+      { "type": "winbuf", "winsize": 5 * 60 * 1000,
+        "sub": [
+          { "type": "ma" },
+          { "type": "variance" }
+        ]
+      }
+    ]
+  }
+];
+
+var aggrDefMA5m = [
+  { "field": "psp_v", 
+    "tick": [             
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 5 * 60 * 1000,
+        "sub": [
+          { "type": "ma" },
+        ]
+      }
+    ]
+  }
+];
+
+// model definition
+var modelConfLR5m = {
+  type: "lr",               // linear regression
+  unit: 50,                 // basic unit for updating aggregates (1 ... 20ms, 50 ... 1s)
+  frequency: 10,            // frequency of updating the prediction (in units)
+  horizon: 5 * 60,          // horizon for prediction
+  forgetFact: 1.0,          // forget factor for recursive linear regression
+  bufferLength: 1510,       // length of buffer of vectors (by units)
+  target: "psp_v|ma|5000",
+  attributes: [
+    { "time": 0,            // in terms of units
+      "attributes": [
+        { type: "value", "name": "psp_v|ma|5000" },
+        { type: "value", "name": "psp_v|ma|300000" },
+        { type: "value", "name": "psp_v|ma|900000" },
+        { type: "value", "name": "f1|variance|300000" },
+        { type: "value", "name": "psp_v|variance|300000" },
+        { type: "value", "name": "psp_v|min|300000" },
+        { type: "value", "name": "psp_v|max|300000" },
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 60 },  // interval is also in term of units
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
+      ]
+    },
+    { "time": -300,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|60000"},
+        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+      ]
+    },    
+    { "time": -600,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|60000"},
+        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+      ]
+    },
+    { "time": -900,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|60000"},
+        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+      ]
+    },
+    { "time": -1200,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|60000"},
+        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+      ]
+    }    
+  ]
+};
+
+var modelConfMA5m = { type: "ma", unit: 50, frequency: 10, horizon: 5 * 60, bufferLength: 0, target: 'psp_v|ma|5000', source: 'psp_v|ma|300000' };
+
+
 // NODE 1
 // 5 sec
-// var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5s, aggrDefMA5s, false);
-// var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, modelConfLR5s, aggrDefLR5s, false);
+var m1_11 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5s, aggrDefMA5s, false);
+var m1_12 = new STLFModeller("167002045410006104c2a000a00000e0", 50, modelConfLR5s, aggrDefLR5s, false);
 // 1 min
-// var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA1m, aggrDefMA1m, false);
-var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR1m, aggrDefLR1m, true);
+var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA1m, aggrDefMA1m, false);
+var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR1m, aggrDefLR1m, false);
+// 5 min
+var m1_31 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5m, aggrDefMA5m, false);
+var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR5m, aggrDefLR5m, true);
+// 15 min
+//var m1_31 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5m, aggrDefMA5m, false);
+//var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR5m, aggrDefLR5m, true);
+
 /*
 var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
 var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "lr", unit: 50, frequency: 10, horizon: 60 }, false);
