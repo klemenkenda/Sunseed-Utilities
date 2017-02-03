@@ -194,7 +194,7 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
       // create and remember aggregates
       var aggregates = this.getAggregates();     
       this.aggregateV.push(aggregates);
-      if (debug) console.log("Rows: " + this.aggregateV.length);
+      if (this.debug) console.log("Rows: " + this.aggregateV.length);
       if (this.aggregateV.length > this.bufferLength) this.aggregateV.shift();
 
       // this is basically the resampler
@@ -278,10 +278,10 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
       // creation of prediction vector
       if (this.aggregateV.length == this.bufferLength) {
         var attributeVec = this.getAttributes();   
-        console.log(attributeVec);
+        if (this.debug) console.log(attributeVec);
         var predictionVec = new qm.la.Vector(attributeVec);      
         prediction = this.predictLR(predictionVec);
-        console.log("Finished prediction.");
+        if (this.debug) console.log("Finished prediction.");
         this.trainV.push(predictionVec);
       }      
     }
@@ -307,6 +307,8 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
           var trainV = this.trainV[0];
           var target = this.aggregate[this.modelConf.target].getFloat();
           this.lr.partialFit(trainV, target);
+          // save the model
+          this.save();
         } else {
           if (this.debug) console.log("Waiting for buffer (for calculating historic features) to get filled (" + this.aggregateV.length + "/" + this.bufferLength + ").");
         }
@@ -362,6 +364,33 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
     dsclient.event.emit("aggregate/" + this.model + "/" + this.horizonunit + "/" + this.node_id, JSON.stringify(aggregate));
   }
 
+  // save model
+  this.save = function() {
+    var filePath = "./models/" + this.node_id + ".bin";
+    var thisWeights = "./models/weights-" + this.node_id + ".txt";
+    if (this.model == "lr") {
+      // create an output stream object and save the model
+      var fout = qm.fs.openWrite(filePath);
+      this.lr.save(fout);
+      fout.close();
+
+      // TODO: weights      
+    }
+  }
+
+  // load model
+  this.load = function() {
+    var filePath = "./models/" + this.node_id + ".bin";
+
+    if (fs.existsSync(filePath)){
+      var fin = qm.fs.openRead(filePath);
+      this.lr = new qm.analytics.RecLinReg(fin);  
+      return true;
+    }
+
+    return false;    
+  }
+
   // part of constructor
 
   this.createAggregates(this.aggrConf);
@@ -369,10 +398,11 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   // get model dimensions
   this.modelDim = this.countAttributes();
 
-  // create stream predictor
-  console.log(this.modelConf.forgetFact);
-  if (this.model == "lr") this.lr = new qm.analytics.RecLinReg( {"dim": this.modelDim, "forgetFact": this.modelConf.forgetFact });  
-
+  // create stream predictor  
+  if (this.model == "lr") {
+    // try to load, otherwise create new
+    if (!this.load()) this.lr = new qm.analytics.RecLinReg( {"dim": this.modelDim, "forgetFact": this.modelConf.forgetFact });  
+  }
 }
 
 
@@ -568,7 +598,7 @@ var modelConfLR1m = {
         { type: "value", "name": "psp_v|min|60000" },
         { type: "value", "name": "psp_v|max|60000" },
         { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 60 },  // interval is also in term of units
-        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
       ]
     },
     { "time": -60,
@@ -603,7 +633,7 @@ var modelConfMA1m = { type: "ma", unit: 50, frequency: 10, horizon: 1 * 60, buff
 
 
 // --------------------------------------------------------------------------
-// 1min horizon definitions
+// 5min horizon definitions
 // aggregate definition
 // --------------------------------------------------------------------------
 
@@ -686,37 +716,157 @@ var modelConfLR5m = {
         { type: "value", "name": "psp_v|min|300000" },
         { type: "value", "name": "psp_v|max|300000" },
         { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 60 },  // interval is also in term of units
-        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
+        { type: "timeDiff", "name": "psp_v|ma|900000", "interval": 300 }
       ]
     },
     { "time": -300,
       "attributes" : [
-        { type: "value", name: "psp_v|ma|60000"},
-        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+        { type: "value", name: "psp_v|ma|300000"},
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
       ]
     },    
     { "time": -600,
       "attributes" : [
-        { type: "value", name: "psp_v|ma|60000"},
-        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+        { type: "value", name: "psp_v|ma|300000"},
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
       ]
     },
     { "time": -900,
       "attributes" : [
-        { type: "value", name: "psp_v|ma|60000"},
-        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+        { type: "value", name: "psp_v|ma|300000"},
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
       ]
     },
     { "time": -1200,
       "attributes" : [
-        { type: "value", name: "psp_v|ma|60000"},
-        { type: "timeDiff", "name": "psp_v|ma|60000", "interval": 300 }
+        { type: "value", name: "psp_v|ma|300000"},
+        { type: "timeDiff", "name": "psp_v|ma|300000", "interval": 300 }
       ]
     }    
   ]
 };
 
 var modelConfMA5m = { type: "ma", unit: 50, frequency: 10, horizon: 5 * 60, bufferLength: 0, target: 'psp_v|ma|5000', source: 'psp_v|ma|300000' };
+
+
+
+
+// --------------------------------------------------------------------------
+// 15min horizon definitions
+// aggregate definition
+// --------------------------------------------------------------------------
+
+var aggrDefLR15m = [
+  { "field": "psp_v", 
+    "tick": [       
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 5 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 15 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+          { "type": "min" },
+          { "type": "max" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 60 * 60 * 1000,
+        "sub": [
+          { "type": "variance" },
+          { "type": "ma" },
+        ]
+      },
+    ] 
+  },
+  { "field": "f1", 
+    "tick": [       
+      { "type": "winbuf", "winsize": 15 * 60 * 1000,
+        "sub": [
+          { "type": "ma" },
+          { "type": "variance" }
+        ]
+      }
+    ]
+  }
+];
+
+var aggrDefMA15m = [
+  { "field": "psp_v", 
+    "tick": [             
+      { "type": "winbuf", "winsize": 5000,
+        "sub": [          
+          { "type": "ma" }
+        ]
+      },
+      { "type": "winbuf", "winsize": 15 * 60 * 1000,
+        "sub": [
+          { "type": "ma" },
+        ]
+      }
+    ]
+  }
+];
+
+// model definition
+var modelConfLR15m = {
+  type: "lr",               // linear regression
+  unit: 50,                 // basic unit for updating aggregates (1 ... 20ms, 50 ... 1s)
+  frequency: 10,            // frequency of updating the prediction (in units)
+  horizon: 15 * 60,         // horizon for prediction
+  forgetFact: 1.0,          // forget factor for recursive linear regression
+  bufferLength: 4510,       // length of buffer of vectors (by units)
+  target: "psp_v|ma|5000",
+  attributes: [
+    { "time": 0,            // in terms of units
+      "attributes": [
+        { type: "value", "name": "psp_v|ma|5000" },
+        { type: "value", "name": "psp_v|ma|300000" },
+        { type: "value", "name": "psp_v|ma|900000" },
+        { type: "value", "name": "psp_v|ma|3600000" },
+        { type: "value", "name": "f1|variance|900000" },
+        { type: "value", "name": "psp_v|variance|900000" },
+        { type: "value", "name": "psp_v|min|900000" },
+        { type: "value", "name": "psp_v|max|900000" },
+        { type: "timeDiff", "name": "psp_v|ma|900000", "interval": 90 },  // interval is also in term of units
+        { type: "timeDiff", "name": "psp_v|ma|3600000", "interval": 3600 }
+      ]
+    },
+    { "time": -900,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|900000"},
+        { type: "timeDiff", "name": "psp_v|ma|900000", "interval": 900 }
+      ]
+    },    
+    { "time": -1800,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|900000"},
+        { type: "timeDiff", "name": "psp_v|ma|900000", "interval": 900 }
+      ]
+    },
+    { "time": -2700,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|900000"},
+        { type: "timeDiff", "name": "psp_v|ma|900000", "interval": 900 }
+      ]
+    },
+    { "time": -3600,
+      "attributes" : [
+        { type: "value", name: "psp_v|ma|900000"},
+        { type: "timeDiff", "name": "psp_v|ma|900000", "interval": 900 }
+      ]
+    }    
+  ]
+};
+
+var modelConfMA15m = { type: "ma", unit: 50, frequency: 10, horizon: 15 * 60, bufferLength: 0, target: 'psp_v|ma|5000', source: 'psp_v|ma|900000' };
 
 
 // NODE 1
@@ -728,10 +878,10 @@ var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA
 var m1_22 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR1m, aggrDefLR1m, false);
 // 5 min
 var m1_31 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5m, aggrDefMA5m, false);
-var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR5m, aggrDefLR5m, true);
+var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR5m, aggrDefLR5m, false);
 // 15 min
-//var m1_31 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA5m, aggrDefMA5m, false);
-//var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR5m, aggrDefLR5m, true);
+var m1_31 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfMA15m, aggrDefMA15m, false);
+var m1_32 = new STLFModeller("167002045410006104c2a000a00000e0", -1, modelConfLR15m, aggrDefLR15m, false);
 
 /*
 var m1_21 = new STLFModeller("167002045410006104c2a000a00000e0", -1, { type: "ma", unit: 50, frequency: 10, horizon: 60 }, false);
