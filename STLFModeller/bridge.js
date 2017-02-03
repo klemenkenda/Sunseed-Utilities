@@ -370,8 +370,6 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
   console.log(this.modelConf.forgetFact);
   if (this.model == "lr") this.lr = new qm.analytics.RecLinReg( {"dim": this.modelDim, "forgetFact": this.modelConf.forgetFact });  
 
-  
-
 }
 
 // 5s horizon definitions
@@ -431,15 +429,14 @@ var aggrDefMA5s = [
 
 // model definition
 var modelConfLR5s = {
-  "type": "lr",               // linear regression
-  "unit": 1,                  // basic unit for updating aggregates (1 ... 20ms, 50 ... 1s)
-  "frequency": 50,            // frequency of updating the prediction (in units)
-  "horizon": 250,             // horizon for prediction (in units)
-  "dim": 13,                  // model dimensions (TODO: could be calcupated from attributes)
-  forgetFact: 0.99999,        // forget factor for recursive linear regression
+  type: "lr",               // linear regression
+  unit: 1,                  // basic unit for updating aggregates (1 ... 20ms, 50 ... 1s)
+  frequency: 50,            // frequency of updating the prediction (in units)
+  horizon: 250,             // horizon for prediction (in units)
+  forgetFact: 1.0,        // forget factor for recursive linear regression
   bufferLength: 300,          // length of buffer of vectors
-  "target": "psp_v|ma|1000",
-  "attributes": [
+  target: "psp_v|ma|1000",
+  attributes: [
     { "time": 0,
       "attributes": [
         { type: "value", "name": "psp_v|ma|1000" },
