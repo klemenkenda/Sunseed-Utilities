@@ -368,15 +368,17 @@ function STLFModeller(node_id, bridge_resample, model, aggrConf, debug) {
 
   // save model
   this.save = function() {
-    var filePath = "./models/" + this.node_id + "-" + this.horizonunit  + ".bin";
-    var thisWeights = "./models/weights-" + this.node_id + ".txt";
+    var filePath = "./models/" + this.node_id + "-" + this.horizonunit + ".bin";
+    var thisWeights = "./models/weights-" + this.node_id + "-" + this.horizonunit + ".txt";
     if (this.model == "lr") {
       // create an output stream object and save the model
       var fout = qm.fs.openWrite(filePath);
       this.lr.save(fout);
       fout.close();
 
-      // TODO: weights      
+      // weights  
+      var weights = this.lr.weights;
+      var foutw = fs.writeFile(thisWeights, weights.toString());
     }
   }
 
@@ -477,8 +479,7 @@ var modelConfLR5s = {
   target: "psp_v|ma|1000",
   attributes: [
     { "time": 0,
-      "attributes": [
-        { type: "value", "name": "psp_v|ma|1000" },
+      "attributes": [        
         { type: "value", "name": "psp_v|ma|5000" },
         { type: "value", "name": "psp_v|ema|60000" },
         { type: "value", "name": "f1|variance|5000" },
@@ -490,26 +491,22 @@ var modelConfLR5s = {
       ]
     },
     { "time": -50,
-      "attributes" : [
-        { type: "value", name: "psp_v|ma|1000"},
+      "attributes" : [        
         { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
       ]
     },
     { "time": -100,
-      "attributes" : [
-        { type: "value", name: "psp_v|ma|1000"},
+      "attributes" : [        
         { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
       ]
     },
     { "time": -150,
-      "attributes" : [
-        { type: "value", name: "psp_v|ma|1000"},
+      "attributes" : [        
         { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
       ]
     },
     { "time": -200,
-      "attributes" : [
-        { type: "value", name: "psp_v|ma|1000"},
+      "attributes" : [        
         { type: "timeDiff", "name": "psp_v|ma|1000", "interval": 50 }
       ]
     }
@@ -591,8 +588,7 @@ var modelConfLR1m = {
   target: "psp_v|ma|1000",
   attributes: [
     { "time": 0,            // in terms of units
-      "attributes": [
-        { type: "value", "name": "psp_v|ma|1000" },
+      "attributes": [        
         { type: "value", "name": "psp_v|ma|60000" },
         { type: "value", "name": "psp_v|ma|300000" },
         { type: "value", "name": "f1|variance|60000" },
@@ -709,8 +705,7 @@ var modelConfLR5m = {
   target: "psp_v|ma|5000",
   attributes: [
     { "time": 0,            // in terms of units
-      "attributes": [
-        { type: "value", "name": "psp_v|ma|5000" },
+      "attributes": [        
         { type: "value", "name": "psp_v|ma|300000" },
         { type: "value", "name": "psp_v|ma|900000" },
         { type: "value", "name": "f1|variance|300000" },
@@ -828,8 +823,7 @@ var modelConfLR15m = {
   target: "psp_v|ma|5000",
   attributes: [
     { "time": 0,            // in terms of units
-      "attributes": [
-        { type: "value", "name": "psp_v|ma|5000" },
+      "attributes": [        
         { type: "value", "name": "psp_v|ma|300000" },
         { type: "value", "name": "psp_v|ma|900000" },
         { type: "value", "name": "psp_v|ma|3600000" },
