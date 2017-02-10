@@ -32,6 +32,8 @@
 
 
 	var client = deepstream('atena.ijs.si:6020').login();
+    var bufferLen = 25; 
+    var aggregateLen = 20;
 	// handle node name
     $(document).ready(function() {
         nodeName = $.urlParam("node");
@@ -42,6 +44,9 @@
 
         if (horizon > 60) horizonStr = (horizon / 60) + " min";
         else horizonStr = horizon + " sec";
+
+        if (horizon == "300") { bufferLen = 90; aggregateLen = 60; }
+        if (horizon == "900") { bufferLen = 270; aggregateLen = 180; }
 
         $("#node_name").text(nodeName);    
         $("#horizon_str").text(horizonStr);
@@ -63,7 +68,7 @@
         rmse = Math.sqrt(mse);        
         $("#rmse").text(rmse.toFixed(4));
         
-        var len = 25;
+        var len = bufferLen;
         if (data.unixts > 0 ) {
             var point = [data.unixts, data.value ];
             
@@ -81,7 +86,7 @@
         rmse = Math.sqrt(mse);        
         $("#rmse_base").text(rmse.toFixed(4));
         
-        var len = 25;
+        var len = bufferLen;
         var point = [data.unixts, data.value ];
         
         var series1 = chartv.series[2],
@@ -93,7 +98,7 @@
         console.log(dataStr);
 	    data = JSON.parse(dataStr);
         
-        var len = 20;
+        var len = aggregateLen;
         var point = [data.unixts, data.value ];
         
         var series1 = chartv.series[0],
