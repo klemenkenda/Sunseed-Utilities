@@ -903,21 +903,31 @@ var nodes = [
 
 var models = [];
 
+var param = [];
+
+// process input parameters
+process.argv.forEach(function (val, index, array) {
+  param[index] = val;
+});
+
 for (var i in nodes) {
   var node = nodes[i];
-  // models[node + "11"] = new STLFModeller(node, -1, modelConfMA5s, aggrDefMA5s, false);
-  // 5 sec
-  models[node + "11"] = new STLFModeller(node, -1, modelConfMA5s, aggrDefMA5s, false);
-  models[node + "12"] = new STLFModeller(node, 50, modelConfLR5s, aggrDefLR5s, false);
-  // 1 min
-  models[node + "21"] = new STLFModeller(node, -1, modelConfMA1m, aggrDefMA1m, false);
-  models[node + "22"] = new STLFModeller(node, -1, modelConfLR1m, aggrDefLR1m, false);
-  // 5 min
-  models[node + "31"] = new STLFModeller(node, -1, modelConfMA5m, aggrDefMA5m, false);
-  models[node + "32"] = new STLFModeller(node, -1, modelConfLR5m, aggrDefLR5m, false);
-  // 15 min
-  models[node + "41"] = new STLFModeller(node, -1, modelConfMA15m, aggrDefMA15m, false);
-  models[node + "42"] = new STLFModeller(node, -1, modelConfLR15m, aggrDefLR15m, false);
+  // models[node + "11"] = new STLFModeller(node, -1, modelConfMA5s, aggrDefMA5s, false);  
+  if (param[2] == "5s") {
+    // 5 sec
+    models[node + "11"] = new STLFModeller(node, -1, modelConfMA5s, aggrDefMA5s, false);
+    models[node + "12"] = new STLFModeller(node, 50, modelConfLR5s, aggrDefLR5s, false);
+  } else {
+    // 1 min
+    models[node + "21"] = new STLFModeller(node, -1, modelConfMA1m, aggrDefMA1m, false);
+    models[node + "22"] = new STLFModeller(node, -1, modelConfLR1m, aggrDefLR1m, false);
+    // 5 min
+    models[node + "31"] = new STLFModeller(node, -1, modelConfMA5m, aggrDefMA5m, false);
+    models[node + "32"] = new STLFModeller(node, -1, modelConfLR5m, aggrDefLR5m, false);
+    // 15 min
+    models[node + "41"] = new STLFModeller(node, -1, modelConfMA15m, aggrDefMA15m, false);
+    models[node + "42"] = new STLFModeller(node, -1, modelConfLR15m, aggrDefLR15m, false);
+  }
 }
 
 
