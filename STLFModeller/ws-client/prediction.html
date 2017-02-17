@@ -19,6 +19,8 @@
     // global
     var horizon;
     var nodeName;
+    var anyData = false;
+    var anyDataError = false;
 
     $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -32,6 +34,29 @@
 
 
 	var client = deepstream('atena.ijs.si:6020').login();
+    var clientError = false;
+    // WS client error
+    client.on('error', ( error, event, topic ) => {
+        console.log("Here", error, event, topic);
+        if (!clientError) {
+            var message = "";
+            if (event == "ACK_TIMEOUT") message = '; usually this means that you have to check your firewall settings (access to port 6020 at our server';
+            $("#messages").prepend('<div class="alert alert-danger alert-dismissible" role="alert" data-dismiss="alert" aria-label="Close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>WebSockets ' + event + "</strong>: " + error + message + ').</div>');
+            clientError = true;
+        }
+    });
+
+    // no data comming (?)
+    var checkDataTimeout = setInterval(function() {
+        if ((anyData == false) && (clientError == false) && (anyDataError == false)) {
+            $("#messages").prepend('<div class="alert alert-warning alert-dismissible" role="alert" data-dismiss="alert" aria-label="Close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>WebSockets</strong>: Still waiting for the data from WAMS. It my take up to 10 seconds to receive first predictions/measurements. Otherwise this might mean that the node is currently offline or that we can not handle data load.</div>');
+            anyDataError = true;
+        } else if (anyData == true) {
+            $("#messages").html("");
+            clearInterval(checkDataTimeout);
+        }
+    }, 2000);
+
     var bufferLen = 25; 
     var aggregateLen = 20;
 	// handle node name
@@ -61,6 +86,7 @@
 	var chartv; // global
     
 	function predictionCallback(dataStr) {
+        anyData = true;
         console.log(dataStr);
 	    data = JSON.parse(dataStr);
 
@@ -79,6 +105,7 @@
 	}
 
     function baselineCallback(dataStr) {
+        anyData = true;
         console.log(dataStr);
 	    data = JSON.parse(dataStr);
 
@@ -95,6 +122,8 @@
 	}
 
     function aggregateCallback(dataStr) {
+        anyData = true;
+
         console.log(dataStr);
 	    data = JSON.parse(dataStr);
         
@@ -233,7 +262,7 @@
     </script>
     <div class="container">        
         <h2>Live predictions (<span id="horizon_str"></span>)</h1>      
-
+        <div id="messages"></div>
         <ul class="nav nav-pills" role="tablist">            
             <li role="presentation" class="active"><a href="#">RMSE <span class="badge" id="rmse">0.00000</span></a></li>
             <li role="presentation" class="active"><a href="#" style="background-color: darkorange !important">RMSE (baseline) <span class="badge" id="rmse_base">0.00000</span></a></li>

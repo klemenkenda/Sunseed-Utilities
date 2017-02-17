@@ -18,6 +18,9 @@
     <script type="text/javascript">
     var horizon;
     var nodeName;
+    var clientError = false;
+    var anyData = false;
+    var anyDataError = false;
 
     $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -31,6 +34,29 @@
 
 
 	var client = deepstream('atena.ijs.si:6020').login();
+
+    // WS client error
+    client.on('error', ( error, event, topic ) => {
+        console.log("Here", error, event, topic);
+        if (!clientError) {
+            var message = "";
+            if (event == "ACK_TIMEOUT") message = '; usually this means that you have to check your firewall settings (access to port 6020 at our server';
+            $("#messages").prepend('<div class="alert alert-danger alert-dismissible" role="alert" data-dismiss="alert" aria-label="Close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>WebSockets ' + event + "</strong>: " + error + message + ').</div>');
+            clientError = true;
+        }
+    });
+
+    // no data comming (?)
+    var checkDataTimeout = setInterval(function() {
+        if ((anyData == false) && (clientError == false) && (anyDataError == false)) {
+            $("#messages").prepend('<div class="alert alert-warning alert-dismissible" role="alert" data-dismiss="alert" aria-label="Close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>WebSockets</strong>: Still waiting for the data from WAMS, this might mean that the node is currently offline.</div>');
+            anyDataError = true;
+        } else if (anyData == true) {
+            $("#messages").html("");
+            clearInterval(checkDataTimeout);
+        }
+    }, 2000);
+
 	// handle node name
     $(document).ready(function() {
         nodeName = $.urlParam("node");
@@ -46,6 +72,8 @@
     var chartt;
 
 	function eventCallback(dataStr) {
+        anyData = true;
+
         console.log(dataStr);
 	    data = JSON.parse(dataStr);
         var unixts = 10 * 365 * 24 * 60 * 60 * 1000 + (data["week_id"] + 1) * 7 * 24 * 60 * 60 * 1000 + data["sec_id"] * 1000 + data["report_n"] * 20;  
@@ -332,6 +360,7 @@
     <div class="container">        
         <h2>Live data from WAMS</h1>
         <p>Due to performance issues of web browsers, data stream is downsampled from 50Hz to 1Hz.</p>
+        <div id="messages"></div>
         <div id="container_v" style="width:100%; height:300px;"></div>
         <div id="container_f" style="width:100%; height:300px;"></div>
         <div id="container_th" style="width:100%; height:300px;"></div>
